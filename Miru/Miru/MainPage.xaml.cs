@@ -67,39 +67,5 @@ namespace Miru
 					m_Clock.Stop();
 		}
 
-		string GetDayOfWeek(DateTime date)
-		{
-			var day = date.DayOfWeek;
-			string Week = string.Empty;
-
-			switch(day)
-			{
-				case DayOfWeek.Monday:
-					Week = "월";
-					break;
-				case DayOfWeek.Tuesday:
-					Week = "화";
-					break;
-				case DayOfWeek.Wednesday:
-					Week = "수";
-					break;
-				case DayOfWeek.Thursday:
-					Week = "목";
-					break;
-				case DayOfWeek.Friday:
-					Week = "금";
-					break;
-				case DayOfWeek.Saturday:
-					Week = "토";
-					break;
-				case DayOfWeek.Sunday:
-					Week = "일";
-					break;
-				default:
-					break;
-			}
-			return Week;
-		}
-
 	}
 }
