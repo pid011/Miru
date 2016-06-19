@@ -27,7 +27,8 @@ namespace Miru
 	public sealed partial class MainPage : Page
 	{
 		DispatcherTimer m_Clock;
-		WeatherInfo weather;
+		Clock time;
+		WeatherInfo weatherInfo;
 
 		public MainPage()
 		{
@@ -36,40 +37,33 @@ namespace Miru
 			Unloaded += MainPage_Unloaded;
 		}
 
-		private async void MainPage_Loaded(object sender, RoutedEventArgs e)
+		private void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
+			int version = 1;
+			double lat = 37.285944;
+			double lon = 127.636764;
+			string appKey = "5424eae1-8e98-3d89-82e5-e9a1c589a7ba";
+			// 현재날씨, API버전 1, 경위도: 여주, Miru전용 appKey
+			weatherInfo =
+				new WeatherInfo(version, lat, lon, appKey);
+			weatherInfo.Create();
+
+			time = new Clock();
 			m_Clock = new DispatcherTimer();
 			m_Clock.Tick += M_Clock_Tick;
 			m_Clock.Interval = TimeSpan.FromSeconds(1);
 			m_Clock.Start();
 
-			weather = new WeatherInfo(
-				WeatherInfo.ScopeType.Current_Time,
-				1,
-				37.285944,
-				127.636764,
-				"5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
-			await weather.Create();
+			
 
-			Weather_Temp.Text = $"{weather.Temperature}℃";
+			Weather_Temp.Text = $"{weatherInfo.Temperature["Current"]}℃";
 		}
 
 		private void M_Clock_Tick(object sender, object e)
 		{
-			DateTime now = DateTime.Now;
-
-			int Hour_ = (now.Hour > 12) ? now.Hour - 12 : now.Hour;
-			string Hour = (Hour_ < 10) ? $"0{Hour_}" : Hour_.ToString();
-
-			string Min = (now.Minute < 10) ? $"0{now.Minute}" : now.Minute.ToString();
-			string state = (now.Hour > 11) ? "PM" : "AM";
-
-			string Week = GetDayOfWeek(now);
-
-			Clock_State.Text = state;
-			Clock_Time.Text = $"{Hour}:{now.Minute}";
-			Clock_Date.Text = $"{now.Year}년 {now.Month}월 {now.Day}일 {Week}요일";
-
+			Clock_State.Text = time.GetCurrentState();
+			Clock_Time.Text = time.GetCurrentTime();
+			Clock_Date.Text = time.getCurrentWeek();
 		}
 
 		private void MainPage_Unloaded(object sender, RoutedEventArgs e)
@@ -77,40 +71,6 @@ namespace Miru
 			if(m_Clock != null)
 				if(m_Clock.IsEnabled)
 					m_Clock.Stop();
-		}
-
-		string GetDayOfWeek(DateTime date)
-		{
-			var day = date.DayOfWeek;
-			string Week = string.Empty;
-
-			switch(day)
-			{
-				case DayOfWeek.Monday:
-					Week = "월";
-					break;
-				case DayOfWeek.Tuesday:
-					Week = "화";
-					break;
-				case DayOfWeek.Wednesday:
-					Week = "수";
-					break;
-				case DayOfWeek.Thursday:
-					Week = "목";
-					break;
-				case DayOfWeek.Friday:
-					Week = "금";
-					break;
-				case DayOfWeek.Saturday:
-					Week = "토";
-					break;
-				case DayOfWeek.Sunday:
-					Week = "일";
-					break;
-				default:
-					break;
-			}
-			return Week;
 		}
 
 	}
