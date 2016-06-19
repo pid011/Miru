@@ -27,6 +27,7 @@ namespace Miru
 	public sealed partial class MainPage : Page
 	{
 		DispatcherTimer m_Clock;
+		Clock clock;
 		WeatherInfo weather;
 
 		public MainPage()
@@ -36,39 +37,26 @@ namespace Miru
 			Unloaded += MainPage_Unloaded;
 		}
 
-		private async void MainPage_Loaded(object sender, RoutedEventArgs e)
+		private void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
+			weather = new WeatherInfo(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
+			weather.Create();
+
+			clock = new Clock();
 			m_Clock = new DispatcherTimer();
 			m_Clock.Tick += M_Clock_Tick;
 			m_Clock.Interval = TimeSpan.FromSeconds(1);
 			m_Clock.Start();
 
-			weather = new WeatherInfo(
-				WeatherInfo.ScopeType.Current_Time,
-				1,
-				37.285944,
-				127.636764,
-				"5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
-			await weather.Create();
 
 			Weather_Temp.Text = $"{weather.Temperature}℃";
 		}
 
 		private void M_Clock_Tick(object sender, object e)
 		{
-			DateTime now = DateTime.Now;
-
-			int Hour_ = (now.Hour > 12) ? now.Hour - 12 : now.Hour;
-			string Hour = (Hour_ < 10) ? $"0{Hour_}" : Hour_.ToString();
-
-			string Min = (now.Minute < 10) ? $"0{now.Minute}" : now.Minute.ToString();
-			string state = (now.Hour > 11) ? "PM" : "AM";
-
-			string Week = GetDayOfWeek(now);
-
-			Clock_State.Text = state;
-			Clock_Time.Text = $"{Hour}:{now.Minute}";
-			Clock_Date.Text = $"{now.Year}년 {now.Month}월 {now.Day}일 {Week}요일";
+			Clock_State.Text = clock.GetCurrentState();
+			Clock_Time.Text = clock.GetCurrentTime();
+			Clock_Date.Text = clock.getCurrentWeek();
 
 		}
 
