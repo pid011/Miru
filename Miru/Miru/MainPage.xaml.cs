@@ -18,6 +18,7 @@ using System.Net.Http;
 using Newtonsoft.Json.Linq;
 
 using Miru.Widget;
+using Miru.Widget.Weather;
 
 namespace Miru
 {
@@ -28,7 +29,8 @@ namespace Miru
 	{
 		DispatcherTimer m_Clock;
 		Clock clock;
-		WeatherInfo weather;
+		Weather m_Weather;
+		WeatherUtil weatherUtil;
 
 		public MainPage()
 		{
@@ -37,19 +39,19 @@ namespace Miru
 			Unloaded += MainPage_Unloaded;
 		}
 
-		private void MainPage_Loaded(object sender, RoutedEventArgs e)
+		private async void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
-			weather = new WeatherInfo(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
-			weather.Create();
-
 			clock = new Clock();
 			m_Clock = new DispatcherTimer();
 			m_Clock.Tick += M_Clock_Tick;
 			m_Clock.Interval = TimeSpan.FromSeconds(1);
 			m_Clock.Start();
+		
+			weatherUtil = 
+			new WeatherUtil(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
+			m_Weather = await weatherUtil.RequestWeatherAsync();
 
-
-			Weather_Temp.Text = $"{weather.Temperature}℃";
+			Weather_Temp.Text = $"{m_Weather.Temperature}℃";
 		}
 
 		private void M_Clock_Tick(object sender, object e)
