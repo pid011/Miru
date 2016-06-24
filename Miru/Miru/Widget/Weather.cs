@@ -92,7 +92,7 @@ namespace Miru.Widget.Weather
 			/// <summary>
 			/// ERROR
 			/// </summary>
-			NULL
+			NOTHING
 		}
 
 		/// <summary>
@@ -179,7 +179,7 @@ namespace Miru.Widget.Weather
 				Humidiy = Convert.ToDouble(item["humidity"].ToString());
 
 				string skycode = item["sky"]["code"].ToString();
-				SkyCode = Enum.IsDefined(typeof(SkyType), skycode) ? (SkyType)Enum.Parse(typeof(SkyType), skycode) : SkyType.NULL;
+				SkyCode = Enum.IsDefined(typeof(SkyType), skycode) ? (SkyType)Enum.Parse(typeof(SkyType), skycode) : SkyType.NOTHING;
 			}
 		}
 		private void ForecastWeatherJsonFarse(string ForecastJson)
