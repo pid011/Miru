@@ -6,6 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Storyboard x:Name="ClockStoryboard"/>
+    </Page.Resources>
 
     <Grid>
         <Grid.Background>
@@ -15,12 +18,13 @@
             </LinearGradientBrush>
         </Grid.Background>
         <TextBlock x:Name="Center" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" FontSize="50" Height="77" Width="134" TextAlignment="Center">
-        	<Run Text="Hello."/>
+        	<Run Text="Hi :)"/>
         </TextBlock>
         <TextBlock x:Name="Clock_State" HorizontalAlignment="Left" Margin="10,55,0,0" TextWrapping="Wrap" Text="오전" VerticalAlignment="Top" Height="25" Width="40" Foreground="White" FontSize="20" RenderTransformOrigin="0.5,0.5" Opacity="0.8"/>
         <TextBlock x:Name="Clock_Time" HorizontalAlignment="Left" Margin="50,15,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Height="86" Width="163" Foreground="White" FontSize="60" RenderTransformOrigin="0.5,0.5"/>
         <TextBlock x:Name="Clock_Date" HorizontalAlignment="Left" Margin="10,97,0,0" TextWrapping="Wrap" Text="0000-00-00" VerticalAlignment="Top" Foreground="White" FontSize="20" RenderTransformOrigin="1,0" TextAlignment="Right" Opacity="0.8"/>
         <TextBlock x:Name="Weather_Temp" HorizontalAlignment="Right" Margin="0,15,20,0" TextWrapping="Wrap" Text="00.00℃" Height="85" Width="184" VerticalAlignment="Top" Foreground="White" FontSize="50" TextAlignment="Right"/>
+        <TextBlock x:Name="Status" HorizontalAlignment="Center" Margin="10,750,10,650" TextWrapping="Wrap" Text="" VerticalAlignment="Center" FontSize="30" Opacity="0.7" Width="940" TextAlignment="Center" Height="40"/>
 
     </Grid>
 </Page>

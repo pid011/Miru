@@ -22,15 +22,13 @@ using Miru.Widget.Weather;
 
 namespace Miru
 {
-	/// <summary>
-	/// 자체적으로 사용하거나 프레임 내에서 탐색할 수 있는 빈 페이지입니다.
-	/// </summary>
 	public sealed partial class MainPage : Page
 	{
-		DispatcherTimer m_Clock;
-		Clock clock;
-		Weather m_Weather;
-		WeatherUtil weatherUtil;
+
+		DispatcherTimer		m_Clock;
+		Clock				clock;
+		Weather				m_Weather;
+		WeatherUtil			weatherUtil;
 
 		public MainPage()
 		{
@@ -46,12 +44,15 @@ namespace Miru
 			m_Clock.Tick += M_Clock_Tick;
 			m_Clock.Interval = TimeSpan.FromSeconds(1);
 			m_Clock.Start();
-		
+			
 			weatherUtil = 
-			new WeatherUtil(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
+				new WeatherUtil(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
 			m_Weather = await weatherUtil.RequestWeatherAsync();
-
-			Weather_Temp.Text = $"{m_Weather.Temperature}℃";
+			
+			if(m_Weather.IsError)
+				Status.Text = m_Weather.ErrorMsg;
+			else
+				Weather_Temp.Text = $"{m_Weather.Temperature}℃";
 		}
 
 		private void M_Clock_Tick(object sender, object e)
@@ -68,6 +69,5 @@ namespace Miru
 				if(m_Clock.IsEnabled)
 					m_Clock.Stop();
 		}
-
 	}
 }

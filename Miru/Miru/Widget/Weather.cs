@@ -17,7 +17,7 @@ namespace Miru.Widget.Weather
 		/// <summary>
 		/// 하늘상태코드
 		/// </summary>
-		public enum SkyType
+		public enum		SkyType
 		{
 			/// <summary>
 			/// 맑음
@@ -98,19 +98,19 @@ namespace Miru.Widget.Weather
 		/// <summary>
 		/// 온도
 		/// </summary>
-		public double Temperature { get; protected set; }
+		public double	Temperature { get; protected set; }
 
 		/// <summary>
 		/// 습도
 		/// </summary>
-		public double Humidiy { get; protected set; }
+		public double	Humidiy { get; protected set; }
 
 		/// <summary>
 		/// 현재 하늘상태
 		/// </summary>
-		public SkyType SkyCode { get; protected set; }
-		public bool IsError { get; protected set; } = false;
-		public string ErrorMsg { get; protected set; }
+		public SkyType	SkyCode { get; protected set; }
+		public bool		IsError { get; protected set; } = false;
+		public string	ErrorMsg { get; protected set; }
 	}
 
 	/// <summary>
@@ -118,10 +118,10 @@ namespace Miru.Widget.Weather
 	/// </summary>
 	public class WeatherUtil : Weather
 	{
-		private int version;
-		private double lat;
-		private double lon;
-		private string appKey;
+		private int		version;
+		private double	lat;
+		private double	lon;
+		private string	appKey;
 
 		/// <summary>
 		/// 날씨정보를 생성합니다.
