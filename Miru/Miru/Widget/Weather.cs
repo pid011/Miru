@@ -17,77 +17,77 @@ namespace Miru.Widget.Weather
 		/// <summary>
 		/// 하늘상태코드
 		/// </summary>
-		public enum		SkyType
+		public enum SkyType
 		{
 			/// <summary>
 			/// 맑음
 			/// </summary>
-			SKY_A01,
+			SKY_01,
 
 			/// <summary>
 			/// 구름조금
 			/// </summary>
-			SKY_A02,
+			SKY_02,
 
 			/// <summary>
 			/// 구름많음
 			/// </summary>
-			SKY_A03,
+			SKY_03,
 
 			/// <summary>
 			/// 구름많고 비
 			/// </summary>
-			SKY_A04,
+			SKY_04,
 
 			/// <summary>
 			/// 구름많고 눈
 			/// </summary>
-			SKY_A05,
+			SKY_05,
 
 			/// <summary>
 			/// 구름많고 비 또는 눈
 			/// </summary>
-			SKY_A06,
+			SKY_06,
 
 			/// <summary>
 			/// 흐림
 			/// </summary>
-			SKY_A07,
+			SKY_07,
 
 			/// <summary>
 			/// 흐리고 비
 			/// </summary>
-			SKY_A08,
+			SKY_08,
 
 			/// <summary>
 			/// 흐리고 눈
 			/// </summary>
-			SKY_A09,
+			SKY_09,
 
 			/// <summary>
 			/// 흐리고 비 또는 눈
 			/// </summary>
-			SKY_A10,
-
+			SKY_10,
+			
 			/// <summary>
 			/// 흐리고 낙뢰
 			/// </summary>
-			SKY_A11,
+			SKY_11,
 
 			/// <summary>
 			/// 뇌우, 비
 			/// </summary>
-			SKY_A12,
+			SKY_12,
 
 			/// <summary>
 			/// 뇌우, 눈
 			/// </summary>
-			SKY_A13,
+			SKY_13,
 
 			/// <summary>
 			/// 뇌우, 비 또는 눈
 			/// </summary>
-			SKY_A14,
+			SKY_14,
 
 			/// <summary>
 			/// ERROR
@@ -96,21 +96,28 @@ namespace Miru.Widget.Weather
 		}
 
 		/// <summary>
-		/// 온도
+		/// 온도(3시간 단위)
 		/// </summary>
-		public double	Temperature { get; protected set; }
+		public Dictionary<int, double> Temperature { get; protected set; }
 
 		/// <summary>
-		/// 습도
+		/// 습도(3시간 단위)
 		/// </summary>
-		public double	Humidiy { get; protected set; }
+		public Dictionary<int, double> Humidiy { get; protected set; }
 
 		/// <summary>
-		/// 현재 하늘상태
+		/// 현재 하늘상태(3시간 단위)
 		/// </summary>
-		public SkyType	SkyCode { get; protected set; }
-		public bool		IsError { get; protected set; } = false;
-		public string	ErrorMsg { get; protected set; }
+		public Dictionary<int, SkyType> SkyCode { get; protected set; }
+
+		/// <summary>
+		/// 에러확인
+		/// </summary>
+		public bool	IsError { get; protected set; } = false;
+		/// <summary>
+		/// 에러 메시지
+		/// </summary>
+		public string ErrorMsg { get; protected set; }
 	}
 
 	/// <summary>
@@ -137,6 +144,7 @@ namespace Miru.Widget.Weather
 			this.lon = lon;
 			this.appKey = appKey;
 		}
+
 		async Task<string> RequestJsonAsync(string url, HttpClient client)
 			=> await client.GetStringAsync(url);
 
@@ -169,21 +177,32 @@ namespace Miru.Widget.Weather
 
 		private void CurrentWeatherJsonParse(string CurrentWeatherJson)
 		{
-			JObject obj1 = JObject.Parse(CurrentWeatherJson);
-			JArray arr1 = JArray.Parse(obj1["weather"]["minutely"].ToString());
+			JObject obj = JObject.Parse(CurrentWeatherJson);
+			JArray arr = JArray.Parse(obj["weather"]["minutely"].ToString());
 
-			foreach(var item in arr1)
+			foreach(var item in arr)
 			{
-				Temperature = Convert.ToDouble(item["temperature"]["tc"].ToString());
+				Temperature.Add(0, Convert.ToDouble(item["temperature"]["tc"].ToString()));
 
-				Humidiy = Convert.ToDouble(item["humidity"].ToString());
+				Humidiy.Add(0, Convert.ToDouble(item["humidity"].ToString()));
 
 				string skycode = item["sky"]["code"].ToString();
-				SkyCode = Enum.IsDefined(typeof(SkyType), skycode) ? (SkyType)Enum.Parse(typeof(SkyType), skycode) : SkyType.NOTHING;
+				SkyCode.Add(0, Enum.IsDefined(typeof(SkyType), skycode) 
+					? (SkyType)Enum.Parse(typeof(SkyType), skycode) : SkyType.NOTHING);
 			}
 		}
+
 		private void ForecastWeatherJsonFarse(string ForecastJson)
 		{
+			JObject obj = JObject.Parse(ForecastJson);
+			JArray arr = JArray.Parse(obj["weather"]["forecast3days"]["fcst3hour"].ToString());
+
+			List<int> releaseTime = new List<int> { 4, 7, 10, 13, 16, 19, 22 };
+			foreach(var sky in arr)
+			{
+				JArray arr2 = JArray.Parse(sky["sky"].ToString());
+				
+			}
 		}
 	}
 }

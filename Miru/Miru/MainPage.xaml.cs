@@ -52,7 +52,7 @@ namespace Miru
 			if(m_Weather.IsError)
 				Status.Text = m_Weather.ErrorMsg;
 			else
-				Weather_Temp.Text = $"{m_Weather.Temperature}℃";
+				Weather_Temp.Text = $"{m_Weather.Temperature[0]}℃";
 		}
 
 		private void M_Clock_Tick(object sender, object e)
