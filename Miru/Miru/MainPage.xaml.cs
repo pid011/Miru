@@ -23,16 +23,16 @@ namespace Miru
         {
             status.Text = "화면을 구성중입니다...";
             this.clock = new Clock();
-
             this.timer = new DispatcherTimer();
             this.timer.Tick += M_Clock_Tick;
             this.timer.Interval = TimeSpan.FromSeconds(1);
-            this.timer.Start();
 
             this.weather = new WeatherWidget(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
             weather.LoadedError += W_LoadedError;
             await this.weather.RequestWeatherAsync();
 
+
+            this.timer.Start();
             Weather_Temp.Text = $"{ this.weather.Temperature?[0] }℃";
             status.Text = string.Empty;
         }
@@ -48,6 +48,7 @@ namespace Miru
             {
             }
         }
+
         private void M_Clock_Tick(object sender, object e)
         {
             Clock_State.Text = clock.GetCurrentState();
