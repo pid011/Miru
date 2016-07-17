@@ -20,8 +20,10 @@ namespace Miru.Widget
         private List<double> forecastTemp;
         private double currentHumidity;
         private List<double> forecastHumidity;
-        private Sky currentSkystatus;
-        private List<Sky> forecastSkystatus;
+        private SkyCode currentSkystatus;
+        private List<SkyCode> forecastSkystatus;
+        private PrecipitationType currentPrecipitation;
+        private List<PrecipitationType> forecastPrecipitation;
 
         public event EventHandler LoadedError;
 
@@ -45,17 +47,35 @@ namespace Miru.Widget
             }
         }
 
-        public List<Sky> SkyStatus
+        public List<SkyCode> SkyStatus
         {
             get
             {
-                List<Sky> list = new List<Sky>() { currentSkystatus };
+                List<SkyCode> list = new List<SkyCode>() { currentSkystatus };
                 forecastSkystatus.ForEach(x => list.Add(x));
                 return list;
             }
         }
 
-        public enum Sky
+        public List<PrecipitationType> Precipitation
+        {
+            get
+            {
+                List<PrecipitationType> list = new List<PrecipitationType>() { currentPrecipitation };
+                forecastPrecipitation.ForEach(x => list.Add(x));
+                return list;
+            }
+        }
+
+        public enum PrecipitationType
+        {
+            Nothing,
+            Rain,
+            RainAndSnow,
+            Snow
+        }
+
+        public enum SkyCode
         {
             Sunny,
             PartlyCloudy,
@@ -121,6 +141,9 @@ namespace Miru.Widget
                 currentHumidity = (Convert.ToDouble((string)obj1["weather"]["minutely"][0]["humidity"]));
                 string skycode = (string)obj1["weather"]["minutely"][0]["sky"]["code"];
                 currentSkystatus = (GetSky(skycode));
+
+                string prec = (string)obj1["weather"]["minutely"][0]["precipitation"]["type"];
+                currentPrecipitation = GetPrec(Convert.ToInt32(prec));
             }
             catch(ArgumentNullException e)
             {
@@ -136,82 +159,103 @@ namespace Miru.Widget
         {
             forecastTemp = new List<double>();
             forecastHumidity = new List<double>();
-            forecastSkystatus = new List<Sky>();
+            forecastSkystatus = new List<SkyCode>();
+            forecastPrecipitation = new List<PrecipitationType>();
         }
 
-        private Sky GetSky(string position)
+        private PrecipitationType GetPrec(int pos)
         {
-            Sky result = Sky.NULL;
+            PrecipitationType type = PrecipitationType.Nothing;
+            switch(pos)
+            {
+                case 1:
+                    type = PrecipitationType.Rain;
+                    break;
+
+                case 2:
+                    type = PrecipitationType.RainAndSnow;
+                    break;
+
+                case 3:
+                    type = PrecipitationType.Snow;
+                    break;
+            }
+            return type;
+        }
+
+        private SkyCode GetSky(string position)
+        {
+            SkyCode result = SkyCode.NULL;
             switch(position)
             {
                 case "SKY_A01":
                 case "SKY_S01":
-                    result = Sky.Sunny;
+                    result = SkyCode.Sunny;
                     break;
 
                 case "SKY_A02":
                 case "SKY_S02":
-                    result = Sky.PartlyCloudy;
+                    result = SkyCode.PartlyCloudy;
                     break;
 
                 case "SKY_A03":
                 case "SKY_S03":
-                    result = Sky.MostlyCloudy;
+                    result = SkyCode.MostlyCloudy;
                     break;
 
                 case "SKY_A04":
                 case "SKY_S04":
-                    result = Sky.MostlyCloudyAndRain;
+                    result = SkyCode.MostlyCloudyAndRain;
                     break;
 
                 case "SKY_A05":
                 case "SKY_S05":
-                    result = Sky.MostlyCloudyAndSnow;
+                    result = SkyCode.MostlyCloudyAndSnow;
                     break;
 
                 case "SKY_A06":
                 case "SKY_S06":
-                    result = Sky.MostlyCloudyAndRainAndSnow;
+                    result = SkyCode.MostlyCloudyAndRainAndSnow;
                     break;
 
                 case "SKY_A07":
                 case "SKY_S07":
-                    result = Sky.Fog;
+                    result = SkyCode.Fog;
                     break;
 
                 case "SKY_A08":
                 case "SKY_S08":
-                    result = Sky.FogAndRain;
+                    result = SkyCode.FogAndRain;
                     break;
 
                 case "SKY_A09":
                 case "SKY_S09":
-                    result = Sky.FogAndSnow;
+                    result = SkyCode.FogAndSnow;
                     break;
 
                 case "SKY_A10":
                 case "SKY_S10":
-                    result = Sky.FogAndRainAndSnow;
+                    result = SkyCode.FogAndRainAndSnow;
                     break;
 
                 case "SKY_A11":
                 case "SKY_S11":
-                    result = Sky.FogAndThunderstroke;
+                    result = SkyCode.FogAndThunderstroke;
                     break;
 
                 case "SKY_A12":
                 case "SKY_S12":
-                    result = Sky.ThunderstormAndRain;
+                    result = SkyCode.ThunderstormAndRain;
                     break;
 
                 case "SKY_A13":
                 case "SKY_S13":
-                    result = Sky.ThunderstormAndSnow;
+                    result = SkyCode.ThunderstormAndSnow;
                     break;
 
                 case "SKY_A14":
                 case "SKY_S14":
-                    result = Sky.ThunderstormAndRainAndSnow;
+                    result = SkyCode.ThunderstormAndRainAndSnow;
                     break;
             }
             return result;
