@@ -1,208 +1,220 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Threading;
-using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-using System.Collections;
-using System.Linq;
 
-namespace Miru.Widget.Weather
+namespace Miru.Widget
 {
-	/// <summary>
-	/// SK Weather Plenet API를 활용한 날씨 정보를 제공합니다.
-	/// </summary>
-	public class Weather
-	{
-		/// <summary>
-		/// 하늘상태코드
-		/// </summary>
-		public enum SkyType
-		{
-			/// <summary>
-			/// 맑음
-			/// </summary>
-			SKY_01,
+    /// <summary>
+    /// 날씨정보생성을 도와줍니다.
+    /// </summary>
+    internal class WeatherWidget : Widget
+    {
+        private int version;
+        private double lat;
+        private double lon;
+        private string appKey;
 
-			/// <summary>
-			/// 구름조금
-			/// </summary>
-			SKY_02,
+        private double currentTemp;
+        private List<double> forecastTemp;
+        private double currentHumidity;
+        private List<double> forecastHumidity;
+        private Sky currentSkystatus;
+        private List<Sky> forecastSkystatus;
 
-			/// <summary>
-			/// 구름많음
-			/// </summary>
-			SKY_03,
+        public event EventHandler LoadedError;
 
-			/// <summary>
-			/// 구름많고 비
-			/// </summary>
-			SKY_04,
+        public List<double> Temperature
+        {
+            get
+            {
+                List<double> list = new List<double>() { currentTemp };
+                forecastTemp.ForEach(x => list.Add(x));
+                return list;
+            }
+        }
 
-			/// <summary>
-			/// 구름많고 눈
-			/// </summary>
-			SKY_05,
+        public List<double> Humidity
+        {
+            get
+            {
+                List<double> list = new List<double>() { currentHumidity };
+                forecastHumidity.ForEach(x => list.Add(x));
+                return list;
+            }
+        }
 
-			/// <summary>
-			/// 구름많고 비 또는 눈
-			/// </summary>
-			SKY_06,
+        public List<Sky> SkyStatus
+        {
+            get
+            {
+                List<Sky> list = new List<Sky>() { currentSkystatus };
+                forecastSkystatus.ForEach(x => list.Add(x));
+                return list;
+            }
+        }
 
-			/// <summary>
-			/// 흐림
-			/// </summary>
-			SKY_07,
+        public enum Sky
+        {
+            Sunny,
+            PartlyCloudy,
+            MostlyCloudy,
+            MostlyCloudyAndRain,
+            MostlyCloudyAndSnow,
+            MostlyCloudyAndRainAndSnow,
+            Fog,
+            FogAndRain,
+            FogAndSnow,
+            FogAndRainAndSnow,
+            FogAndThunderstroke,
+            ThunderstormAndRain,
+            ThunderstormAndSnow,
+            ThunderstormAndRainAndSnow,
+            NULL
+        }
 
-			/// <summary>
-			/// 흐리고 비
-			/// </summary>
-			SKY_08,
+        /// <summary>
+        /// 날씨정보를 생성합니다.
+        /// </summary>
+        /// <param name="version">API 버전</param>
+        /// <param name="lat">위도(Only Korea)</param>
+        /// <param name="lon">경도(Only Korea)</param>
+        /// <param name="appKey">SK plenet에서 제공받은 appKey</param>
+        public WeatherWidget(int version, double lat, double lon, string appKey)
+        {
+            this.version = version;
+            this.lat = lat;
+            this.lon = lon;
+            this.appKey = appKey;
+        }
 
-			/// <summary>
-			/// 흐리고 눈
-			/// </summary>
-			SKY_09,
+        public async Task RequestWeatherAsync()
+        {
+            string currentWeatherUrl = $"http://apis.skplanetx.com/weather/current/minutely?version={version}&lat={lat}&lon={lon}&appKey={appKey}";
+            string forecastWeatherUrl = $"http://apis.skplanetx.com/weather/forecast/3days?version={version}&lat={lat}&lon={lon}&appKey={appKey}";
 
-			/// <summary>
-			/// 흐리고 비 또는 눈
-			/// </summary>
-			SKY_10,
-			
-			/// <summary>
-			/// 흐리고 낙뢰
-			/// </summary>
-			SKY_11,
+            Uri currentWeatherUri = new Uri(currentWeatherUrl);
+            Uri forecastWeatherUri = new Uri(forecastWeatherUrl);
+            try
+            {
+                string json1 = await new HttpClient().GetStringAsync(currentWeatherUri);
+                string json2 = await new HttpClient().GetStringAsync(forecastWeatherUri);
+                CurrentWeatherJsonParse(json1);
+                ForecastWeatherJsonFarse(json2);
+            }
+            catch(ArgumentNullException e)
+            {
+                LoadEvent(e.Message);
+            }
+        }
 
-			/// <summary>
-			/// 뇌우, 비
-			/// </summary>
-			SKY_12,
+        private void LoadEvent(string msg) => LoadedError(this, new ErrorCallbackEventArgs { name = nameof(WeatherWidget), msg = msg });
 
-			/// <summary>
-			/// 뇌우, 눈
-			/// </summary>
-			SKY_13,
+        private void CurrentWeatherJsonParse(string CurrentWeatherJson)
+        {
+            try
+            {
+                JObject obj1 = JObject.Parse(CurrentWeatherJson);
 
-			/// <summary>
-			/// 뇌우, 비 또는 눈
-			/// </summary>
-			SKY_14,
+                currentTemp = (Convert.ToDouble((string)obj1["weather"]["minutely"][0]["temperature"]["tc"]));
+                currentHumidity = (Convert.ToDouble((string)obj1["weather"]["minutely"][0]["humidity"]));
+                string skycode = (string)obj1["weather"]["minutely"][0]["sky"]["code"];
+                currentSkystatus = (GetSky(skycode));
+            }
+            catch(ArgumentNullException e)
+            {
+                LoadEvent(e.Message);
+            }
+            catch(NullReferenceException e)
+            {
+                LoadEvent(e.Message);
+            }
+        }
 
-			/// <summary>
-			/// ERROR
-			/// </summary>
-			NOTHING
-		}
+        private void ForecastWeatherJsonFarse(string ForecastJson)
+        {
+            forecastTemp = new List<double>();
+            forecastHumidity = new List<double>();
+            forecastSkystatus = new List<Sky>();
+        }
 
-		/// <summary>
-		/// 온도(3시간 단위)
-		/// </summary>
-		public Dictionary<int, double> Temperature { get; protected set; }
+        private Sky GetSky(string position)
+        {
+            Sky result = Sky.NULL;
+            switch(position)
+            {
+                case "SKY_A01":
+                case "SKY_S01":
+                    result = Sky.Sunny;
+                    break;
 
-		/// <summary>
-		/// 습도(3시간 단위)
-		/// </summary>
-		public Dictionary<int, double> Humidiy { get; protected set; }
+                case "SKY_A02":
+                case "SKY_S02":
+                    result = Sky.PartlyCloudy;
+                    break;
 
-		/// <summary>
-		/// 현재 하늘상태(3시간 단위)
-		/// </summary>
-		public Dictionary<int, SkyType> SkyCode { get; protected set; }
+                case "SKY_A03":
+                case "SKY_S03":
+                    result = Sky.MostlyCloudy;
+                    break;
 
-		/// <summary>
-		/// 에러확인
-		/// </summary>
-		public bool	IsError { get; protected set; } = false;
-		/// <summary>
-		/// 에러 메시지
-		/// </summary>
-		public string ErrorMsg { get; protected set; }
-	}
+                case "SKY_A04":
+                case "SKY_S04":
+                    result = Sky.MostlyCloudyAndRain;
+                    break;
 
-	/// <summary>
-	/// 날씨정보생성을 도와줍니다.
-	/// </summary>
-	public class WeatherUtil : Weather
-	{
-		private int		version;
-		private double	lat;
-		private double	lon;
-		private string	appKey;
+                case "SKY_A05":
+                case "SKY_S05":
+                    result = Sky.MostlyCloudyAndSnow;
+                    break;
 
-		/// <summary>
-		/// 날씨정보를 생성합니다.
-		/// </summary>
-		/// <param name="version">API 버전</param>
-		/// <param name="lat">위도(Only Korea)</param>
-		/// <param name="lon">경도(Only Korea)</param>
-		/// <param name="appKey">SK plenet에서 제공받은 appKey</param>
-		public WeatherUtil(int version, double lat, double lon, string appKey)
-		{
-			this.version = version;
-			this.lat = lat;
-			this.lon = lon;
-			this.appKey = appKey;
-		}
+                case "SKY_A06":
+                case "SKY_S06":
+                    result = Sky.MostlyCloudyAndRainAndSnow;
+                    break;
 
-		async Task<string> RequestJsonAsync(string url, HttpClient client)
-			=> await client.GetStringAsync(url);
+                case "SKY_A07":
+                case "SKY_S07":
+                    result = Sky.Fog;
+                    break;
 
-		public async Task<Weather> RequestWeatherAsync()
-		{
-			string CurrentWeatherUrl = "http://apis.skplanetx.com/weather/current/minutely";
-			string ForecastWeatherUrl = "http://apis.skplanetx.com/weather/forecast/3days";
+                case "SKY_A08":
+                case "SKY_S08":
+                    result = Sky.FogAndRain;
+                    break;
 
-			CurrentWeatherUrl = $"{CurrentWeatherUrl}?version={version}&lat={lat}&lon={lon}&appKey={appKey}";
-			ForecastWeatherUrl = $"{ForecastWeatherUrl}?version={version}&lat={lat}&lon={lon}&appKey={appKey}";
+                case "SKY_A09":
+                case "SKY_S09":
+                    result = Sky.FogAndSnow;
+                    break;
 
-			HttpClient client = new HttpClient();
-			try
-			{
-				Task<string> getStringTask1 = RequestJsonAsync(CurrentWeatherUrl, client);
-				Task<string> getStringTask2 = RequestJsonAsync(ForecastWeatherUrl, client);
-				string json1 = await getStringTask1;
-				string json2 = await getStringTask2;
-				CurrentWeatherJsonParse(json1);
-				ForecastWeatherJsonFarse(json2);
-			}
-			catch(HttpRequestException e)
-			{
-				IsError = true;
-				ErrorMsg = e.Message;
-			}
+                case "SKY_A10":
+                case "SKY_S10":
+                    result = Sky.FogAndRainAndSnow;
+                    break;
 
-			return this;
-		}
+                case "SKY_A11":
+                case "SKY_S11":
+                    result = Sky.FogAndThunderstroke;
+                    break;
 
-		private void CurrentWeatherJsonParse(string CurrentWeatherJson)
-		{
-			JObject obj = JObject.Parse(CurrentWeatherJson);
-			JArray arr = JArray.Parse(obj["weather"]["minutely"].ToString());
+                case "SKY_A12":
+                case "SKY_S12":
+                    result = Sky.ThunderstormAndRain;
+                    break;
 
-			foreach(var item in arr)
-			{
-				Temperature.Add(0, Convert.ToDouble(item["temperature"]["tc"].ToString()));
+                case "SKY_A13":
+                case "SKY_S13":
+                    result = Sky.ThunderstormAndSnow;
+                    break;
 
-				Humidiy.Add(0, Convert.ToDouble(item["humidity"].ToString()));
-
-				string skycode = item["sky"]["code"].ToString();
-				SkyCode.Add(0, Enum.IsDefined(typeof(SkyType), skycode) 
-					? (SkyType)Enum.Parse(typeof(SkyType), skycode) : SkyType.NOTHING);
-			}
-		}
-
-		private void ForecastWeatherJsonFarse(string ForecastJson)
-		{
-			JObject obj = JObject.Parse(ForecastJson);
-			JArray arr = JArray.Parse(obj["weather"]["forecast3days"]["fcst3hour"].ToString());
-
-			List<int> releaseTime = new List<int> { 4, 7, 10, 13, 16, 19, 22 };
-			foreach(var sky in arr)
-			{
-				JArray arr2 = JArray.Parse(sky["sky"].ToString());
-				
-			}
-		}
-	}
+                case "SKY_A14":
+                case "SKY_S14":
+                    result = Sky.ThunderstormAndRainAndSnow;
+                    break;
+            }
+            return result;
+        }
+    }
 }

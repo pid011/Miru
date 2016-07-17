@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace Miru
@@ -40,7 +30,7 @@ namespace Miru
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+            if(System.Diagnostics.Debugger.IsAttached)
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
@@ -49,14 +39,14 @@ namespace Miru
 
             // 창에 콘텐츠가 이미 있는 경우 앱 초기화를 반복하지 말고,
             // 창이 활성화되어 있는지 확인하십시오.
-            if (rootFrame == null)
+            if(rootFrame == null)
             {
                 // 탐색 컨텍스트로 사용할 프레임을 만들고 첫 페이지로 이동합니다.
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                if(e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: 이전에 일시 중지된 응용 프로그램에서 상태를 로드합니다.
                 }
@@ -65,9 +55,9 @@ namespace Miru
                 Window.Current.Content = rootFrame;
             }
 
-            if (e.PrelaunchActivated == false)
+            if(e.PrelaunchActivated == false)
             {
-                if (rootFrame.Content == null)
+                if(rootFrame.Content == null)
                 {
                     // 탐색 스택이 복원되지 않으면 첫 번째 페이지로 돌아가고
                     // 필요한 정보를 탐색 매개 변수로 전달하여 새 페이지를
@@ -84,7 +74,7 @@ namespace Miru
         /// </summary>
         /// <param name="sender">탐색에 실패한 프레임</param>
         /// <param name="e">탐색 실패에 대한 정보</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
