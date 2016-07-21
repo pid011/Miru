@@ -113,12 +113,13 @@ namespace Miru.Widget
 
             try
             {
-                HttpClient client = new HttpClient();
-                string currentWeatherJson = await client.GetStringAsync(currentWeatherUri);
-                string forecastWeatherJson = await client.GetStringAsync(forecastWeatherUri);
-                CurrentWeatherJsonParse(currentWeatherJson);
-                ForecastWeatherJsonFarse(forecastWeatherJson);
-                client.Dispose();
+                using (HttpClient client = new HttpClient())
+                {
+                    string currentWeatherJson = await client.GetStringAsync(currentWeatherUri);
+                    string forecastWeatherJson = await client.GetStringAsync(forecastWeatherUri);
+                    CurrentWeatherJsonParse(currentWeatherJson);
+                    ForecastWeatherJsonFarse(forecastWeatherJson);
+                }
             }
             catch(ArgumentNullException)
             {
