@@ -20,6 +20,7 @@ namespace Miru
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            
         }
 
         /// <summary>

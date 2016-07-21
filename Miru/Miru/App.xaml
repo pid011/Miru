@@ -4,4 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Miru"
     RequestedTheme="Dark">
+
+    <Application.Resources>
+        <Style TargetType="TextBlock" x:Key="FontWeatherIcons">
+            <Setter Property="FontFamily" Value="ms-appx:///Assets/Fonts/artill_clean_icons.otf#artill clean weather icons" />
+        </Style>
+    </Application.Resources>
 </Application>

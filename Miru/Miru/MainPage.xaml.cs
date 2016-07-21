@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Miru.Widget;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -21,7 +21,9 @@ namespace Miru
 
         private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            status.Text = "화면을 구성중입니다...";
+            var rl = new ResourceLoader();
+
+            status.Text = rl.GetString("loadScreen");
             this.clock = new Clock();
             this.timer = new DispatcherTimer();
             this.timer.Tick += M_Clock_Tick;
@@ -31,10 +33,35 @@ namespace Miru
             weather.LoadedError += W_LoadedError;
             await this.weather.RequestWeatherAsync();
 
+            // var uri = new Uri("ms-appx:///WeatherImage/0-sunny.png");
 
             this.timer.Start();
-            Weather_Temp.Text = $"{ this.weather.Temperature?[0] }℃";
+            Weather_Temp.Text = $"{ this.weather.Temperatures?[0] }℃";
+            WeatherIcon.Text = this.weather.WeatherIcons?[0].ToString();
             status.Text = string.Empty;
+
+            switch(this.clock.TimeStatus)
+            {
+                case Clock.Status.Morning:
+                    Center.Text = rl.GetString("helloMiru_mornig");
+                    break;
+
+                case Clock.Status.Afternoon:
+                    Center.Text = rl.GetString("helloMiru_afternoon");
+                    break;
+
+                case Clock.Status.Evening:
+                    Center.Text = rl.GetString("helloMiru_evening");
+                    break;
+
+                case Clock.Status.Night:
+                    Center.Text = rl.GetString("helloMiru_night");
+                    break;
+
+                default:
+                    Center.Text = rl.GetString("helloMiru_default");
+                    break;
+            }
         }
 
         private void W_LoadedError(object sender, EventArgs e)

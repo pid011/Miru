@@ -22,27 +22,25 @@ namespace Miru.Widget
         private List<double> forecastHumidity;
         private SkyCode currentSkystatus;
         private List<SkyCode> forecastSkystatus;
-        private PrecipitationType currentPrecipitation;
-        private List<PrecipitationType> forecastPrecipitation;
 
         public event EventHandler LoadedError;
 
-        public List<double> Temperature
+        public List<double> Temperatures
         {
             get
             {
-                List<double> list = new List<double>() { currentTemp };
-                forecastTemp.ForEach(x => list.Add(x));
+                List<double> list = new List<double>() { this.currentTemp };
+                this.forecastTemp.ForEach(x => list.Add(x));
                 return list;
             }
         }
 
-        public List<double> Humidity
+        public List<double> Humiditys
         {
             get
             {
-                List<double> list = new List<double>() { currentHumidity };
-                forecastHumidity.ForEach(x => list.Add(x));
+                List<double> list = new List<double>() { this.currentHumidity };
+                this.forecastHumidity.ForEach(x => list.Add(x));
                 return list;
             }
         }
@@ -51,28 +49,22 @@ namespace Miru.Widget
         {
             get
             {
-                List<SkyCode> list = new List<SkyCode>() { currentSkystatus };
-                forecastSkystatus.ForEach(x => list.Add(x));
+                List<SkyCode> list = new List<SkyCode>() { this.currentSkystatus };
+                this.forecastSkystatus.ForEach(x => list.Add(x));
                 return list;
             }
         }
 
-        public List<PrecipitationType> Precipitation
+        public List<char> WeatherIcons
         {
             get
             {
-                List<PrecipitationType> list = new List<PrecipitationType>() { currentPrecipitation };
-                forecastPrecipitation.ForEach(x => list.Add(x));
-                return list;
-            }
-        }
+                List<char> icons = new List<char>();
+                WeatherIcon iconTools = new WeatherIcon();
 
-        public enum PrecipitationType
-        {
-            Nothing,
-            Rain,
-            RainAndSnow,
-            Snow
+                SkyStatus.ForEach(x => icons.Add(iconTools.GetWeatherIcon(x)));
+                return icons;
+            }
         }
 
         public enum SkyCode
@@ -109,27 +101,29 @@ namespace Miru.Widget
             this.appKey = appKey;
         }
 
+        private void LoadEvent(string msg) => LoadedError(this, new ErrorCallbackEventArgs { name = nameof(WeatherWidget), msg = msg });
+
         public async Task RequestWeatherAsync()
         {
-            string currentWeatherUrl = $"http://apis.skplanetx.com/weather/current/minutely?version={version}&lat={lat}&lon={lon}&appKey={appKey}";
-            string forecastWeatherUrl = $"http://apis.skplanetx.com/weather/forecast/3days?version={version}&lat={lat}&lon={lon}&appKey={appKey}";
+            string currentWeatherUrl = $"http://apis.skplanetx.com/weather/current/minutely?version={this.version}&lat={this.lat}&lon={this.lon}&appKey={this.appKey}";
+            string forecastWeatherUrl = $"http://apis.skplanetx.com/weather/forecast/3days?version={this.version}&lat={this.lat}&lon={this.lon}&appKey={this.appKey}";
 
             Uri currentWeatherUri = new Uri(currentWeatherUrl);
             Uri forecastWeatherUri = new Uri(forecastWeatherUrl);
+
             try
             {
-                string json1 = await new HttpClient().GetStringAsync(currentWeatherUri);
-                string json2 = await new HttpClient().GetStringAsync(forecastWeatherUri);
-                CurrentWeatherJsonParse(json1);
-                ForecastWeatherJsonFarse(json2);
+                HttpClient client = new HttpClient();
+                string currentWeatherJson = await client.GetStringAsync(currentWeatherUri);
+                string forecastWeatherJson = await client.GetStringAsync(forecastWeatherUri);
+                CurrentWeatherJsonParse(currentWeatherJson);
+                ForecastWeatherJsonFarse(forecastWeatherJson);
+                client.Dispose();
             }
-            catch(ArgumentNullException e)
+            catch(ArgumentNullException)
             {
-                LoadEvent(e.Message);
             }
         }
-
-        private void LoadEvent(string msg) => LoadedError(this, new ErrorCallbackEventArgs { name = nameof(WeatherWidget), msg = msg });
 
         private void CurrentWeatherJsonParse(string CurrentWeatherJson)
         {
@@ -141,17 +135,12 @@ namespace Miru.Widget
                 currentHumidity = (Convert.ToDouble((string)obj1["weather"]["minutely"][0]["humidity"]));
                 string skycode = (string)obj1["weather"]["minutely"][0]["sky"]["code"];
                 currentSkystatus = (GetSky(skycode));
-
-                string prec = (string)obj1["weather"]["minutely"][0]["precipitation"]["type"];
-                currentPrecipitation = GetPrec(Convert.ToInt32(prec));
             }
-            catch(ArgumentNullException e)
+            catch(ArgumentNullException)
             {
-                LoadEvent(e.Message);
             }
-            catch(NullReferenceException e)
+            catch(NullReferenceException)
             {
-                LoadEvent(e.Message);
             }
         }
 
@@ -160,27 +149,6 @@ namespace Miru.Widget
             forecastTemp = new List<double>();
             forecastHumidity = new List<double>();
             forecastSkystatus = new List<SkyCode>();
-            forecastPrecipitation = new List<PrecipitationType>();
-        }
-
-        private PrecipitationType GetPrec(int pos)
-        {
-            PrecipitationType type = PrecipitationType.Nothing;
-            switch(pos)
-            {
-                case 1:
-                    type = PrecipitationType.Rain;
-                    break;
-
-                case 2:
-                    type = PrecipitationType.RainAndSnow;
-                    break;
-
-                case 3:
-                    type = PrecipitationType.Snow;
-                    break;
-            }
-            return type;
         }
 
         private SkyCode GetSky(string position)

@@ -13,6 +13,38 @@ namespace Miru.Widget
         /// <returns>AM or PM</returns>
         public string GetCurrentState() => (DateTime.Now.Hour > 11) ? "PM" : "AM";
 
+        public enum Status
+        {
+            Morning,
+            Afternoon,
+            Evening,
+            Night
+        }
+
+        /// <summary>
+        /// 오전 오후 저녁 밤을 구분하여 반환합니다.
+        /// </summary>
+        public Status TimeStatus
+        {
+            get
+            {
+                int hour = DateTime.Now.Hour;
+                if(hour > 5 && hour < 12)
+                {
+                    return Status.Morning;
+                }
+                else if(hour > 11 && hour < 17)
+                {
+                    return Status.Afternoon;
+                }
+                else if(hour > 16 && hour < 21)
+                {
+                    return Status.Evening;
+                }
+                return Status.Night;
+            }
+        }
+
         /// <summary>
         /// 현재 시간을 문자열로 반환합니다.
         /// </summary>
