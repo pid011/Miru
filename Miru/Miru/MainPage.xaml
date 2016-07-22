@@ -16,21 +16,17 @@
         </Grid.Background>
         <TextBlock x:Name="Center" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" FontSize="50" Height="77" Width="355" TextAlignment="Center" Text="" />
         <TextBlock x:Name="status" HorizontalAlignment="Center" Margin="0,0,0,50" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="40" Width="800" FontSize="30" TextAlignment="Center" FontStyle="Italic" Text=""></TextBlock>
-        <!--WEATHER TEMP-->
-        <Grid HorizontalAlignment="Left" Height="89" Margin="547,10,0,0" VerticalAlignment="Top" Width="368">
-            <TextBlock x:Name="Weather_Temp" HorizontalAlignment="Right" Margin="0" TextWrapping="Wrap" Text="00.00℃" Height="109" Width="244" VerticalAlignment="Center" Foreground="White" FontSize="70" />
-            <TextBlock x:Name="WeatherIcon" FontFamily="ms-appx:///Assets/Fonts/artill_clean_icons.otf#artill clean weather icons" HorizontalAlignment="Left" Margin="43,-27,0,-24" TextWrapping="Wrap" Text="A" VerticalAlignment="Center" Width="76" Height="140" FontSize="90" TextAlignment="Right" />
+        <Grid HorizontalAlignment="Right" Height="89" Margin="0,10,10,0" VerticalAlignment="Top" Width="368">
+            <TextBlock x:Name="Weather_Temp" HorizontalAlignment="Right" Margin="0,-10,86,-10" TextWrapping="Wrap" Text="00.00℃" Height="109" Width="244" VerticalAlignment="Center" Foreground="White" FontSize="70" TextAlignment="Right" />
+            <TextBlock x:Name="WeatherIcon" FontFamily="ms-appx:///Assets/Fonts/artill_clean_icons.otf#artill clean weather icons" HorizontalAlignment="Right" Margin="0,-24,10,-27" TextWrapping="Wrap" Text="A" VerticalAlignment="Center" Width="76" Height="140" FontSize="90" TextAlignment="Right" />
         </Grid>
-        <!--CLOCK-->
-        <Grid HorizontalAlignment="Left" Height="130" Margin="10,10,0,0" VerticalAlignment="Top" Width="355">
-            <!--TIMER-->
-            <Grid HorizontalAlignment="Left" Height="94" Margin="10,10,0,0" VerticalAlignment="Top" Width="199">
-                <TextBlock x:Name="Clock_State" HorizontalAlignment="Left" Margin="0,30,0,0" TextWrapping="Wrap" Text="오전" VerticalAlignment="Top" Height="25" Width="40" Foreground="White" FontSize="20" RenderTransformOrigin="0.5,0.5" Opacity="0.8" />
-                <TextBlock x:Name="Clock_Time" HorizontalAlignment="Right" Margin="0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Height="90" Width="153" Foreground="White" FontSize="60" RenderTransformOrigin="0.5,0.5" />
+        <Grid HorizontalAlignment="Left" Height="112" Margin="10,10,0,0" VerticalAlignment="Top" Width="355">
+            <Grid HorizontalAlignment="Left" Height="70" Margin="10,10,0,0" VerticalAlignment="Top" Width="199">
+                <TextBlock x:Name="Clock_State" HorizontalAlignment="Left" TextWrapping="Wrap" Text="오전" VerticalAlignment="Top" Height="25" Width="40" Foreground="White" FontSize="20" RenderTransformOrigin="0.5,0.5" Opacity="0.8" />
+                <TextBlock x:Name="Clock_Time" HorizontalAlignment="Right" Margin="0,-11,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Height="71" Width="153" Foreground="White" FontSize="60" RenderTransformOrigin="0.5,0.5" />
             </Grid>
-            <!--DATE-->
-            <Grid HorizontalAlignment="Left" Height="42" Margin="0" VerticalAlignment="Bottom" Width="284">
-                <TextBlock x:Name="Clock_Date" HorizontalAlignment="Center" Margin="10,0,10,9" TextWrapping="Wrap" Text="0000-00-00" VerticalAlignment="Bottom" Foreground="White" FontSize="20" RenderTransformOrigin="1,0" Opacity="0.8" Width="264" />
+            <Grid HorizontalAlignment="Left" Height="31" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="284">
+                <TextBlock x:Name="Clock_Date" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="0000-00-00" VerticalAlignment="Center" Foreground="White" FontSize="20" RenderTransformOrigin="1,0" Opacity="0.8" Width="264" />
             </Grid>
         </Grid>
     </Grid>
