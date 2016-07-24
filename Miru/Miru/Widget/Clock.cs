@@ -13,7 +13,7 @@ namespace Miru.Widget
         /// 현재시간이 오전인지 오후인지를 문자열로 반환합니다.
         /// </summary>
         /// <returns>AM or PM</returns>
-        public string GetCurrentState() => (DateTime.Now.Hour > 11) ? "PM" : "AM";
+        public string GetCurrentState() => (DateTime.Now.Hour > 11) ? rl.GetString("PM") : rl.GetString("AM");
 
         public enum Status
         {
