@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AM" xml:space="preserve">
+    <value>오전</value>
+  </data>
   <data name="helloMiru_afternoon" xml:space="preserve">
     <value>"오늘은 무엇을 하실 건가요?"</value>
   </data>
   <data name="helloMiru_default" xml:space="preserve">
     <value>"안녕하세요!"</value>
   </data>
-  <data name="helloMiru_evenig" xml:space="preserve">
+  <data name="helloMiru_evening" xml:space="preserve">
     <value>"오늘도 하루가 다 갔네요."</value>
   </data>
   <data name="helloMiru_moring" xml:space="preserve">
@@ -134,5 +137,8 @@
   </data>
   <data name="loadScreen" xml:space="preserve">
     <value>화면을 구성중입니다...</value>
+  </data>
+  <data name="PM" xml:space="preserve">
+    <value>오후</value>
   </data>
 </root>
