@@ -1,12 +1,14 @@
 ﻿using System;
+using Windows.ApplicationModel.Resources;
 
 namespace Miru.Widget
 {
     /// <summary>
     /// 각종 시간 기능을 제공합니다.
     /// </summary>
-    public class Clock
+    public class Clock : Widget
     {
+        ResourceLoader rl = new ResourceLoader();
         /// <summary>
         /// 현재시간이 오전인지 오후인지를 문자열로 반환합니다.
         /// </summary>

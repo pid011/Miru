@@ -2,11 +2,11 @@
 
 namespace Miru.Widget
 {
-    internal abstract class Widget
+    public class Widget
     {
     }
 
-    internal class ErrorCallbackEventArgs : EventArgs
+    public class ErrorCallbackEventArgs : EventArgs
     {
         public string name { get; set; }
         public string msg { get; set; }
