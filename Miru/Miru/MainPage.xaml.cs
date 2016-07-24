@@ -33,8 +33,6 @@ namespace Miru
             weather.LoadedError += W_LoadedError;
             await this.weather.RequestWeatherAsync();
 
-            // var uri = new Uri("ms-appx:///WeatherImage/0-sunny.png");
-
             this.timer.Start();
             Weather_Temp.Text = $"{ this.weather.Temperatures?[0] }℃";
             WeatherIcon.Text = this.weather.WeatherIcons?[0].ToString();
