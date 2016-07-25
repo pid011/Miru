@@ -15,9 +15,9 @@
                 <GradientStop Color="Black" Offset="1" />
             </LinearGradientBrush>
         </Grid.Background>
-        <TextBlock x:Name="Center" HorizontalAlignment="Center" Margin="80,682,80,681" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" FontSize="50" Height="77" Width="800" TextAlignment="Center" Text="" />
+        <TextBlock x:Name="Center" HorizontalAlignment="Center" Margin="80,682,80,681" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" FontSize="32" Height="77" Width="800" TextAlignment="Center" Text="" />
         <TextBlock x:Name="status" HorizontalAlignment="Center" Margin="0,0,0,50" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="40" Width="800" FontSize="30" TextAlignment="Center" FontStyle="Italic" Text=""/>
-        <Grid HorizontalAlignment="Right" Height="120" Margin="0,10,10,0" VerticalAlignment="Top" Width="262">
+        <Grid HorizontalAlignment="Right" Height="120" Margin="0,50,50,0" VerticalAlignment="Top" Width="262">
             <Grid HorizontalAlignment="Left" Width="253" Margin="0,0,0,41" d:LayoutOverrides="TopPosition, BottomPosition">
                 <TextBlock x:Name="clockState" TextWrapping="Wrap" Text="오전" Foreground="White" FontSize="20" RenderTransformOrigin="0.5,0.5" Opacity="0.8" Margin="209,42,0,9" TextAlignment="Center" HorizontalAlignment="Left" Width="44" d:LayoutOverrides="TopMargin, BottomMargin, TopPosition, BottomPosition" />
                 <TextBlock x:Name="clockTime" HorizontalAlignment="Right" Margin="0,-10,46,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Height="80" Width="176" Foreground="White" FontSize="69.333" RenderTransformOrigin="0.5,0.5" TextAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin" />
@@ -26,31 +26,31 @@
                 <TextBlock x:Name="clockDate" TextWrapping="Wrap" Text="0000-00-00" Foreground="White" FontSize="20" RenderTransformOrigin="1,0" Opacity="0.8" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin, TopPosition, BottomPosition" TextAlignment="Right" HorizontalAlignment="Right" Width="243" />
             </Grid>
         </Grid>
-        <Grid Height="477" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="341">
+        <Grid Height="477" Margin="50,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="341">
             <Grid Margin="10,10,10,0" Height="85" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition">
                 <TextBlock x:Name="currentWeatherTemp" Margin="76,-10,0,-13" TextWrapping="Wrap" Text="00.00℃" Foreground="White" FontSize="69.333" d:LayoutOverrides="TopMargin, BottomMargin" Height="108" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="244" />
                 <TextBlock x:Name="currentWeatherIcon" FontFamily="ms-appx:///Assets/Fonts/artill_clean_icons.otf#artill clean weather icons" Margin="0,-24,0,-30" TextWrapping="Wrap" Text="A" FontSize="90" TextAlignment="Center" d:LayoutOverrides="TopMargin, BottomMargin" Height="139" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="76" />
             </Grid>
             <StackPanel Margin="10,100,0,10" d:LayoutOverrides="TopPosition, BottomPosition" HorizontalAlignment="Left" Width="321">
-                <Grid Height="50" Opacity="0.8">
+                <Grid Height="50" Opacity="0.8" Margin="0">
                     <TextBlock x:Name="forecastWeatherIcon1" FontFamily="ms-appx:///Assets/Fonts/artill_clean_icons.otf#artill clean weather icons" HorizontalAlignment="Left" TextWrapping="Wrap" Width="50" Height="70" FontSize="53.333" TextAlignment="Center" VerticalAlignment="Bottom" Text="a" Margin="0,-20,0,0"/>
-                    <TextBlock x:Name="forecastWeatherTemp1" Margin="0,-9,10,-9" TextWrapping="Wrap" Text="00.00℃" HorizontalAlignment="Right" Width="261" FontSize="46.667" Height="70"/>
+                    <TextBlock x:Name="forecastWeatherTemp1" Margin="50,-9,-22,-11" TextWrapping="Wrap" Text="00.00℃" HorizontalAlignment="Left" Width="186" FontSize="46.667" Height="70"/>
                 </Grid>
-                <Grid Height="50" Margin="0.167,0,0.166,0" Opacity="0.6">
+                <Grid Height="50" Margin="0,0,85.333,0" Opacity="0.6">
                     <TextBlock x:Name="forecastWeatherIcon2" FontFamily="ms-appx:///Assets/Fonts/artill_clean_icons.otf#artill clean weather icons" HorizontalAlignment="Left" TextWrapping="Wrap" Width="50" Height="70" FontSize="40" TextAlignment="Center" VerticalAlignment="Bottom" Text="a" Margin="0,-9,0,-11"/>
-                    <TextBlock x:Name="forecastWeatherTemp2" Margin="0,0,10,0" TextWrapping="Wrap" Text="00.00℃" HorizontalAlignment="Right" Width="261" FontSize="33.333" d:LayoutOverrides="LeftMargin, RightMargin, TopPosition, BottomPosition"/>
+                    <TextBlock x:Name="forecastWeatherTemp2" Margin="50,0,0,0" TextWrapping="Wrap" Text="00.00℃" HorizontalAlignment="Left" Width="186" FontSize="33.333" d:LayoutOverrides="TopPosition, BottomPosition"/>
                 </Grid>
-                <Grid Height="50" Margin="0.167,0,0.166,0" Opacity="0.5">
+                <Grid Height="50" Margin="0,0,85.333,0" Opacity="0.5">
                     <TextBlock x:Name="forecastWeatherIcon3" FontFamily="ms-appx:///Assets/Fonts/artill_clean_icons.otf#artill clean weather icons" HorizontalAlignment="Left" TextWrapping="Wrap" Width="50" Height="30" FontSize="26.667" TextAlignment="Center" VerticalAlignment="Bottom" Text="a" Margin="0,0,0,15"/>
-                    <TextBlock x:Name="forecastWeatherTemp3" Margin="0,10,10,13" TextWrapping="Wrap" Text="00.00℃" HorizontalAlignment="Right" Width="261" FontSize="20" d:LayoutOverrides="LeftMargin, RightMargin, TopPosition, BottomPosition"/>
+                    <TextBlock x:Name="forecastWeatherTemp3" Margin="50,10,0,13" TextWrapping="Wrap" Text="00.00℃" HorizontalAlignment="Left" Width="186" FontSize="20" d:LayoutOverrides="TopPosition, BottomPosition"/>
                 </Grid>
-                <Grid Height="50" Margin="0.167,0,0.166,0" Opacity="0.4">
+                <Grid Height="50" Margin="0,0,85.333,0" Opacity="0.4">
                     <TextBlock x:Name="forecastWeatherIcon4" FontFamily="ms-appx:///Assets/Fonts/artill_clean_icons.otf#artill clean weather icons" HorizontalAlignment="Left" TextWrapping="Wrap" Width="50" Height="25" FontSize="20" TextAlignment="Center" VerticalAlignment="Bottom" Text="a" Margin="0,0,0,15"/>
-                    <TextBlock x:Name="forecastWeatherTemp4" Margin="0,16,10,15" TextWrapping="Wrap" Text="00.00℃" HorizontalAlignment="Right" Width="261" FontSize="13.333" d:LayoutOverrides="LeftMargin, RightMargin, TopPosition, BottomPosition"/>
+                    <TextBlock x:Name="forecastWeatherTemp4" Margin="50,16,0,15" TextWrapping="Wrap" Text="00.00℃" HorizontalAlignment="Left" Width="186" FontSize="13.333" d:LayoutOverrides="TopPosition, BottomPosition"/>
                 </Grid>
-                <Grid Height="50" Margin="0.167,0,0.166,0" Opacity="0.4">
+                <Grid Height="50" Opacity="0.4" HorizontalAlignment="Right" Width="236" Margin="0,0,85.333,0">
                     <TextBlock x:Name="forecastWeatherIcon5" FontFamily="ms-appx:///Assets/Fonts/artill_clean_icons.otf#artill clean weather icons" HorizontalAlignment="Left" TextWrapping="Wrap" Width="50" Height="25" FontSize="20" TextAlignment="Center" VerticalAlignment="Bottom" Text="a" Margin="0,0,0,15"/>
-                    <TextBlock x:Name="forecastWeatherTemp5" Margin="0,16,10,15" TextWrapping="Wrap" Text="00.00℃" HorizontalAlignment="Right" Width="261" FontSize="13.333" d:LayoutOverrides="LeftMargin, RightMargin, TopPosition, BottomPosition"/>
+                    <TextBlock x:Name="forecastWeatherTemp5" Margin="50,16,0,15" TextWrapping="Wrap" Text="00.00℃" HorizontalAlignment="Left" Width="186" FontSize="13.333" d:LayoutOverrides="LeftMargin, RightMargin, TopPosition, BottomPosition"/>
                 </Grid>
             </StackPanel>
         </Grid>

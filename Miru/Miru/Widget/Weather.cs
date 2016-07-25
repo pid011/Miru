@@ -150,6 +150,7 @@ namespace Miru.Widget
             forecastTemp = new List<double>();
             forecastHumidity = new List<double>();
             forecastSkystatus = new List<SkyCode>();
+            // TODO: 날씨 파서 구현
         }
 
         private SkyCode GetSky(string position)
