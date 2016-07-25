@@ -34,8 +34,8 @@ namespace Miru
             await this.weather.RequestWeatherAsync();
 
             this.timer.Start();
-            Weather_Temp.Text = $"{ this.weather.Temperatures?[0] }℃";
-            WeatherIcon.Text = this.weather.WeatherIcons?[0].ToString();
+            currentWeatherTemp.Text = $"{this.weather.Temperatures?[0]}℃";
+            currentWeatherIcon.Text = this.weather.WeatherIcons?[0].ToString();
             status.Text = string.Empty;
 
             switch(this.clock.TimeStatus)
@@ -76,9 +76,9 @@ namespace Miru
 
         private void M_Clock_Tick(object sender, object e)
         {
-            Clock_State.Text = clock.GetCurrentState();
-            Clock_Time.Text = clock.GetCurrentTime();
-            Clock_Date.Text = clock.getCurrentWeek();
+            clockState.Text = clock.GetCurrentState();
+            clockTime.Text = clock.GetCurrentTime();
+            clockDate.Text = clock.getCurrentWeek();
         }
 
         private void MainPage_Unloaded(object sender, RoutedEventArgs e)
