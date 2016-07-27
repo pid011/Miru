@@ -141,4 +141,10 @@
   <data name="PM" xml:space="preserve">
     <value>오후</value>
   </data>
+  <data name="pin_error" xml:space="preserve">
+    <value>센서가 정상작동 하지 않습니다!</value>
+  </data>
+  <data name="pin_successed" xml:space="preserve">
+    <value>센서가 정상작동 중입니다...</value>
+  </data>
 </root>
