@@ -25,7 +25,14 @@ namespace Miru
             Loaded += MainPage_Loaded;
             Unloaded += MainPage_Unloaded;
             bool isSuccessed = InitGpio();
-            this.status.Text = isSuccessed ? rl.GetString("pin_successed") : rl.GetString("pin_error");
+            if (isSuccessed)
+            {
+                this.status.Text = rl.GetString("pin_successed");
+            }
+            else
+            {
+                this.status.Text = rl.GetString("pin_error");
+            }
         }
         private bool InitGpio( )
         {
