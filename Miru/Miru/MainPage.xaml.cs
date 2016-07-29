@@ -1,9 +1,10 @@
 ﻿using System;
-using Miru.Widget;
+using Miru.View;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.Devices.Gpio;
+using Miru.GpioPin;
 
 namespace Miru
 {
@@ -12,10 +13,7 @@ namespace Miru
         private DispatcherTimer timer;
         private Clock clock;
         private WeatherWidget weather;
-
-        private const int PIR_SENSER_PIN = 23;
-        private GpioPin pin;
-        // private GpioPinValue pinValue;
+        private PIRSenser pirSenser = new PIRSenser();
 
         ResourceLoader rl = new ResourceLoader();
 
@@ -24,7 +22,9 @@ namespace Miru
             InitializeComponent();
             Loaded += MainPage_Loaded;
             Unloaded += MainPage_Unloaded;
-            bool isSuccessed = InitGpio();
+
+            bool isSuccessed = pirSenser.InitGpio();
+
             if (isSuccessed)
             {
                 this.status.Text = rl.GetString("pin_successed");
@@ -33,20 +33,6 @@ namespace Miru
             {
                 this.status.Text = rl.GetString("pin_error");
             }
-        }
-        private bool InitGpio( )
-        {
-            var gpio = GpioController.GetDefault();
-
-            if (gpio == null)
-            {
-                this.pin = null;
-                return false;
-            }
-
-            this.pin = gpio.OpenPin(PIR_SENSER_PIN);
-            this.pin.SetDriveMode(GpioPinDriveMode.Input);
-            return true;
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)

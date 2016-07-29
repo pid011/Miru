@@ -1,12 +1,12 @@
 ﻿using System;
 using Windows.ApplicationModel.Resources;
 
-namespace Miru.Widget
+namespace Miru.View
 {
     /// <summary>
     /// 각종 시간 기능을 제공합니다.
     /// </summary>
-    public class Clock : Widget
+    public class Clock : View
     {
         ResourceLoader rl = new ResourceLoader();
         /// <summary>

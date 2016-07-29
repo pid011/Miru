@@ -4,12 +4,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-namespace Miru.Widget
+namespace Miru.View
 {
     /// <summary>
     /// 날씨정보생성을 도와줍니다.
     /// </summary>
-    internal class WeatherWidget : Widget
+    internal class WeatherWidget : View
     {
         private int version;
         private double lat;

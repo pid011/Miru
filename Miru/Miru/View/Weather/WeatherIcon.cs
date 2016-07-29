@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Miru.Widget
+namespace Miru.View
 {
     internal class WeatherIcon
     {

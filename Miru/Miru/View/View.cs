@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Miru.Widget
+namespace Miru.View
 {
-    public class Widget
+    public class View
     {
     }
 
