@@ -23,8 +23,6 @@ namespace Miru.View
         private SkyCode currentSkystatus;
         private List<SkyCode> forecastSkystatus;
 
-        public event EventHandler LoadedError;
-
         public List<double> Temperatures
         {
             get
@@ -101,8 +99,6 @@ namespace Miru.View
             this.appKey = appKey;
         }
 
-        private void LoadEvent(string msg) => LoadedError(this, new ErrorCallbackEventArgs { name = nameof(WeatherWidget), msg = msg });
-
         public async Task RequestWeatherAsync()
         {
             string currentWeatherUrl = $"http://apis.skplanetx.com/weather/current/minutely?version={this.version}&lat={this.lat}&lon={this.lon}&appKey={this.appKey}";
@@ -123,6 +119,7 @@ namespace Miru.View
             }
             catch(ArgumentNullException)
             {
+                throw;
             }
         }
 
@@ -139,9 +136,11 @@ namespace Miru.View
             }
             catch(ArgumentNullException)
             {
+                throw;
             }
             catch(NullReferenceException)
             {
+                throw;
             }
         }
 

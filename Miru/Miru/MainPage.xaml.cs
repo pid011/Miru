@@ -70,7 +70,6 @@ namespace Miru
         private async void CreateWidget()
         {
             this.weather = new WeatherWidget(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
-            weather.LoadedError += W_LoadedError;
             await this.weather.RequestWeatherAsync();
 
             this.timer.Start();
@@ -79,18 +78,6 @@ namespace Miru
 
             
 
-        }
-
-        private void W_LoadedError(object sender, EventArgs e)
-        {
-            try
-            {
-                ErrorCallbackEventArgs args = e as ErrorCallbackEventArgs;
-                status.Text = $"[{args.name}] {args.msg}";
-            }
-            catch(Exception)
-            {
-            }
         }
 
         private void M_Clock_Tick(object sender, object e)
@@ -102,7 +89,6 @@ namespace Miru
 
         private void MainPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            this.weather.LoadedError -= W_LoadedError;
             if(timer != null)
             {
                 if(timer.IsEnabled)
