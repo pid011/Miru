@@ -14,7 +14,7 @@ namespace Miru
         private DispatcherTimer timer;
         private Clock clock;
         private WeatherWidget weather;
-        private PIRSenser pirSenser;
+        private UltrasonicSenser pirSenser;
         private int count;
         private bool isSetView;
 
@@ -30,7 +30,7 @@ namespace Miru
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            this.pirSenser = new PIRSenser();
+            this.pirSenser = new UltrasonicSenser();
 
             bool isSuccessed = pirSenser.InitGpio();
 
@@ -92,7 +92,9 @@ namespace Miru
 
         private void M_Clock_Tick(object sender, object e)
         {
+            /*
             count++;
+
             if (! isSetView)
             {
                 if (pirSenser.pinValue == GpioPinValue.High)
@@ -115,6 +117,7 @@ namespace Miru
                     clockDate.Text = clock.getCurrentWeek();
                 }
             }
+            */
         }
         private void CloseView()
         {
