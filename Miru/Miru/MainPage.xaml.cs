@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.Devices.Gpio;
 using Miru.GpioPin;
+using System.Threading.Tasks;
 
 namespace Miru
 {
@@ -13,13 +14,9 @@ namespace Miru
         private DispatcherTimer timer;
         private Clock clock;
         private WeatherWidget weather;
-<<<<<<< HEAD
-        private UltrasonicSenser pirSenser;
+        private PIRSenser pirSenser;
         private int count;
         private bool isSetView;
-=======
-        private PIRSenser pirSenser = new PIRSenser();
->>>>>>> parent of 4e32484... Add GetPinValue Property
 
         ResourceLoader rl = new ResourceLoader();
 
@@ -28,15 +25,12 @@ namespace Miru
             InitializeComponent();
             Loaded += MainPage_Loaded;
             Unloaded += MainPage_Unloaded;
-<<<<<<< HEAD
             this.Opacity = 0;
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            this.pirSenser = new UltrasonicSenser();
-=======
->>>>>>> parent of 4e32484... Add GetPinValue Property
+            this.pirSenser = new PIRSenser();
 
             bool isSuccessed = pirSenser.InitGpio();
 
@@ -48,15 +42,19 @@ namespace Miru
             {
                 this.status.Text = rl.GetString("pin_error");
             }
-        }
-
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.clock = new Clock();
             this.timer = new DispatcherTimer();
             this.timer.Tick += M_Clock_Tick;
             this.timer.Interval = TimeSpan.FromSeconds(1);
+            this.timer.Start();
 
+            SetView();
+        }
+
+        private void SetView()
+        {
+            isSetView = true;
+
+            this.clock = new Clock();
             CreateWidget();
             switch (this.clock.TimeStatus)
             {
@@ -80,6 +78,7 @@ namespace Miru
                     Center.Text = rl.GetString("helloMiru_default");
                     break;
             }
+            this.Opacity = 1;
         }
 
         private async void CreateWidget()
@@ -87,20 +86,13 @@ namespace Miru
             this.weather = new WeatherWidget(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
             await this.weather.RequestWeatherAsync();
 
-            this.timer.Start();
             currentWeatherTemp.Text = $"{this.weather.Temperatures?[0]}℃";
             currentWeatherIcon.Text = this.weather.WeatherIcons?[0].ToString();
-
-            
-
         }
 
         private void M_Clock_Tick(object sender, object e)
         {
-<<<<<<< HEAD
-            /*
             count++;
-
             if (! isSetView)
             {
                 if (pirSenser.pinValue == GpioPinValue.High)
@@ -123,7 +115,6 @@ namespace Miru
                     clockDate.Text = clock.getCurrentWeek();
                 }
             }
-            */
         }
         private void CloseView()
         {
@@ -133,23 +124,20 @@ namespace Miru
             */
             this.MainGrid.Opacity = 0;
             this.isSetView = false;
-=======
-            clockState.Text = clock.GetCurrentState();
-            clockTime.Text = clock.GetCurrentTime();
-            clockDate.Text = clock.getCurrentWeek();
->>>>>>> parent of 4e32484... Add GetPinValue Property
         }
 
         private void MainPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            if(timer != null)
+            if (timer != null)
             {
-                if(timer.IsEnabled)
+                if (timer.IsEnabled)
                 {
                     timer.Tick -= M_Clock_Tick;
                 }
             }
             timer.Stop();
+
+            this.pirSenser.Dispose();
         }
     }
 }
