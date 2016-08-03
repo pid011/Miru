@@ -4,12 +4,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-namespace Miru.View
+namespace Miru.ViewModel
 {
     /// <summary>
     /// 날씨정보생성을 도와줍니다.
     /// </summary>
-    internal class WeatherWidget : View
+    public class WeatherWidget : ViewModel
     {
         private int version;
         private double lat;
@@ -58,9 +58,8 @@ namespace Miru.View
             get
             {
                 List<char> icons = new List<char>();
-                WeatherIcon iconTools = new WeatherIcon();
 
-                SkyStatus.ForEach(x => icons.Add(iconTools.GetWeatherIcon(x)));
+                SkyStatus.ForEach(x => icons.Add(WeatherIcon.GetWeatherIcon(x)));
                 return icons;
             }
         }

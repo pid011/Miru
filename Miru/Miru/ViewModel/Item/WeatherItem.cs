@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Miru.GpioPin
+namespace Miru.ViewModel.Item
 {
-    public abstract class Senser
+    public class WeatherItem : Item
     {
-        public abstract bool InitGpio();
     }
 }

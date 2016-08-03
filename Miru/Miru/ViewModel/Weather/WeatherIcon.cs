@@ -1,10 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace Miru.View
+namespace Miru.ViewModel
 {
-    internal class WeatherIcon
+    /// <summary>
+    /// 날씨 아이콘에 대한 메서드를 제공합니다.
+    /// </summary>
+    public class WeatherIcon
     {
-        private Dictionary<string, char> iconTable = new Dictionary<string, char>
+        #region icon table set
+        private static Dictionary<string, char> iconTable = new Dictionary<string, char>
         {
             ["s-01"] = '1',
             ["n-01"] = '6',
@@ -35,10 +40,21 @@ namespace Miru.View
             ["s-14"] = 'R',
             ["n-14"] = 'r',
         };
+        #endregion
 
-        private bool isNight() => new Clock().TimeStatus == Clock.Status.Night ? true : false;
+        private static bool isNight()
+        {
+            var now = DateTime.Now;
+            // 낮과 밤의 평균 길이는 12시간, 12시간이므로
+            return now.Hour > 6 && now.Hour < 20 ? true : false;
+        }
 
-        public char GetWeatherIcon(WeatherWidget.SkyCode sky)
+        /// <summary>
+        /// 매개변수로 받은 날씨 상태에 맞는 날씨 아이콘을 반환합니다.
+        /// </summary>
+        /// <param name="sky">날씨 상태입니다.</param>
+        /// <returns>날씨 아이콘</returns>
+        public static char GetWeatherIcon(WeatherWidget.SkyCode sky)
         {
             char icon = '1';
 
