@@ -9,6 +9,9 @@ namespace Miru.ViewModel
     /// </summary>
     public class Clock : ViewModel
     {
+        /// <summary>
+        /// 현재 시간을 가져옵니다.
+        /// </summary>
         public ClockItem Item
         {
             get
