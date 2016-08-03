@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Miru.ViewModel.Item
 {
-    public class Item
+    /// <summary>
+    /// ViewItem 상위 클래스입니다.
+    /// </summary>
+    public abstract class Item
     {
     }
 }
