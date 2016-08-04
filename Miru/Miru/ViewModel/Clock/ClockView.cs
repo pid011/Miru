@@ -7,7 +7,7 @@ namespace Miru.ViewModel
     /// <summary>
     /// 각종 시간 기능을 제공합니다.
     /// </summary>
-    public class Clock : ViewModel
+    public class ClockView : ViewModel
     {
         /// <summary>
         /// 현재 시간을 가져옵니다.

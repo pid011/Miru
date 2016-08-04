@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Miru.Util;
 
 namespace Miru.ViewModel.Item
@@ -58,7 +54,7 @@ namespace Miru.ViewModel.Item
         /// 오전 / 오후 중 하나를 제공합니다.(오전/오후)
         /// </summary>
         public string AMPM => ConvertAMPMToString(_ampm);
-        private Clock.AMPM _ampm;
+        private ClockView.AMPM _ampm;
 
 
         /// <summary>
@@ -71,7 +67,7 @@ namespace Miru.ViewModel.Item
         /// <param name="hour">시간을 지정합니다. 두자리 숫자(hh)로 표기해야 합니다.</param>
         /// <param name="min">분을 지정합니다. 두자리 숫자(nn)으로 표기해야 합니다.</param>
         /// <param name="ampm">12시간 단위의 시간을 오전/오후로 지정합니다.</param>
-        public ClockItem(int year, int month, int day, DayOfWeek week, int hour, int min, Clock.AMPM ampm)
+        public ClockItem(int year, int month, int day, DayOfWeek week, int hour, int min, ClockView.AMPM ampm)
         {
             this._year = year;
             this._month = month;
@@ -82,16 +78,16 @@ namespace Miru.ViewModel.Item
             this._ampm = ampm;
         }
 
-        private string ConvertAMPMToString(Clock.AMPM ampm)
+        private string ConvertAMPMToString(ClockView.AMPM ampm)
         {
             string result = string.Empty;
 
             switch (ampm)
             {
-                case Clock.AMPM.AM:
+                case ClockView.AMPM.AM:
                     result = ResourcesString.GetString("am");
                     break;
-                case Clock.AMPM.PM:
+                case ClockView.AMPM.PM:
                     result = ResourcesString.GetString("pm");
                     break;
             }

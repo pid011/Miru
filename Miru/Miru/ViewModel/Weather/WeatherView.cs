@@ -9,79 +9,85 @@ namespace Miru.ViewModel
     /// <summary>
     /// 날씨정보생성을 도와줍니다.
     /// </summary>
-    public class WeatherWidget : ViewModel
+    public class WeatherView : ViewModel
     {
         private int version;
         private double lat;
         private double lon;
         private string appKey;
 
-        private double currentTemp;
-        private List<double> forecastTemp;
-        private double currentHumidity;
-        private List<double> forecastHumidity;
-        private SkyCode currentSkystatus;
-        private List<SkyCode> forecastSkystatus;
+        private Queue<double> temperature = new Queue<double>();
+        private Queue<double> humidity = new Queue<double>();
+        private Queue<SkyCode> skyStates = new Queue<SkyCode>();
 
-        public List<double> Temperatures
-        {
-            get
-            {
-                List<double> list = new List<double>() { this.currentTemp };
-                this.forecastTemp.ForEach(x => list.Add(x));
-                return list;
-            }
-        }
-
-        public List<double> Humiditys
-        {
-            get
-            {
-                List<double> list = new List<double>() { this.currentHumidity };
-                this.forecastHumidity.ForEach(x => list.Add(x));
-                return list;
-            }
-        }
-
-        public List<SkyCode> SkyStatus
-        {
-            get
-            {
-                List<SkyCode> list = new List<SkyCode>() { this.currentSkystatus };
-                this.forecastSkystatus.ForEach(x => list.Add(x));
-                return list;
-            }
-        }
-
-        public List<char> WeatherIcons
-        {
-            get
-            {
-                List<char> icons = new List<char>();
-
-                SkyStatus.ForEach(x => icons.Add(WeatherIcon.GetWeatherIcon(x)));
-                return icons;
-            }
-        }
-
+        #region sky states
+        /// <summary>
+        /// 여러가지 하늘상태를 열거합니다.
+        /// </summary>
         public enum SkyCode
         {
+            /// <summary>
+            /// 맑음
+            /// </summary>
             Sunny,
+            /// <summary>
+            /// 구름조금
+            /// </summary>
             PartlyCloudy,
+            /// <summary>
+            /// 구름많음
+            /// </summary>
             MostlyCloudy,
+            /// <summary>
+            /// 구름많고 비
+            /// </summary>
             MostlyCloudyAndRain,
+            /// <summary>
+            /// 구름많고 눈
+            /// </summary>
             MostlyCloudyAndSnow,
+            /// <summary>
+            /// 구름많고 비 또는 눈
+            /// </summary>
             MostlyCloudyAndRainAndSnow,
+            /// <summary>
+            /// 흐림
+            /// </summary>
             Fog,
+            /// <summary>
+            /// 흐리고 비
+            /// </summary>
             FogAndRain,
+            /// <summary>
+            /// 흐리고 눈
+            /// </summary>
             FogAndSnow,
+            /// <summary>
+            /// 흐리고 비 또는 눈
+            /// </summary>
             FogAndRainAndSnow,
+            /// <summary>
+            /// 흐리고 낙뢰
+            /// </summary>
             FogAndThunderstroke,
+            /// <summary>
+            /// 뇌우, 비
+            /// </summary>
             ThunderstormAndRain,
+            /// <summary>
+            /// 뇌우, 눈
+            /// </summary>
             ThunderstormAndSnow,
+            /// <summary>
+            /// 뇌우, 비 또는 눈
+            /// </summary>
             ThunderstormAndRainAndSnow,
+            /// <summary>
+            /// 알 수 없음
+            /// </summary>
             NULL
         }
+        #endregion
 
         /// <summary>
         /// 날씨정보를 생성합니다.
@@ -90,7 +96,7 @@ namespace Miru.ViewModel
         /// <param name="lat">위도(Only Korea)</param>
         /// <param name="lon">경도(Only Korea)</param>
         /// <param name="appKey">SK plenet에서 제공받은 appKey</param>
-        public WeatherWidget(int version, double lat, double lon, string appKey)
+        public WeatherView(int version, double lat, double lon, string appKey)
         {
             this.version = version;
             this.lat = lat;
@@ -98,6 +104,10 @@ namespace Miru.ViewModel
             this.appKey = appKey;
         }
 
+        /// <summary>
+        /// 날씨정보를 불러옵니다.
+        /// </summary>
+        /// <returns>날씨정보를 불러오는 비동기작업</returns>
         public async Task RequestWeatherAsync()
         {
             string currentWeatherUrl = $"http://apis.skplanetx.com/weather/current/minutely?version={this.version}&lat={this.lat}&lon={this.lon}&appKey={this.appKey}";
@@ -112,11 +122,12 @@ namespace Miru.ViewModel
                 {
                     string currentWeatherJson = await client.GetStringAsync(currentWeatherUri);
                     string forecastWeatherJson = await client.GetStringAsync(forecastWeatherUri);
+
                     CurrentWeatherJsonParse(currentWeatherJson);
                     ForecastWeatherJsonFarse(forecastWeatherJson);
                 }
             }
-            catch(ArgumentNullException)
+            catch (ArgumentNullException)
             {
                 throw;
             }
@@ -127,17 +138,12 @@ namespace Miru.ViewModel
             try
             {
                 JObject obj1 = JObject.Parse(CurrentWeatherJson);
-
-                currentTemp = (Convert.ToDouble((string)obj1["weather"]["minutely"][0]["temperature"]["tc"]));
-                currentHumidity = (Convert.ToDouble((string)obj1["weather"]["minutely"][0]["humidity"]));
+                temperature.Enqueue(Convert.ToDouble((string)obj1["weather"]["minutely"][0]["temperature"]["tc"]));
+                humidity.Enqueue(Convert.ToDouble((string)obj1["weather"]["minutely"][0]["humidity"]));
                 string skycode = (string)obj1["weather"]["minutely"][0]["sky"]["code"];
-                currentSkystatus = (GetSky(skycode));
+                skyStates.Enqueue(GetSky(skycode));
             }
-            catch(ArgumentNullException)
-            {
-                throw;
-            }
-            catch(NullReferenceException)
+            catch (FormatException)
             {
                 throw;
             }
@@ -145,9 +151,6 @@ namespace Miru.ViewModel
 
         private void ForecastWeatherJsonFarse(string ForecastJson)
         {
-            forecastTemp = new List<double>();
-            forecastHumidity = new List<double>();
-            forecastSkystatus = new List<SkyCode>();
             // TODO: 날씨 파서 구현
         }
 

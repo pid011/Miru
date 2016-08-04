@@ -8,7 +8,7 @@ namespace Miru.ViewModel
     /// </summary>
     public class WeatherIcon
     {
-        #region icon table set
+        #region icon table
         private static Dictionary<string, char> iconTable = new Dictionary<string, char>
         {
             ["s-01"] = '1',
@@ -54,65 +54,65 @@ namespace Miru.ViewModel
         /// </summary>
         /// <param name="sky">날씨 상태입니다.</param>
         /// <returns>날씨 아이콘</returns>
-        public static char GetWeatherIcon(WeatherWidget.SkyCode sky)
+        public static char GetWeatherIcon(WeatherView.SkyCode sky)
         {
             char icon = '1';
 
             switch(sky)
             {
-                case WeatherWidget.SkyCode.Sunny:
+                case WeatherView.SkyCode.Sunny:
                     icon = !isNight() ? iconTable["s-01"] : iconTable["n-01"];
                     break;
 
-                case WeatherWidget.SkyCode.PartlyCloudy:
+                case WeatherView.SkyCode.PartlyCloudy:
                     icon = !isNight() ? iconTable["s-02"] : iconTable["n-02"];
                     break;
 
-                case WeatherWidget.SkyCode.MostlyCloudy:
+                case WeatherView.SkyCode.MostlyCloudy:
                     icon = !isNight() ? iconTable["s-03"] : iconTable["n-03"];
                     break;
 
-                case WeatherWidget.SkyCode.MostlyCloudyAndRain:
+                case WeatherView.SkyCode.MostlyCloudyAndRain:
                     icon = !isNight() ? iconTable["s-04"] : iconTable["n-04"];
                     break;
 
-                case WeatherWidget.SkyCode.MostlyCloudyAndSnow:
+                case WeatherView.SkyCode.MostlyCloudyAndSnow:
                     icon = !isNight() ? iconTable["s-05"] : iconTable["n-05"];
                     break;
 
-                case WeatherWidget.SkyCode.MostlyCloudyAndRainAndSnow:
+                case WeatherView.SkyCode.MostlyCloudyAndRainAndSnow:
                     icon = !isNight() ? iconTable["s-06"] : iconTable["n-06"];
                     break;
 
-                case WeatherWidget.SkyCode.Fog:
+                case WeatherView.SkyCode.Fog:
                     icon = !isNight() ? iconTable["s-07"] : iconTable["n-07"];
                     break;
 
-                case WeatherWidget.SkyCode.FogAndRain:
+                case WeatherView.SkyCode.FogAndRain:
                     icon = !isNight() ? iconTable["s-08"] : iconTable["n-08"];
                     break;
 
-                case WeatherWidget.SkyCode.FogAndSnow:
+                case WeatherView.SkyCode.FogAndSnow:
                     icon = !isNight() ? iconTable["s-09"] : iconTable["n-09"];
                     break;
 
-                case WeatherWidget.SkyCode.FogAndRainAndSnow:
+                case WeatherView.SkyCode.FogAndRainAndSnow:
                     icon = !isNight() ? iconTable["s-10"] : iconTable["n-10"];
                     break;
 
-                case WeatherWidget.SkyCode.FogAndThunderstroke:
+                case WeatherView.SkyCode.FogAndThunderstroke:
                     icon = !isNight() ? iconTable["s-11"] : iconTable["n-11"];
                     break;
 
-                case WeatherWidget.SkyCode.ThunderstormAndRain:
+                case WeatherView.SkyCode.ThunderstormAndRain:
                     icon = !isNight() ? iconTable["s-12"] : iconTable["n-12"];
                     break;
 
-                case WeatherWidget.SkyCode.ThunderstormAndSnow:
+                case WeatherView.SkyCode.ThunderstormAndSnow:
                     icon = !isNight() ? iconTable["s-13"] : iconTable["n-13"];
                     break;
 
-                case WeatherWidget.SkyCode.ThunderstormAndRainAndSnow:
+                case WeatherView.SkyCode.ThunderstormAndRainAndSnow:
                     icon = !isNight() ? iconTable["s-14"] : iconTable["n-14"];
                     break;
             }
