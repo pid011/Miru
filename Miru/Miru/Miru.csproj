@@ -102,6 +102,7 @@
       <DependentUpon>Background.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\ResourcesString.cs" />
+    <Compile Include="Util\WeatherPlanet.cs" />
     <Compile Include="View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
