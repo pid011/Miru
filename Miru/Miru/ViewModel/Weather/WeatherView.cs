@@ -124,7 +124,7 @@ namespace Miru.ViewModel
                     string forecastWeatherJson = await client.GetStringAsync(forecastWeatherUri);
 
                     CurrentWeatherJsonParse(currentWeatherJson);
-                    ForecastWeatherJsonFarse(forecastWeatherJson);
+                    ForecastWeatherJsonParse(forecastWeatherJson);
                 }
             }
             catch (ArgumentNullException)
@@ -149,7 +149,7 @@ namespace Miru.ViewModel
             }
         }
 
-        private void ForecastWeatherJsonFarse(string ForecastJson)
+        private void ForecastWeatherJsonParse(string ForecastJson)
         {
             // TODO: 날씨 파서 구현
         }
