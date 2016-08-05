@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.Devices.Gpio;
 using System.Threading.Tasks;
+using Miru.ViewModel.Item;
 
 namespace Miru
 {
@@ -13,6 +14,12 @@ namespace Miru
     /// </summary>
     public sealed partial class View : Page
     {
+        private WeatherView weatherView;
+        private ClockView clockView;
+
+        private WeatherItem weatherItem;
+        private ClockItem clockItem;
+
         /// <summary>
         /// View 인스턴스를 초기화합니다.
         /// </summary>
@@ -20,7 +27,31 @@ namespace Miru
         {
             InitializeComponent();
 
-            
+            this.Loaded += View_Loaded;
+        }
+
+        private void View_Loaded(object sender, RoutedEventArgs e)
+        {
+            Task loadWeatherInfoTask = new Task(async () =>
+            {
+                weatherView = new WeatherView(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
+                weatherItem = await weatherView.GetWeatherItem();
+            });
+
+            Task loadClockInfoTask = new Task(() =>
+            {
+                clockView = new ClockView();
+                clockItem = clockView.GetClockItem();
+            });
+
+            Task.WaitAll(loadWeatherInfoTask, loadClockInfoTask);
+
+            this.currentWeatherTemp.Text = $"{weatherItem.Humiditys.Dequeue()}℃";
+            this.currentWeatherIcon.Text = weatherItem.SkyIcon.Dequeue().ToString();
+
+            this.clockTime.Text = $"{clockItem.Hour}:{clockItem.Minute}";
+            this.clockState.Text = clockItem.AMPM;
+            this.clockDate.Text = $"{clockItem.Year}-{clockItem.Month}-{clockItem.Day} {clockItem.Week}";
         }
     }
 }

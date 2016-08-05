@@ -9,23 +9,22 @@ namespace Miru.ViewModel
     /// </summary>
     public class ClockView : ViewModel
     {
+
         /// <summary>
-        /// 현재 시간을 가져옵니다.
+        /// 시간정보를 가져옵니다.
         /// </summary>
-        public ClockItem Item
+        /// <returns>시간정보</returns>
+        public ClockItem GetClockItem()
         {
-            get
-            {
-                var now = DateTime.Now;
-                return new ClockItem(
-                    now.Year,
-                    now.Month,
-                    now.Day,
-                    now.DayOfWeek,
-                    ConvertHour(now.Hour),
-                    now.Minute,
-                    GetCurrentAMPM());
-            }
+            var now = DateTime.Now;
+            return new ClockItem(
+                now.Year,
+                now.Month,
+                now.Day,
+                now.DayOfWeek,
+                ConvertHour(now.Hour),
+                now.Minute,
+                GetCurrentAMPM());
         }
 
         private AMPM GetCurrentAMPM() => (DateTime.Now.Hour > 11) ? AMPM.PM : AMPM.AM;
