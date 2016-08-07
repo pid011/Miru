@@ -120,10 +120,10 @@ namespace Miru.Util
             try
             {
                 JObject obj = JObject.Parse(currentWeatherJson);
-                //TODO: obj = JObject.Parse((string) obj["weather"]["minutely"][0]);
-                currentTemperature = Convert.ToDouble((string) obj["weather"]["minutely"][0]["temperature"]["tc"]);
-                currentHumidity = Convert.ToDouble((string) obj["weather"]["minutely"][0]["humidity"]);
-                string skycode = (string) obj["weather"]["minutely"][0]["sky"]["code"];
+                obj = JObject.Parse((string) obj["weather"]["minutely"][0]);
+                currentTemperature = Convert.ToDouble((string) obj["temperature"]["tc"]);
+                currentHumidity = Convert.ToDouble((string) obj["humidity"]);
+                string skycode = (string) obj["sky"]["code"];
                 currentSkyState = GetSky(skycode);
             }
             catch (FormatException)
