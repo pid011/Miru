@@ -22,9 +22,6 @@ namespace Miru
     /// </summary>
     public sealed partial class Background : Page
     {
-        DispatcherTimer timer;
-        int count;
-        bool isView;
         /// <summary>
         /// Background 인스턴스를 초기화합니다.
         /// </summary>
