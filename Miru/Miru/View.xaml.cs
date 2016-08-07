@@ -14,11 +14,15 @@ namespace Miru
     /// </summary>
     public sealed partial class View : Page
     {
+        DispatcherTimer clockTimer;
+
         private WeatherView weatherView;
         private ClockView clockView;
 
         private WeatherItem weatherItem;
         private ClockItem clockItem;
+
+        int count = 0;
 
         /// <summary>
         /// View 인스턴스를 초기화합니다.
@@ -26,7 +30,7 @@ namespace Miru
         public View()
         {
             InitializeComponent();
-
+            this.Opacity = 0;
             this.Loaded += View_Loaded;
         }
 
@@ -46,12 +50,29 @@ namespace Miru
 
             Task.WaitAll(loadWeatherInfoTask, loadClockInfoTask);
 
+            clockTimer = new DispatcherTimer();
+            clockTimer.Interval = TimeSpan.FromSeconds(1);
+            clockTimer.Tick += ClockTimer_Tick;
+            clockTimer.Start();
+
             this.currentWeatherTemp.Text = $"{weatherItem.Humiditys.Dequeue()}℃";
             this.currentWeatherIcon.Text = weatherItem.SkyIcon.Dequeue().ToString();
 
+            this.Opacity = 1;
+
+        }
+
+        private void ClockTimer_Tick(object sender, object e)
+        {
+            count++;
+            if (count > 19)
+            {
+                this.Frame.Navigate(typeof(Background));
+            }
             this.clockTime.Text = $"{clockItem.Hour}:{clockItem.Minute}";
             this.clockState.Text = clockItem.AMPM;
             this.clockDate.Text = $"{clockItem.Year}-{clockItem.Month}-{clockItem.Day} {clockItem.Week}";
+            
         }
     }
 }
