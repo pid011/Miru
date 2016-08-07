@@ -30,6 +30,7 @@ namespace Miru
         public View()
         {
             InitializeComponent();
+
             this.Opacity = 0;
             this.Loaded += View_Loaded;
         }
