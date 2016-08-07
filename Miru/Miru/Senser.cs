@@ -13,7 +13,7 @@ namespace Miru
     /// <summary>
     /// 초음파 센서에 대한 메서드, 속성을 제공합니다.
     /// </summary>
-    public class Control
+    public class Senser
     {
         /// <summary>
         /// Gpio 핀 초기화 여부를 나타냅니다.

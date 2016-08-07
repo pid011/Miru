@@ -29,9 +29,9 @@ namespace Miru
         {
             this.InitializeComponent();
 
-            if (!Control.IsInitialized)
+            if (!Senser.IsInitialized)
             {
-                Control.InitializeGpio();
+                Senser.InitializeGpio();
             }
             this.Loaded += Background_Loaded;
         }
@@ -39,8 +39,8 @@ namespace Miru
         private async void Background_Loaded(object sender, RoutedEventArgs e)
         {
 
-            Control.Distance = 90;
-            await Control.WaitDistanceAsync();
+            Senser.Distance = 90;
+            await Senser.WaitDistanceAsync();
             this.Frame.Navigate(typeof(View));
         }
     }
