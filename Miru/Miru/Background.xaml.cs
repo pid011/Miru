@@ -38,6 +38,7 @@ namespace Miru
 
         private async void Background_Loaded(object sender, RoutedEventArgs e)
         {
+
             Control.Distance = 90;
             await Control.WaitDistanceAsync();
             this.Frame.Navigate(typeof(View));
