@@ -46,43 +46,25 @@ namespace Miru.Util
         }
 
         /// <summary>
-        /// 현재 날씨정보를 비동기로 가져옵니다.
+        /// 날씨정보를 비동기로 가져옵니다.
         /// </summary>
-        /// <returns>Json형태의 현재 날씨정보</returns>
-        public async Task<string> GetCurrentWeatherJsonAsync()
+        /// <returns>Json형태의 날씨정보</returns>
+        public async Task<Dictionary<int, string>> GetWeatherJsonAsync()
         {
             string currentWeatherUrl = $"http://apis.skplanetx.com/weather/current/minutely?version={this.version}&lat={this.lat}&lon={this.lon}&appKey={this.appKey}";
             Uri currentWeatherUri = new Uri(currentWeatherUrl);
 
-            string currentWeatherJson;
-            try
-            {
-                using(HttpClient client = new HttpClient())
-                {
-                    currentWeatherJson = await client.GetStringAsync(currentWeatherUri);
-                }
-            }
-            catch (ArgumentNullException)
-            {
-                throw;
-            }
-            return currentWeatherJson;
-        }
-
-        /// <summary>
-        /// 일기예보를 비동기로 가져옵니다.
-        /// </summary>
-        /// <returns>Json 형태의 일기예보</returns>
-        public async Task<string> GetForecastWeatherJsonAsync()
-        {
             string forecastWeatherUrl = $"http://apis.skplanetx.com/weather/forecast/3days?version={this.version}&lat={this.lat}&lon={this.lon}&appKey={this.appKey}";
             Uri forecastWeatherUri = new Uri(forecastWeatherUrl);
 
+
+            string currentWeatherJson;
             string forecastWeatherJson;
             try
             {
-                using(HttpClient client = new HttpClient())
+                using (HttpClient client = new HttpClient())
                 {
+                    currentWeatherJson = await client.GetStringAsync(currentWeatherUri);
                     forecastWeatherJson = await client.GetStringAsync(forecastWeatherUri);
                 }
             }
@@ -90,7 +72,12 @@ namespace Miru.Util
             {
                 throw;
             }
-            return forecastWeatherJson;
+
+            return new Dictionary<int, string>()
+            {
+                [1] = currentWeatherJson,
+                [2] = forecastWeatherJson
+            };
         }
 
         /// <summary>
