@@ -107,7 +107,7 @@
     <Compile Include="View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control.cs" />
+    <Compile Include="Senser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\Clock\ClockView.cs" />
     <Compile Include="ViewModel\Item\ClockItem.cs" />
