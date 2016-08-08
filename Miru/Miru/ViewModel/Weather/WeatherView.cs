@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Miru.Util;
-using Miru.ViewModel.Item;
 using Newtonsoft.Json.Linq;
 
 namespace Miru.ViewModel
@@ -11,7 +10,7 @@ namespace Miru.ViewModel
     /// <summary>
     /// 날씨정보생성을 도와줍니다.
     /// </summary>
-    public class WeatherView : ViewModel
+    public class WeatherView : WeatherUtil
     {
         private int version;
         private double lat;
@@ -39,7 +38,7 @@ namespace Miru.ViewModel
         /// 날씨정보를 비동기로 가져옵니다.
         /// </summary>
         /// <returns>날씨정보</returns>
-        public async Task<WeatherItem> GetWeatherItem()
+        public async Task<WeatherUtil> GetWeatherItem()
         {
             var jsons = await GetWeatherJsonAsync();
             var item = WeatherJsonParse(jsons[0], jsons[1]);
@@ -83,9 +82,9 @@ namespace Miru.ViewModel
             };
         }
 
-        private WeatherItem WeatherJsonParse(string currentWeatherJson, string forecastWeatherJson)
+        private WeatherUtil WeatherJsonParse(string currentWeatherJson, string forecastWeatherJson)
         {
-            WeatherItem item = new WeatherItem();
+            WeatherUtil item = new WeatherUtil();
             try
             {
                 JObject cwObj = JObject.Parse(currentWeatherJson);

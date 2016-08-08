@@ -109,12 +109,11 @@
     <Compile Include="Senser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\Clock\ClockView.cs" />
-    <Compile Include="ViewModel\Item\ClockItem.cs" />
-    <Compile Include="ViewModel\Item\Item.cs" />
-    <Compile Include="ViewModel\Item\WeatherItem.cs" />
+    <Compile Include="ViewModel\Clock\IClock.cs" />
+    <Compile Include="Util\ClockUtil.cs" />
+    <Compile Include="Util\WeatherUtil.cs" />
     <Compile Include="ViewModel\Weather\WeatherView.cs" />
     <Compile Include="ViewModel\Weather\WeatherIcon.cs" />
-    <Compile Include="ViewModel\ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

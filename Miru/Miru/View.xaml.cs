@@ -5,7 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.Devices.Gpio;
 using System.Threading.Tasks;
-using Miru.ViewModel.Item;
+using Miru.ViewModel.Clock;
 
 namespace Miru
 {
@@ -18,11 +18,9 @@ namespace Miru
 
         private WeatherView weatherView;
         private ClockView clockView;
+        private IClock clock;
 
-        private WeatherItem weatherItem;
-        private ClockItem clockItem;
-
-        int count = 0;
+        int count;
 
         /// <summary>
         /// View 인스턴스를 초기화합니다.
@@ -38,18 +36,18 @@ namespace Miru
         private async void View_Loaded(object sender, RoutedEventArgs e)
         {
             weatherView = new WeatherView(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
-            weatherItem = await weatherView.GetWeatherItem();
 
             clockView = new ClockView();
-            clockItem = clockView.GetClockItem();
+            clock = clockView as IClock;
 
             clockTimer = new DispatcherTimer();
             clockTimer.Interval = TimeSpan.FromSeconds(1);
             clockTimer.Tick += ClockTimer_Tick;
+            count = 0;
             clockTimer.Start();
 
-            this.currentWeatherTemp.Text = $"{weatherItem.Humiditys.Dequeue()}℃";
-            this.currentWeatherIcon.Text = weatherItem.SkyIcon.Dequeue().ToString();
+            // this.currentWeatherTemp.Text = $"{weatherItem.Temperatures.Dequeue()}℃";
+            // .currentWeatherIcon.Text = weatherItem.SkyIcon.Dequeue().ToString();
 
             this.Opacity = 1;
 
@@ -57,15 +55,16 @@ namespace Miru
 
         private void ClockTimer_Tick(object sender, object e)
         {
+            this.clockTime.Text = $"{clock.Hour}:{clock.Minute}";
+            this.clockState.Text = clock.AMPM;
+            this.clockDate.Text = $"{clock.Year}-{clock.Month}-{clock.Day} {clock.Week}";
+            /*
             count++;
             if (count > 19)
             {
                 this.Frame.Navigate(typeof(Background));
             }
-            clockItem = clockView.GetClockItem();
-            this.clockTime.Text = $"{clockItem.Hour}:{clockItem.Minute}";
-            this.clockState.Text = clockItem.AMPM;
-            this.clockDate.Text = $"{clockItem.Year}-{clockItem.Month}-{clockItem.Day} {clockItem.Week}";
+            */
         }
     }
 }
