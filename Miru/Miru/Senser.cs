@@ -19,23 +19,25 @@ namespace Miru
         /// Gpio 핀 초기화 여부를 나타냅니다.
         /// </summary>
         public static bool IsInitialized { get; private set; } = false;
+
+
         /// <summary>
         /// 디바이스에서 사람까지의 측정될 거리범위를 cm단위로 나타냅니다.
         /// </summary>
-        public static int Distance { get; set; } = 90;
+        public int Distance { get; set; } = 90;
 
-        private static int PIN_ECHO = 23;
-        private static int PIN_TRIG = 24;
+        private int PIN_ECHO = 23;
+        private int PIN_TRIG = 24;
 
-        private static GpioController gpioController;
-        private static GpioPin echoPin;
-        private static GpioPin trigPin;
+        private GpioController gpioController;
+        private GpioPin echoPin;
+        private GpioPin trigPin;
 
 
         /// <summary>
         /// Gpio 핀을 초기화합니다.
         /// </summary>
-        public static  void InitializeGpio()
+        public void InitializeGpio()
         {
             try
             {
@@ -57,7 +59,7 @@ namespace Miru
             }
         }
 
-        private static int GetDistance()
+        private int GetDistance()
         {
             Stopwatch stopwatch = new Stopwatch();
             trigPin.Write(GpioPinValue.Low);
@@ -92,14 +94,22 @@ namespace Miru
         /// <summary>
         /// 초음파센서로 측정한 거리가 <see cref="Distance"/>에 설정된 거리보다 가까울때까지 기다립니다.
         /// </summary>
-        public static async Task WaitDistanceAsync()
+        public async Task WaitDistanceAsync()
         {
             int currentDistance;
-            do
+            while (true)
             {
                 currentDistance = GetDistance();
-                await Task.Delay(500);
-            } while (currentDistance < Distance);
+                if (currentDistance < Distance)
+                {
+                    break;
+                }
+                else
+                {
+                    await Task.Delay(500);
+                }
+            }
         }
+
     }
 }

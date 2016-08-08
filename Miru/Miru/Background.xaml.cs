@@ -22,25 +22,27 @@ namespace Miru
     /// </summary>
     public sealed partial class Background : Page
     {
+        Senser senser;
         /// <summary>
         /// Background 인스턴스를 초기화합니다.
         /// </summary>
         public Background()
         {
             this.InitializeComponent();
+            senser = new Senser();
 
             if (!Senser.IsInitialized)
             {
-                Senser.InitializeGpio();
+                senser.InitializeGpio();
             }
+
+            senser.Distance = 90;
             this.Loaded += Background_Loaded;
         }
 
-        private async void Background_Loaded(object sender, RoutedEventArgs e)
+        private void Background_Loaded(object sender, RoutedEventArgs e)
         {
-
-            Senser.Distance = 90;
-            await Senser.WaitDistanceAsync();
+            // await senser.WaitDistanceAsync();
             this.Frame.Navigate(typeof(View));
         }
     }

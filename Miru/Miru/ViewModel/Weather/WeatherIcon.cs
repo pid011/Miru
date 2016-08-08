@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Miru.Util;
 
-using static Miru.Util.WeatherPlanet;
+using static Miru.ViewModel.WeatherView;
 
 namespace Miru.ViewModel
 {

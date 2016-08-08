@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Miru.Util.WeatherPlanet;
+using static Miru.ViewModel.WeatherView;
 
 namespace Miru.ViewModel.Item
 {
@@ -16,13 +16,13 @@ namespace Miru.ViewModel.Item
         /// 온도를 3시간 단위로 제공합니다.
         /// 첫번째 요소는 현재 온도입니다.
         /// </summary>
-        public Queue<double> Temperatures { get; set; }
+        public Queue<double> Temperatures { get; set; } = new Queue<double>();
 
         /// <summary>
         /// 습도를 3시간 단위로 제공합니다.
         /// 첫번째 요소는 현재 습도입니다.
         /// </summary>
-        public Queue<double> Humiditys { get; set; }
+        public Queue<double> Humiditys { get; set; } = new Queue<double>();
 
         /// <summary>
         /// 하늘상태에 맞는 날씨 아이콘을 3시간 단위로 제공합니다.
@@ -33,9 +33,9 @@ namespace Miru.ViewModel.Item
         /// 하늘상태를 3시간 단위로 제공합니다.
         /// 첫번째 요소는 현재 하늘상태입니다.
         /// </summary>
-        public Queue<SkyCode> skyStates { get; set; }
+        public Queue<SkyCode> skyStates { get; set; } = new Queue<SkyCode>();
 
-        private static Queue<char> ConvertIcon(Queue<SkyCode> skyState)
+        private Queue<char> ConvertIcon(Queue<SkyCode> skyState)
         {
             Queue<char> icons = new Queue<char>();
             foreach (var item in skyState)

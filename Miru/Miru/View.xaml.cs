@@ -31,25 +31,17 @@ namespace Miru
         {
             InitializeComponent();
 
-            this.Opacity = 0;
+            // this.Opacity = 0;
             this.Loaded += View_Loaded;
         }
 
-        private void View_Loaded(object sender, RoutedEventArgs e)
+        private async void View_Loaded(object sender, RoutedEventArgs e)
         {
-            Task loadWeatherInfoTask = new Task(async () =>
-            {
-                weatherView = new WeatherView(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
-                weatherItem = await weatherView.GetWeatherItem();
-            });
+            weatherView = new WeatherView(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
+            weatherItem = await weatherView.GetWeatherItem();
 
-            Task loadClockInfoTask = new Task(() =>
-            {
-                clockView = new ClockView();
-                clockItem = clockView.GetClockItem();
-            });
-
-            Task.WaitAll(loadWeatherInfoTask, loadClockInfoTask);
+            clockView = new ClockView();
+            clockItem = clockView.GetClockItem();
 
             clockTimer = new DispatcherTimer();
             clockTimer.Interval = TimeSpan.FromSeconds(1);
@@ -70,10 +62,10 @@ namespace Miru
             {
                 this.Frame.Navigate(typeof(Background));
             }
+            clockItem = clockView.GetClockItem();
             this.clockTime.Text = $"{clockItem.Hour}:{clockItem.Minute}";
             this.clockState.Text = clockItem.AMPM;
             this.clockDate.Text = $"{clockItem.Year}-{clockItem.Month}-{clockItem.Day} {clockItem.Week}";
-            
         }
     }
 }
