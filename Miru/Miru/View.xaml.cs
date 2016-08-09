@@ -31,6 +31,15 @@ namespace Miru
 
             this.Opacity = 0;
             this.Loaded += View_Loaded;
+            this.Unloaded += View_Unloaded;
+        }
+
+        private void View_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (clockTimer != null)
+            {
+                clockTimer.Stop();
+            }
         }
 
         private async void View_Loaded(object sender, RoutedEventArgs e)
@@ -86,6 +95,7 @@ namespace Miru
             count++;
             if (count > 19)
             {
+                clockTimer.Stop();
                 this.Frame.Navigate(typeof(Background));
             }
         }

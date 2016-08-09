@@ -12,6 +12,7 @@ namespace Miru
     public sealed partial class Background : Page
     {
         private Senser senser;
+        private DispatcherTimer timer;
 
         /// <summary>
         /// Background 인스턴스를 초기화합니다.
@@ -28,12 +29,33 @@ namespace Miru
 
             senser.Distance = 90;
             this.Loaded += Background_Loaded;
+            this.Unloaded += Background_Unloaded;
         }
 
-        private async void Background_Loaded(object sender, RoutedEventArgs e)
+        private void Background_Unloaded(object sender, RoutedEventArgs e)
         {
-            await senser.WaitDistanceAsync();
-            this.Frame.Navigate(typeof(View));
+            if (timer != null)
+            {
+                timer.Stop();
+            }
+        }
+
+        private void Background_Loaded(object sender, RoutedEventArgs e)
+        {
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, object e)
+        {
+            int currentDistance = senser.GetDistance();
+            if (currentDistance < senser.Distance)
+            {
+                timer.Stop();
+                this.Frame.Navigate(typeof(View));
+            }
         }
     }
 }

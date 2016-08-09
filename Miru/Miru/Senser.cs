@@ -52,7 +52,7 @@ namespace Miru
             }
         }
 
-        private int GetDistance()
+        public int GetDistance()
         {
             Stopwatch stopwatch = new Stopwatch();
             trigPin.Write(GpioPinValue.Low);
@@ -82,26 +82,6 @@ namespace Miru
             distance = Math.Round(distance);
 
             return (int) distance;
-        }
-
-        /// <summary>
-        /// 초음파센서로 측정한 거리가 <see cref="Distance"/>에 설정된 거리보다 가까울때까지 기다립니다.
-        /// </summary>
-        public async Task WaitDistanceAsync()
-        {
-            int currentDistance;
-            while (true)
-            {
-                currentDistance = GetDistance();
-                if (currentDistance < Distance)
-                {
-                    break;
-                }
-                else
-                {
-                    await Task.Delay(500);
-                }
-            }
         }
     }
 }
