@@ -27,11 +27,19 @@ namespace Miru
                 senser.InitializeGpio();
             }
 
-            senser.Distance = 90;
             this.Loaded += Background_Loaded;
             this.Unloaded += Background_Unloaded;
         }
 
+
+        private void Background_Loaded(object sender, RoutedEventArgs e)
+        {
+            senser.Distance = 90;
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
         private void Background_Unloaded(object sender, RoutedEventArgs e)
         {
             if (timer != null)
@@ -40,17 +48,9 @@ namespace Miru
             }
         }
 
-        private void Background_Loaded(object sender, RoutedEventArgs e)
-        {
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(500);
-            timer.Tick += Timer_Tick;
-            timer.Start();
-        }
-
         private void Timer_Tick(object sender, object e)
         {
-            int currentDistance = senser.GetDistance();
+            var currentDistance = senser.GetDistance();
             if (currentDistance < senser.Distance)
             {
                 timer.Stop();

@@ -168,4 +168,10 @@
   <data name="thursday" xml:space="preserve">
     <value>목요일</value>
   </data>
+  <data name="pin_echo_null_error" xml:space="preserve">
+    <value>echo핀이 null참조를 가졌습니다.</value>
+  </data>
+  <data name="pin_trig_null_error" xml:space="preserve">
+    <value>trig핀이 null참조를 가졌습니다.</value>
+  </data>
 </root>
