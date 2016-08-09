@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.Devices.Gpio;
 using System.Threading.Tasks;
 using Miru.ViewModel.Clock;
+using Miru.ViewModel.Weather;
 
 namespace Miru
 {
@@ -17,6 +18,8 @@ namespace Miru
         DispatcherTimer clockTimer;
 
         private WeatherView weatherView;
+        private IWeather weather;
+
         private ClockView clockView;
         private IClock clock;
 
@@ -36,6 +39,8 @@ namespace Miru
         private async void View_Loaded(object sender, RoutedEventArgs e)
         {
             weatherView = new WeatherView(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
+            await weatherView.CreateWeatherItem();
+            weather = weatherView as IWeather;
 
             clockView = new ClockView();
             clock = clockView as IClock;
@@ -46,8 +51,8 @@ namespace Miru
             count = 0;
             clockTimer.Start();
 
-            // this.currentWeatherTemp.Text = $"{weatherItem.Temperatures.Dequeue()}℃";
-            // .currentWeatherIcon.Text = weatherItem.SkyIcon.Dequeue().ToString();
+            this.currentWeatherTemp.Text = $"{weather.Temperatures.Dequeue()}℃";
+            this.currentWeatherIcon.Text = weather.SkyIcons.Dequeue().ToString();
 
             this.Opacity = 1;
 

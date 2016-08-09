@@ -112,6 +112,7 @@
     <Compile Include="ViewModel\Clock\IClock.cs" />
     <Compile Include="Util\ClockUtil.cs" />
     <Compile Include="Util\WeatherUtil.cs" />
+    <Compile Include="ViewModel\Weather\IWeather.cs" />
     <Compile Include="ViewModel\Weather\WeatherView.cs" />
     <Compile Include="ViewModel\Weather\WeatherIcon.cs" />
   </ItemGroup>
