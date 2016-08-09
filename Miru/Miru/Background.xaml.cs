@@ -40,9 +40,9 @@ namespace Miru
             this.Loaded += Background_Loaded;
         }
 
-        private void Background_Loaded(object sender, RoutedEventArgs e)
+        private async void Background_Loaded(object sender, RoutedEventArgs e)
         {
-            // await senser.WaitDistanceAsync();
+            await senser.WaitDistanceAsync();
             this.Frame.Navigate(typeof(View));
         }
     }
