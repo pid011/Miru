@@ -32,7 +32,7 @@ namespace Miru
         {
             InitializeComponent();
 
-            // this.Opacity = 0;
+            this.Opacity = 0;
             this.Loaded += View_Loaded;
         }
 
@@ -51,25 +51,47 @@ namespace Miru
             count = 0;
             clockTimer.Start();
 
-            this.currentWeatherTemp.Text = $"{weather.Temperatures.Dequeue()}℃";
-            this.currentWeatherIcon.Text = weather.SkyIcons.Dequeue().ToString();
+            SetWeatherTexts();
+            SetClockTexts();
 
             this.Opacity = 1;
 
         }
 
-        private void ClockTimer_Tick(object sender, object e)
+        private void SetWeatherTexts()
+        {
+            this.currentWeatherTemp.Text = $"{weather.Temperatures.Dequeue()}℃";
+            this.currentWeatherIcon.Text = weather.SkyIcons.Dequeue().ToString();
+
+            this.forecastWeatherTemp1.Text = $"{weather.Temperatures.Dequeue()}℃";
+            this.forecastWeatherTemp2.Text = $"{weather.Temperatures.Dequeue()}℃";
+            this.forecastWeatherTemp3.Text = $"{weather.Temperatures.Dequeue()}℃";
+            this.forecastWeatherTemp4.Text = $"{weather.Temperatures.Dequeue()}℃";
+            this.forecastWeatherTemp5.Text = $"{weather.Temperatures.Dequeue()}℃";
+
+            this.forecastWeatherIcon1.Text = weather.SkyIcons.Dequeue().ToString();
+            this.forecastWeatherIcon2.Text = weather.SkyIcons.Dequeue().ToString();
+            this.forecastWeatherIcon3.Text = weather.SkyIcons.Dequeue().ToString();
+            this.forecastWeatherIcon4.Text = weather.SkyIcons.Dequeue().ToString();
+            this.forecastWeatherIcon5.Text = weather.SkyIcons.Dequeue().ToString();
+        }
+
+        private void SetClockTexts()
         {
             this.clockTime.Text = $"{clock.Hour}:{clock.Minute}";
             this.clockState.Text = clock.AMPM;
             this.clockDate.Text = $"{clock.Year}-{clock.Month}-{clock.Day} {clock.Week}";
-            /*
+        }
+
+        private void ClockTimer_Tick(object sender, object e)
+        {
+            SetClockTexts();
+
             count++;
             if (count > 19)
             {
                 this.Frame.Navigate(typeof(Background));
             }
-            */
         }
     }
 }
