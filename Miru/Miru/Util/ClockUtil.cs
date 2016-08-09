@@ -1,5 +1,4 @@
 ﻿using System;
-using Miru.ViewModel.Clock;
 
 using static Miru.ViewModel.Clock.ClockView;
 
@@ -24,6 +23,7 @@ namespace Miru.Util
                 case AMPMS.AM:
                     result = ResourcesString.GetString("am");
                     break;
+
                 case AMPMS.PM:
                     result = ResourcesString.GetString("pm");
                     break;

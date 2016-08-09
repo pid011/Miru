@@ -1,12 +1,9 @@
 ﻿using System;
 using Miru.ViewModel;
-using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.Devices.Gpio;
-using System.Threading.Tasks;
 using Miru.ViewModel.Clock;
 using Miru.ViewModel.Weather;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Miru
 {
@@ -15,7 +12,7 @@ namespace Miru
     /// </summary>
     public sealed partial class View : Page
     {
-        DispatcherTimer clockTimer;
+        private DispatcherTimer clockTimer;
 
         private WeatherView weatherView;
         private IWeather weather;
@@ -23,7 +20,7 @@ namespace Miru
         private ClockView clockView;
         private IClock clock;
 
-        int count;
+        private int count;
 
         /// <summary>
         /// View 인스턴스를 초기화합니다.
@@ -55,7 +52,6 @@ namespace Miru
             SetClockTexts();
 
             this.Opacity = 1;
-
         }
 
         private void SetWeatherTexts()

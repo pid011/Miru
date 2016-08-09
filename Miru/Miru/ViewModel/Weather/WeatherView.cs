@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Miru.Util;
-using Newtonsoft.Json.Linq;
 using Miru.ViewModel.Weather;
+using Newtonsoft.Json.Linq;
 
 namespace Miru.ViewModel
 {
@@ -29,9 +29,8 @@ namespace Miru.ViewModel
         public Queue<WeatherUtil.SkyCode> SkyStates => skyStates;
         private Queue<WeatherUtil.SkyCode> skyStates;
 
-
         /// <summary>
-        /// 날씨정보를 가져오기 위한 몇가지 정보를 지정하고 
+        /// 날씨정보를 가져오기 위한 몇가지 정보를 지정하고
         /// <see cref="WeatherView"/>클래스의 인스턴스를 초기화합니다.
         /// </summary>
         /// <param name="version">API 버전</param>
@@ -68,7 +67,6 @@ namespace Miru.ViewModel
 
             string fwUrl = $"http://apis.skplanetx.com/weather/forecast/3days?version={this.version}&lat={this.lat}&lon={this.lon}&appKey={this.appKey}";
             Uri fwUri = new Uri(fwUrl);
-
 
             string cwJson;
             string fwJson;

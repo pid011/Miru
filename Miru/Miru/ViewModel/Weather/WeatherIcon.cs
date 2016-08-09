@@ -10,6 +10,7 @@ namespace Miru.ViewModel
     public class WeatherIcon
     {
         #region icon table
+
         private static Dictionary<string, char> iconTable = new Dictionary<string, char>
         {
             ["s-01"] = '1',
@@ -41,7 +42,8 @@ namespace Miru.ViewModel
             ["s-14"] = 'R',
             ["n-14"] = 'r',
         };
-        #endregion
+
+        #endregion icon table
 
         private static bool isNight()
         {
@@ -59,7 +61,7 @@ namespace Miru.ViewModel
         {
             char icon = '1';
 
-            switch(sky)
+            switch (sky)
             {
                 case WeatherUtil.SkyCode.Sunny:
                     icon = !isNight() ? iconTable["s-01"] : iconTable["n-01"];

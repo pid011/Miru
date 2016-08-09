@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Miru.ViewModel;
 
 namespace Miru.Util
 {
     /// <summary>
-    /// 날씨에 대한 속성을 제공합니다.
+    /// 날씨정보에 대한 도움이 되는 메서드를 제공합니다.
     /// </summary>
     public class WeatherUtil
     {
@@ -105,7 +101,6 @@ namespace Miru.Util
             return result;
         }
 
-
         /// <summary>
         /// 여러가지 하늘상태를 열거합니다.
         /// </summary>
@@ -116,64 +111,76 @@ namespace Miru.Util
             /// 맑음
             /// </summary>
             Sunny,
+
             /// <summary>
             /// 구름조금
             /// </summary>
             PartlyCloudy,
+
             /// <summary>
             /// 구름많음
             /// </summary>
             MostlyCloudy,
+
             /// <summary>
             /// 구름많고 비
             /// </summary>
             MostlyCloudyAndRain,
+
             /// <summary>
             /// 구름많고 눈
             /// </summary>
             MostlyCloudyAndSnow,
+
             /// <summary>
             /// 구름많고 비 또는 눈
             /// </summary>
             MostlyCloudyAndRainAndSnow,
+
             /// <summary>
             /// 흐림
             /// </summary>
             Fog,
+
             /// <summary>
             /// 흐리고 비
             /// </summary>
             FogAndRain,
+
             /// <summary>
             /// 흐리고 눈
             /// </summary>
             FogAndSnow,
+
             /// <summary>
             /// 흐리고 비 또는 눈
             /// </summary>
             FogAndRainAndSnow,
+
             /// <summary>
             /// 흐리고 낙뢰
             /// </summary>
             FogAndThunderstroke,
+
             /// <summary>
             /// 뇌우, 비
             /// </summary>
             ThunderstormAndRain,
+
             /// <summary>
             /// 뇌우, 눈
             /// </summary>
             ThunderstormAndSnow,
+
             /// <summary>
             /// 뇌우, 비 또는 눈
             /// </summary>
             ThunderstormAndRainAndSnow,
+
             /// <summary>
             /// 알 수 없음
             /// </summary>
             NULL
         }
-
-
     }
 }

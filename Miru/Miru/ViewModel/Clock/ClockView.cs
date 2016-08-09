@@ -1,6 +1,5 @@
 ﻿using System;
 using Miru.Util;
-using Windows.ApplicationModel.Resources;
 
 namespace Miru.ViewModel.Clock
 {
@@ -44,7 +43,6 @@ namespace Miru.ViewModel.Clock
         /// </summary>
         public string AMPM => ClockUtil.ConvertString(GetCurrentAMPM());
 
-
         private AMPMS GetCurrentAMPM() => (DateTime.Now.Hour > 11) ? AMPMS.PM : AMPMS.AM;
 
         /// <summary>
@@ -63,6 +61,7 @@ namespace Miru.ViewModel.Clock
             /// 오전
             /// </summary>
             AM,
+
             /// <summary>
             /// 오후
             /// </summary>

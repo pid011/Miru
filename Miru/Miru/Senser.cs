@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Windows.Devices.Gpio;
-using Windows.UI.Xaml;
 
 namespace Miru
 {
@@ -20,7 +15,6 @@ namespace Miru
         /// </summary>
         public static bool IsInitialized { get; private set; } = false;
 
-
         /// <summary>
         /// 디바이스에서 사람까지의 측정될 거리범위를 cm단위로 나타냅니다.
         /// </summary>
@@ -32,7 +26,6 @@ namespace Miru
         private GpioController gpioController;
         private GpioPin echoPin;
         private GpioPin trigPin;
-
 
         /// <summary>
         /// Gpio 핀을 초기화합니다.
@@ -110,6 +103,5 @@ namespace Miru
                 }
             }
         }
-
     }
 }
