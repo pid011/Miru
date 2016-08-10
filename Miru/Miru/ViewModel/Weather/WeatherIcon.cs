@@ -47,9 +47,8 @@ namespace Miru.ViewModel
 
         private static bool isNight()
         {
-            var now = DateTime.Now;
-            // 낮과 밤의 평균 길이는 12시간, 12시간이므로
-            return now.Hour > 6 && now.Hour < 20 ? true : false;
+            var hour = DateTime.Now.Hour;
+            return hour < 6 || hour > 19 ? true : false;
         }
 
         /// <summary>
