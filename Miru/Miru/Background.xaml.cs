@@ -11,8 +11,7 @@ namespace Miru
     /// </summary>
     public sealed partial class Background : Page
     {
-        private Senser senser;
-        private DispatcherTimer timer;
+        private DispatcherTimer timer = new DispatcherTimer();
 
         /// <summary>
         /// Background 인스턴스를 초기화합니다.
@@ -20,12 +19,6 @@ namespace Miru
         public Background()
         {
             this.InitializeComponent();
-            senser = new Senser();
-
-            if (!Senser.IsInitialized)
-            {
-                senser.InitializeGpio();
-            }
 
             this.Loaded += Background_Loaded;
             this.Unloaded += Background_Unloaded;
@@ -34,9 +27,7 @@ namespace Miru
 
         private void Background_Loaded(object sender, RoutedEventArgs e)
         {
-            senser.Distance = 90;
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -50,8 +41,8 @@ namespace Miru
 
         private void Timer_Tick(object sender, object e)
         {
-            var currentDistance = senser.GetDistance();
-            if (currentDistance < senser.Distance)
+            var currentDistance = UcSensor.senser.GetDistance();
+            if (currentDistance < 90)
             {
                 timer.Stop();
                 this.Frame.Navigate(typeof(View));
