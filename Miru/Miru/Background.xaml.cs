@@ -20,17 +20,13 @@ namespace Miru
         {
             this.InitializeComponent();
 
-            this.Loaded += Background_Loaded;
             this.Unloaded += Background_Unloaded;
-        }
 
-
-        private void Background_Loaded(object sender, RoutedEventArgs e)
-        {
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
+
         private void Background_Unloaded(object sender, RoutedEventArgs e)
         {
             if (timer != null)

@@ -29,9 +29,9 @@ namespace Miru
         {
             InitializeComponent();
 
-            this.Opacity = 0;
-            this.Loaded += View_Loaded;
             this.Unloaded += View_Unloaded;
+
+            LoadViewModel();
         }
 
         private void View_Unloaded(object sender, RoutedEventArgs e)
@@ -42,7 +42,7 @@ namespace Miru
             }
         }
 
-        private async void View_Loaded(object sender, RoutedEventArgs e)
+        private async void LoadViewModel()
         {
             weatherView = new WeatherView(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
             await weatherView.CreateWeatherItem();
@@ -60,7 +60,6 @@ namespace Miru
             SetWeatherTexts();
             SetClockTexts();
 
-            this.Opacity = 1;
         }
 
         private void SetWeatherTexts()
