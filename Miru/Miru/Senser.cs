@@ -12,7 +12,7 @@ namespace Miru
     public class UcSensor
     {
         /// <summary>
-        /// TRIGGER핀의 Gpio 위치(Gpio xx)
+        /// TRIGGER핀의 Gpio 위치
         /// </summary>
         public const int PIN_TRIGGER = 23;
         /// <summary>
