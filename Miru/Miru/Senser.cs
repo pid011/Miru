@@ -9,7 +9,7 @@ using Windows.Devices.Gpio;
 
 namespace Miru
 {
-    public class UcSensor
+    public class Senser
     {
         /// <summary>
         /// TRIGGER핀의 Gpio 위치
@@ -21,16 +21,16 @@ namespace Miru
         public const int PIN_ECHO = 18;
 
         /// <summary>
-        /// 초음파센서에 대한 메서드를 제공합니다.
+        /// 거리 측정에 대한 메서드를 제공합니다.
         /// </summary>
-        public static UcSensor senser = new UcSensor();
+        public static Senser Distance { get; } = new Senser();
 
         GpioController gpio;
 
         GpioPin triggerPin;
         GpioPin echoPin;
 
-        private UcSensor()
+        private Senser()
         {
             gpio = GpioController.GetDefault();
             if (gpio == null)
