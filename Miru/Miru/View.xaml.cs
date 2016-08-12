@@ -78,6 +78,7 @@ namespace Miru
             this.forecastWeatherIcon3.Text = weather.SkyIcons.Dequeue().ToString();
             this.forecastWeatherIcon4.Text = weather.SkyIcons.Dequeue().ToString();
             this.forecastWeatherIcon5.Text = weather.SkyIcons.Dequeue().ToString();
+
         }
 
         private void SetClockTexts()

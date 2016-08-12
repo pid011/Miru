@@ -53,28 +53,27 @@ namespace Miru
         public double GetDistance()
         {
             ManualResetEvent mre = new ManualResetEvent(false);
-            mre.WaitOne(500);
-            Stopwatch pulseLength = new Stopwatch();
 
-            triggerPin.Write(GpioPinValue.High);
+            Stopwatch stopwatch = new Stopwatch();
+
+            this.triggerPin.Write(GpioPinValue.High);
             mre.WaitOne(TimeSpan.FromMilliseconds(0.01));
-            triggerPin.Write(GpioPinValue.Low);
+            this.triggerPin.Write(GpioPinValue.Low);
 
-            while (echoPin.Read() == GpioPinValue.Low)
+            while (this.echoPin.Read() == GpioPinValue.Low)
             {
             }
-            pulseLength.Start();
+            stopwatch.Start();
 
-
-            while (echoPin.Read() == GpioPinValue.High)
+            while (this.echoPin.Read() == GpioPinValue.High)
             {
             }
-            pulseLength.Stop();
+            stopwatch.Stop();
 
-            TimeSpan timeBetween = pulseLength.Elapsed;
+            TimeSpan timeBetween = stopwatch.Elapsed;
             Debug.WriteLine(timeBetween.ToString());
+
             double distance = timeBetween.TotalSeconds * 17000;
-            Debug.WriteLine($"Current distance: {distance}cm");
 
             return Math.Round(distance);
         }
