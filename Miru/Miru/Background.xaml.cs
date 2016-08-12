@@ -37,7 +37,7 @@ namespace Miru
 
         private void Timer_Tick(object sender, object e)
         {
-            var currentDistance = UcSensor.senser.GetDistance();
+            var currentDistance = Senser.Distance.GetDistance();
             if (currentDistance < 90)
             {
                 timer.Stop();
