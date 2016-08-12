@@ -18,16 +18,27 @@ namespace Miru.ViewModel
         private double lon;
         private string appKey;
 
-        public Queue<double> Temperatures => temperatures;
+        public Queue<double> Temperatures => RoundDouble(temperatures);
         private Queue<double> temperatures;
 
-        public Queue<double> Humiditys => humiditys;
+        public Queue<double> Humiditys => RoundDouble(humiditys);
         private Queue<double> humiditys;
 
         public Queue<char> SkyIcons => WeatherUtil.ConvertIcon(SkyStates);
 
         public Queue<WeatherUtil.SkyCode> SkyStates => skyStates;
         private Queue<WeatherUtil.SkyCode> skyStates;
+
+        private Queue<double> RoundDouble(Queue<double> queue)
+        {
+            Queue<double> results = new Queue<double>();
+            foreach (var item in queue)
+            {
+                results.Enqueue(Math.Round(item));
+            }
+
+            return results;
+        }
 
         /// <summary>
         /// 날씨정보를 가져오기 위한 몇가지 정보를 지정하고
