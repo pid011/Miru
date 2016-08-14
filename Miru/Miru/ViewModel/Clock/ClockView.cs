@@ -50,7 +50,7 @@ namespace Miru.ViewModel.Clock
         /// </summary>
         /// <param name="hour">변환할 시간입니다.</param>
         /// <returns>변환된 시간</returns>
-        private int ConvertHour(int hour) => hour > 12 ? hour - 12 : hour;
+        private int ConvertHour(int hour) => hour > 12 ? hour - 12 : hour == 0 ? 12 : hour;
 
         /// <summary>
         /// 오전/오후 를 열거합니다.
