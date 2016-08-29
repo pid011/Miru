@@ -4,7 +4,8 @@
     xmlns:local="using:Miru"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:View="using:Miru.ViewModel"
+    xmlns:View="using:Miru"
+    xmlns:viewmodel="using:Miru.ViewModel"
     x:Class="Miru.View"
     mc:Ignorable="d">
 
@@ -24,11 +25,11 @@
                 </TransitionCollection>
             </Grid.ChildrenTransitions>
             <Grid HorizontalAlignment="Left" Width="253" Margin="0,0,0,41" d:LayoutOverrides="TopPosition, BottomPosition">
-                <TextBlock x:Name="clockState" TextWrapping="Wrap" Text="오전" Foreground="White" FontSize="20" RenderTransformOrigin="0.5,0.5" Opacity="0.8" Margin="209,42,0,9" TextAlignment="Center" HorizontalAlignment="Left" Width="44" d:LayoutOverrides="TopMargin, BottomMargin, TopPosition, BottomPosition" />
-                <TextBlock x:Name="clockTime" HorizontalAlignment="Right" Margin="0,-10,46,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Height="80" Width="176" Foreground="White" FontSize="69.333" RenderTransformOrigin="0.5,0.5" TextAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin" />
+                <TextBlock x:Name="ampm" TextWrapping="Wrap" Text="{x:Bind Path=ViewModel.ClockViewModel.AMPMS, Mode=OneWay}" Foreground="White" FontSize="20" RenderTransformOrigin="0.5,0.5" Opacity="0.8" Margin="209,42,0,9" TextAlignment="Center" HorizontalAlignment="Left" Width="44" d:LayoutOverrides="TopMargin, BottomMargin, TopPosition, BottomPosition" />
+                <TextBlock x:Name="clockTime" HorizontalAlignment="Right" Margin="0,-10,46,0" TextWrapping="Wrap" Text="{x:Bind Path=ViewModel.ClockViewModel.Time, Mode=OneWay}" VerticalAlignment="Top" Height="80" Width="176" Foreground="White" FontSize="69.333" RenderTransformOrigin="0.5,0.5" TextAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin" />
             </Grid>
             <Grid HorizontalAlignment="Left" Height="31" VerticalAlignment="Bottom" Width="253" Margin="0,0,0,5">
-                <TextBlock x:Name="clockDate" TextWrapping="Wrap" Text="0000-00-00" Foreground="White" FontSize="20" RenderTransformOrigin="1,0" Opacity="0.8" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin, TopPosition, BottomPosition" TextAlignment="Right" HorizontalAlignment="Right" Width="243" />
+                <TextBlock x:Name="clockDate" TextWrapping="Wrap" Text="{x:Bind Path=ViewModel.ClockViewModel.Date, Mode=OneWay}" Foreground="White" FontSize="20" RenderTransformOrigin="1,0" Opacity="0.8" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin, TopPosition, BottomPosition" TextAlignment="Right" HorizontalAlignment="Right" Width="243" />
             </Grid>
         </Grid>
         <Grid Height="477" Margin="50,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="341">

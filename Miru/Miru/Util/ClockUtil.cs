@@ -1,6 +1,6 @@
 ﻿using System;
 
-using static Miru.ViewModel.Clock.ClockView;
+using static Miru.Factory.Clock.ClockFactory;
 
 namespace Miru.Util
 {
@@ -79,5 +79,12 @@ namespace Miru.Util
         /// <param name="target">변환할 대상</param>
         /// <returns>변환된 문자열</returns>
         public static string ConvertString(int target) => target < 10 ? $"0{target}" : target.ToString();
+
+        /// <summary>
+        /// 24시간 단위 시간을 12시간 단위 시간으로 변환합니다.
+        /// </summary>
+        /// <param name="hour">변환할 시간입니다.</param>
+        /// <returns>변환된 시간</returns>
+        public static int ConvertHour(int hour) => hour > 12 ? hour - 12 : hour == 0 ? 12 : hour;
     }
 }

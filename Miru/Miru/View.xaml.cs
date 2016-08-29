@@ -1,7 +1,8 @@
 ﻿using System;
+using Miru.Factory;
+using Miru.Factory.Clock;
+using Miru.Factory.Weather;
 using Miru.ViewModel;
-using Miru.ViewModel.Clock;
-using Miru.ViewModel.Weather;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -12,15 +13,7 @@ namespace Miru
     /// </summary>
     public sealed partial class View : Page
     {
-        private DispatcherTimer clockTimer;
-
-        private WeatherView weatherView;
-        private IWeather weather;
-
-        private ClockView clockView;
-        private IClock clock;
-
-        private int count;
+        public MainViewModel ViewModel { get; }
 
         /// <summary>
         /// View 인스턴스를 초기화합니다.
@@ -31,73 +24,14 @@ namespace Miru
 
             this.Unloaded += View_Unloaded;
 
-            LoadViewModel();
+            this.ViewModel = new MainViewModel();
         }
 
         private void View_Unloaded(object sender, RoutedEventArgs e)
         {
-            if (clockTimer != null)
-            {
-                clockTimer.Stop();
-            }
+            ViewModel.Dispose();
         }
 
-        private async void LoadViewModel()
-        {
-            weatherView = new WeatherView(1, 37.285944, 127.636764, "5424eae1-8e98-3d89-82e5-e9a1c589a7ba");
-            await weatherView.CreateWeatherItem();
-            weather = weatherView as IWeather;
-
-            clockView = new ClockView();
-            clock = clockView as IClock;
-
-            clockTimer = new DispatcherTimer();
-            clockTimer.Interval = TimeSpan.FromSeconds(1);
-            clockTimer.Tick += ClockTimer_Tick;
-            count = 0;
-            clockTimer.Start();
-
-            SetWeatherTexts();
-            SetClockTexts();
-
-        }
-
-        private void SetWeatherTexts()
-        {
-            this.currentWeatherTemp.Text = $"{weather.Temperatures.Dequeue()}℃";
-            this.currentWeatherIcon.Text = weather.SkyIcons.Dequeue().ToString();
-
-            this.forecastWeatherTemp1.Text = $"{weather.Temperatures.Dequeue()}℃";
-            this.forecastWeatherTemp2.Text = $"{weather.Temperatures.Dequeue()}℃";
-            this.forecastWeatherTemp3.Text = $"{weather.Temperatures.Dequeue()}℃";
-            this.forecastWeatherTemp4.Text = $"{weather.Temperatures.Dequeue()}℃";
-            this.forecastWeatherTemp5.Text = $"{weather.Temperatures.Dequeue()}℃";
-
-            this.forecastWeatherIcon1.Text = weather.SkyIcons.Dequeue().ToString();
-            this.forecastWeatherIcon2.Text = weather.SkyIcons.Dequeue().ToString();
-            this.forecastWeatherIcon3.Text = weather.SkyIcons.Dequeue().ToString();
-            this.forecastWeatherIcon4.Text = weather.SkyIcons.Dequeue().ToString();
-            this.forecastWeatherIcon5.Text = weather.SkyIcons.Dequeue().ToString();
-
-        }
-
-        private void SetClockTexts()
-        {
-            this.clockTime.Text = $"{clock.Hour}:{clock.Minute}";
-            this.clockState.Text = clock.AMPM;
-            this.clockDate.Text = $"{clock.Year}-{clock.Month}-{clock.Day} {clock.Week}";
-        }
-
-        private void ClockTimer_Tick(object sender, object e)
-        {
-            SetClockTexts();
-
-            count++;
-            if (count > 19)
-            {
-                clockTimer.Stop();
-                this.Frame.Navigate(typeof(Background));
-            }
-        }
+ 
     }
 }

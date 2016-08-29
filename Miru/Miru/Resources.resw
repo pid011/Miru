@@ -174,4 +174,7 @@
   <data name="pin_trig_null_error" xml:space="preserve">
     <value>trig핀이 null참조를 가졌습니다.</value>
   </data>
+  <data name="format_exception" xml:space="preserve">
+    <value>문자열 변환에 실패하였습니다. 지정된 타입이 일치하지 않습니다.</value>
+  </data>
 </root>

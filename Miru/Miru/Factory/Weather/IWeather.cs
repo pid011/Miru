@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Miru.Util;
 
-namespace Miru.ViewModel.Weather
+namespace Miru.Factory.Weather
 {
     /// <summary>
     /// 날씨 정보에 대한 속성을 제공합니다.
     /// </summary>
-    internal interface IWeather
+    public interface IWeather
     {
         /// <summary>
         /// 온도를 3시간 단위로 제공합니다.

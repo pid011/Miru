@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using Miru.ViewModel;
+﻿using System;
+using System.Collections.Generic;
+using Miru.Factory;
 
 namespace Miru.Util
 {
@@ -8,12 +9,12 @@ namespace Miru.Util
     /// </summary>
     public class WeatherUtil
     {
-        public static Queue<char> ConvertIcon(Queue<SkyCode> skyState)
+        public static List<char> ConvertIcon(List<SkyCode> skyState)
         {
-            Queue<char> icons = new Queue<char>();
+            List<char> icons = new List<char>();
             foreach (var item in skyState)
             {
-                icons.Enqueue(WeatherIcon.GetWeatherIcon(item));
+                icons.Add(WeatherIcon.GetWeatherIcon(item));
             }
             return icons;
         }
@@ -100,6 +101,19 @@ namespace Miru.Util
             }
             return result;
         }
+
+        public static List<double> RoundDoubleList(List<double> list)
+        {
+            List<double> results = new List<double>();
+            foreach (var item in list)
+            {
+                results.Add(Math.Round(item));
+            }
+
+            return results;
+        }
+
+        public static int ConvertInt32(double target) => Convert.ToInt32(Math.Round(target));
 
         /// <summary>
         /// 여러가지 하늘상태를 열거합니다.

@@ -3,52 +3,66 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Miru.Util;
-using Miru.ViewModel.Weather;
+using Miru.Factory.Weather;
 using Newtonsoft.Json.Linq;
 
-namespace Miru.ViewModel
+namespace Miru.Factory
 {
-    /// <summary>
-    /// 날씨정보생성을 도와줍니다.
-    /// </summary>
-    public class WeatherView : IWeather
+    public class WeatherFactory
     {
+        public class WeatherItem
+        {
+            /// <summary>
+            /// 온도를 3시간 단위로 제공합니다.
+            /// 첫번째 요소는 현재 온도입니다.
+            /// </summary>
+            public List<string> Temperatures { get; }
+
+            /// <summary>
+            /// 습도를 3시간 단위로 제공합니다.
+            /// 첫번째 요소는 현재 습도입니다.
+            /// </summary>
+            public List<string> Humiditys { get; }
+
+            /// <summary>
+            /// 하늘상태에 맞는 날씨 아이콘을 3시간 단위로 제공합니다.
+            /// 첫번째 요소는 현재 하늘상태 아이콘입니다.
+            /// </summary>
+            public List<string> SkyIcons { get; }
+
+            public WeatherItem(List<double> temp, List<double> hum, List<WeatherUtil.SkyCode> skyStates)
+            {
+                this.Temperatures = new List<string>();
+                temp.ForEach(x => Temperatures.Add(CommonUtil.ConvertString(WeatherUtil.ConvertInt32(x))));
+
+                this.Humiditys = new List<string>();
+                hum.ForEach(x => Humiditys.Add(CommonUtil.ConvertString(WeatherUtil.ConvertInt32(x))));
+
+                this.SkyIcons = new List<string>();
+                WeatherUtil.ConvertIcon(skyStates).ForEach(x => SkyIcons.Add(x.ToString()));
+            }
+        }
+
         private int version;
         private double lat;
         private double lon;
         private string appKey;
 
-        public Queue<double> Temperatures => RoundDouble(temperatures);
-        private Queue<double> temperatures;
+        public WeatherItem CurrentWeather => new WeatherItem(temperatures, humiditys, skyStates);
 
-        public Queue<double> Humiditys => RoundDouble(humiditys);
-        private Queue<double> humiditys;
-
-        public Queue<char> SkyIcons => WeatherUtil.ConvertIcon(SkyStates);
-
-        public Queue<WeatherUtil.SkyCode> SkyStates => skyStates;
-        private Queue<WeatherUtil.SkyCode> skyStates;
-
-        private Queue<double> RoundDouble(Queue<double> queue)
-        {
-            Queue<double> results = new Queue<double>();
-            foreach (var item in queue)
-            {
-                results.Enqueue(Math.Round(item));
-            }
-
-            return results;
-        }
+        private List<double> temperatures;
+        private List<double> humiditys;
+        private List<WeatherUtil.SkyCode> skyStates;
 
         /// <summary>
         /// 날씨정보를 가져오기 위한 몇가지 정보를 지정하고
-        /// <see cref="WeatherView"/>클래스의 인스턴스를 초기화합니다.
+        /// <see cref="WeatherFactory"/>클래스의 인스턴스를 초기화합니다.
         /// </summary>
         /// <param name="version">API 버전</param>
         /// <param name="lat">위도(Only Korea)</param>
         /// <param name="lon">경도(Only Korea)</param>
         /// <param name="appKey">SK plenet에서 제공받은 appKey</param>
-        public WeatherView(int version, double lat, double lon, string appKey)
+        public WeatherFactory(int version, double lat, double lon, string appKey)
         {
             this.version = version;
             this.lat = lat;
@@ -103,31 +117,31 @@ namespace Miru.ViewModel
 
         private void WeatherJsonParse(string currentWeatherJson, string forecastWeatherJson)
         {
-            temperatures = new Queue<double>();
-            humiditys = new Queue<double>();
-            skyStates = new Queue<WeatherUtil.SkyCode>();
+            temperatures = new List<double>();
+            humiditys = new List<double>();
+            skyStates = new List<WeatherUtil.SkyCode>();
 
             try
             {
                 JObject cwObj = JObject.Parse(currentWeatherJson);
                 cwObj = (JObject) cwObj["weather"]["minutely"][0];
-                temperatures.Enqueue(Convert.ToDouble((string) cwObj["temperature"]["tc"]));
-                humiditys.Enqueue(Convert.ToDouble((string) cwObj["humidity"]));
+                temperatures.Add(Convert.ToDouble((string) cwObj["temperature"]["tc"]));
+                humiditys.Add(Convert.ToDouble((string) cwObj["humidity"]));
                 string skycode = (string) cwObj["sky"]["code"];
-                skyStates.Enqueue(WeatherUtil.ConvertSky(skycode));
+                skyStates.Add(WeatherUtil.ConvertSky(skycode));
 
                 JObject fwObj = JObject.Parse(forecastWeatherJson);
                 fwObj = (JObject) fwObj["weather"]["forecast3days"][0]["fcst3hour"];
                 for (int i = 4; i < 25; i += 3)
                 {
-                    temperatures.Enqueue(Convert.ToDouble((string) fwObj["temperature"][$"temp{i}hour"]));
-                    humiditys.Enqueue(Convert.ToDouble((string) fwObj["humidity"][$"rh{i}hour"]));
-                    skyStates.Enqueue(WeatherUtil.ConvertSky((string) fwObj["sky"][$"code{i}hour"]));
+                    temperatures.Add(Convert.ToDouble((string) fwObj["temperature"][$"temp{i}hour"]));
+                    humiditys.Add(Convert.ToDouble((string) fwObj["humidity"][$"rh{i}hour"]));
+                    skyStates.Add(WeatherUtil.ConvertSky((string) fwObj["sky"][$"code{i}hour"]));
                 }
             }
             catch (FormatException)
             {
-                throw;
+                throw new FormatException(ResourcesString.GetString("format_exception"));
             }
         }
     }

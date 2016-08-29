@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Miru.Util;
 
-namespace Miru.ViewModel
+namespace Miru.Factory
 {
     /// <summary>
     /// 날씨 아이콘에 대한 메서드를 제공합니다.
