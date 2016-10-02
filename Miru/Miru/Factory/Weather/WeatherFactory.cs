@@ -59,8 +59,9 @@ namespace Miru.Factory
                 {
                     list.Add(new WeatherViewModel.WeatherItem()
                     {
-                        Temperatures = CommonUtil.ConvertString(WeatherUtil.ConvertInt32(temperatures[i])),
-                        Humiditys = CommonUtil.ConvertString(WeatherUtil.ConvertInt32(humiditys[i])),
+                        Temperatures = 
+                            $"{CommonUtil.ConvertString(WeatherUtil.ConvertInt32(temperatures[i]))}{ResourcesString.GetString("temp")}",
+                        Humiditys = $"{CommonUtil.ConvertString(WeatherUtil.ConvertInt32(humiditys[i]))}%",
                         SkyIcons = WeatherUtil.ConvertIcon(skyStates)[i].ToString()
                     });
                 }

@@ -189,4 +189,7 @@
   <data name="tomorrow" xml:space="preserve">
     <value>내일</value>
   </data>
+  <data name="temp" xml:space="preserve">
+    <value>℃</value>
+  </data>
 </root>
