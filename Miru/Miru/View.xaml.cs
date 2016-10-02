@@ -1,7 +1,6 @@
 ﻿using System;
 using Miru.Factory;
 using Miru.Factory.Clock;
-using Miru.Factory.Weather;
 using Miru.ViewModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

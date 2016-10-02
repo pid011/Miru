@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Miru.Util;
-using Miru.Factory.Weather;
+using Miru.ViewModel;
 using Newtonsoft.Json.Linq;
 
 namespace Miru.Factory
 {
     public class WeatherFactory
     {
+        /*
         public class WeatherItem
         {
             /// <summary>
@@ -29,6 +30,7 @@ namespace Miru.Factory
             /// 첫번째 요소는 현재 하늘상태 아이콘입니다.
             /// </summary>
             public List<string> SkyIcons { get; }
+            public int Count => Temperatures.Count;
 
             public WeatherItem(List<double> temp, List<double> hum, List<WeatherUtil.SkyCode> skyStates)
             {
@@ -42,13 +44,57 @@ namespace Miru.Factory
                 WeatherUtil.ConvertIcon(skyStates).ForEach(x => SkyIcons.Add(x.ToString()));
             }
         }
-
+        */
         private int version;
         private double lat;
         private double lon;
         private string appKey;
 
-        public WeatherItem CurrentWeather => new WeatherItem(temperatures, humiditys, skyStates);
+        public List<WeatherViewModel.WeatherItem> CurrentWeather
+        {
+            get
+            {
+                var list = new List<WeatherViewModel.WeatherItem>();
+                for (int i = 0; i < temperatures.Count; i++)
+                {
+                    list.Add(new WeatherViewModel.WeatherItem()
+                    {
+                        Temperatures = CommonUtil.ConvertString(WeatherUtil.ConvertInt32(temperatures[i])),
+                        Humiditys = CommonUtil.ConvertString(WeatherUtil.ConvertInt32(humiditys[i])),
+                        SkyIcons = WeatherUtil.ConvertIcon(skyStates)[i].ToString()
+                    });
+                }
+                int hour = DateTime.Now.Hour;
+                int day = 0;
+                foreach (var item in list)
+                {
+                    hour += 3;
+                    if (hour > 24)
+                    {
+                        hour -= 24;
+                        day++;
+                    }
+                    item.FromHour = $"{hour}{ResourcesString.GetString("hour")}";
+                    #region 날짜표현
+                    switch (day)
+                    {
+                        case 0:
+                            item.FromHour = $"{ResourcesString.GetString("today")} {item.FromHour}";
+                            break;
+                        case 1:
+                            item.FromHour = $"{ResourcesString.GetString("tomorrow")} {item.FromHour}";
+                            break;
+                        case 2:
+                            item.FromHour = $"{ResourcesString.GetString("the_day_after_tomorrow")} {item.FromHour}";
+                            break;
+                        default:
+                            break;
+                    }
+                    #endregion
+                }
+                return list;
+            }
+        }
 
         private List<double> temperatures;
         private List<double> humiditys;

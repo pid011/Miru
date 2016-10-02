@@ -177,4 +177,16 @@
   <data name="format_exception" xml:space="preserve">
     <value>문자열 변환에 실패하였습니다. 지정된 타입이 일치하지 않습니다.</value>
   </data>
+  <data name="hour" xml:space="preserve">
+    <value>시</value>
+  </data>
+  <data name="the_day_after_tomorrow" xml:space="preserve">
+    <value>모레</value>
+  </data>
+  <data name="today" xml:space="preserve">
+    <value>오늘</value>
+  </data>
+  <data name="tomorrow" xml:space="preserve">
+    <value>내일</value>
+  </data>
 </root>

@@ -17,6 +17,9 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Miru_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>arm</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -103,6 +106,7 @@
       <DependentUpon>Background.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\CommonUtil.cs" />
+    <Compile Include="Util\WeatherConfig.cs" />
     <Compile Include="ViewModel\IStopFactory.cs" />
     <Compile Include="ViewModel\BindableBase.cs" />
     <Compile Include="Util\ResourcesString.cs" />
@@ -114,7 +118,6 @@
     <Compile Include="Factory\Clock\ClockFactory.cs" />
     <Compile Include="Util\ClockUtil.cs" />
     <Compile Include="Util\WeatherUtil.cs" />
-    <Compile Include="Factory\Weather\IWeather.cs" />
     <Compile Include="Factory\Weather\WeatherFactory.cs" />
     <Compile Include="Factory\Weather\WeatherIcon.cs" />
     <Compile Include="ViewModel\ClockViewModel.cs" />
