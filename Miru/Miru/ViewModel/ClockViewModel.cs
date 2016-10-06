@@ -55,6 +55,19 @@ namespace Miru.ViewModel
             }
         }
 
+        public Dictionary<string, string> TimeDic
+        {
+            get
+            {
+                return new Dictionary<string, string>()
+                {
+                    ["date"] = this.date,
+                    ["time"] = this.time,
+                    ["ampms"] = this.ampms
+                };
+            }
+        }
+
         public ClockViewModel()
         {
             clockFactory = new ClockFactory();

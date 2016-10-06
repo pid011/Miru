@@ -12,17 +12,20 @@ namespace Miru.ViewModel
     {
         public ClockViewModel ClockViewModel { get; }
         public WeatherViewModel WeatherViewModel { get; }
+        public SupporterViewModel SupporterViewModel { get; }
 
         public MainViewModel()
         {
             ClockViewModel = new ClockViewModel();
             WeatherViewModel = new WeatherViewModel();
+            SupporterViewModel = new SupporterViewModel(ClockViewModel.TimeDic, WeatherViewModel.WeathersList);
         }
 
         public void Dispose()
         {
             ClockViewModel.Dispose();
             WeatherViewModel.Dispose();
+            SupporterViewModel.Dispose();
         }
     }
 }

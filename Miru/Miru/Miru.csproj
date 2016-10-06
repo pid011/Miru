@@ -96,6 +96,8 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <PRIResource Include="Resources.resw" />
     <Content Include="Assets\Fonts\artill_clean_icons.otf" />
+    <Content Include="Assets\Fonts\RixVideoGame_3D.ttf" />
+    <Content Include="Assets\Fonts\Immortal_Memory.ttf" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +107,7 @@
     <Compile Include="Background.xaml.cs">
       <DependentUpon>Background.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Factory\Supporter.cs" />
     <Compile Include="Util\CommonUtil.cs" />
     <Compile Include="Util\WeatherConfig.cs" />
     <Compile Include="ViewModel\BindableBase.cs" />
@@ -121,6 +124,7 @@
     <Compile Include="Factory\Weather\WeatherIcon.cs" />
     <Compile Include="ViewModel\ClockViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SupporterViewModel.cs" />
     <Compile Include="ViewModel\WeatherViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
