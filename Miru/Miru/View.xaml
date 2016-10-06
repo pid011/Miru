@@ -28,6 +28,7 @@
                 </TransitionCollection>
             </Grid.ChildrenTransitions>
             <Grid HorizontalAlignment="Left" Width="253" Margin="0,0,0,41" d:LayoutOverrides="TopPosition, BottomPosition">
+
                 <TextBlock x:Name="ampm" TextWrapping="Wrap" Text="{Binding Path=ClockViewModel.AMPMS}" Foreground="White" FontSize="20" RenderTransformOrigin="0.5,0.5" Opacity="0.8" Margin="209,42,0,9" TextAlignment="Center" HorizontalAlignment="Left" Width="44" d:LayoutOverrides="TopMargin, BottomMargin, TopPosition, BottomPosition" />
                 <TextBlock x:Name="clockTime" HorizontalAlignment="Right" Margin="0,-10,46,0" TextWrapping="Wrap" Text="{Binding Path=ClockViewModel.Time}" VerticalAlignment="Top" Height="80" Width="176" Foreground="White" FontSize="69.333" RenderTransformOrigin="0.5,0.5" TextAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin" />
             </Grid>

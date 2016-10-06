@@ -107,13 +107,12 @@
     </Compile>
     <Compile Include="Util\CommonUtil.cs" />
     <Compile Include="Util\WeatherConfig.cs" />
-    <Compile Include="ViewModel\IStopFactory.cs" />
     <Compile Include="ViewModel\BindableBase.cs" />
     <Compile Include="Util\ResourcesString.cs" />
     <Compile Include="View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Senser.cs" />
+    <Compile Include="Factory\Senser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Factory\Clock\ClockFactory.cs" />
     <Compile Include="Util\ClockUtil.cs" />

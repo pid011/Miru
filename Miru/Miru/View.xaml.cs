@@ -14,6 +14,8 @@ namespace Miru
     {
         public MainViewModel ViewModel { get; }
 
+        private DispatcherTimer timer;
+
         /// <summary>
         /// View 인스턴스를 초기화합니다.
         /// </summary>
@@ -24,13 +26,24 @@ namespace Miru
             this.Unloaded += View_Unloaded;
 
             this.ViewModel = new MainViewModel();
+
+            timer = new DispatcherTimer();
+            /*
+            timer.Interval = TimeSpan.FromSeconds(30);
+            timer.Tick += Timer_End;
+            timer.Start();
+            */
+        }
+
+        private void Timer_End(object sender, object e)
+        {
+            timer.Stop();
+            this.Frame.Navigate(typeof(Background));
         }
 
         private void View_Unloaded(object sender, RoutedEventArgs e)
         {
             ViewModel.Dispose();
         }
-
- 
     }
 }

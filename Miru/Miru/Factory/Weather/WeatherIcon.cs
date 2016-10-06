@@ -48,7 +48,7 @@ namespace Miru.Factory
         private static bool isNight()
         {
             var hour = DateTime.Now.Hour;
-            return hour < 6 || hour > 19 ? true : false;
+            return hour < 7 || hour > 17 ? true : false;
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Miru.Factory
         /// <returns>날씨 아이콘</returns>
         public static char GetWeatherIcon(WeatherUtil.SkyCode sky)
         {
-            char icon = '1';
+            char icon = 'e';
 
             switch (sky)
             {
