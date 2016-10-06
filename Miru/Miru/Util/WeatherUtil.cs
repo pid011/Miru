@@ -26,7 +26,7 @@ namespace Miru.Util
         /// <returns></returns>
         public static SkyCode ConvertSky(string position)
         {
-            SkyCode result = SkyCode.NULL;
+            SkyCode result = SkyCode.NoReported;
             switch (position)
             {
                 case "SKY_A01":
@@ -194,7 +194,7 @@ namespace Miru.Util
             /// <summary>
             /// 알 수 없음
             /// </summary>
-            NULL
+            NoReported
         }
     }
 }

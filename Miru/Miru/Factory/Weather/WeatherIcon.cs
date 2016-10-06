@@ -19,26 +19,26 @@ namespace Miru.Factory
             ["n-02"] = 'a',
             ["s-03"] = '3',
             ["n-03"] = '3',
-            ["s-04"] = 'K',
+            ["s-04"] = 'J',
             ["n-04"] = 'k',
             ["s-05"] = 'H',
-            ["n-05"] = 'h',
-            ["s-06"] = 'T',
-            ["n-06"] = 't',
-            ["s-07"] = '…',
+            ["n-05"] = 'i',
+            ["s-06"] = 'V',
+            ["n-06"] = 'w',
+            ["s-07"] = 'Z',
             ["n-07"] = '!',
-            ["s-08"] = 'M',
-            ["n-08"] = 'm',
+            ["s-08"] = 'K',
+            ["n-08"] = 'K',
             ["s-09"] = 'I',
-            ["n-09"] = 'i',
-            ["s-10"] = 'U',
-            ["n-10"] = 'u',
-            ["s-11"] = 'Y',
+            ["n-09"] = 'I',
+            ["s-10"] = 'W',
+            ["n-10"] = 'W',
+            ["s-11"] = 'X',
             ["n-11"] = 'y',
-            ["s-12"] = 'Q',
+            ["s-12"] = 'P',
             ["n-12"] = 'q',
-            ["s-13"] = 'S',
-            ["n-13"] = 's',
+            ["s-13"] = 'H',
+            ["n-13"] = 'i',
             ["s-14"] = 'R',
             ["n-14"] = 'r',
         };
@@ -48,7 +48,8 @@ namespace Miru.Factory
         private static bool isNight()
         {
             var hour = DateTime.Now.Hour;
-            return hour < 7 || hour > 17 ? true : false;
+
+            return hour > 6 && hour < 18 ? false : true;
         }
 
         /// <summary>
@@ -58,7 +59,7 @@ namespace Miru.Factory
         /// <returns>날씨 아이콘</returns>
         public static char GetWeatherIcon(WeatherUtil.SkyCode sky)
         {
-            char icon = 'e';
+            char icon = ' ';
 
             switch (sky)
             {
