@@ -8,6 +8,7 @@ namespace Miru.Util
 {
     public static class WeatherConfig
     {
+        // weather api data
         public static readonly int version = 1;
         public static readonly double lat = 37.285944;
         public static readonly double lon = 127.636764;
