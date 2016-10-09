@@ -69,11 +69,11 @@ namespace Miru.Factory
                     });
                 }
 
-                list[0].FromHour = ResourcesString.GetString("current");
+                #region 날짜표현
 
+                list[0].FromHour = ResourcesString.GetString("current");
                 int hour = DateTime.Now.Hour;
                 int day = 0;
-
                 // Danger code :(
                 for (int i = 1; i < list.Count; i++)
                 {
@@ -84,7 +84,6 @@ namespace Miru.Factory
                         day++;
                     }
                     list[i].FromHour = $"{hour}{ResourcesString.GetString("hour")}";
-                    #region 날짜표현
                     switch (day)
                     {
                         case 0:
