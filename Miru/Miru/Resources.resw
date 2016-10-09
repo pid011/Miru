@@ -192,4 +192,7 @@
   <data name="temp" xml:space="preserve">
     <value>℃</value>
   </data>
+  <data name="current" xml:space="preserve">
+    <value>현재</value>
+  </data>
 </root>

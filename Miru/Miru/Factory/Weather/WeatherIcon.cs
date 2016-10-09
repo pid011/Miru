@@ -45,78 +45,73 @@ namespace Miru.Factory
 
         #endregion icon table
 
-        private static bool isNight()
-        {
-            var hour = DateTime.Now.Hour;
-
-            return hour > 6 && hour < 18 ? false : true;
-        }
+        private static bool isNight(int hour) => hour > 6 && hour < 18 ? false : true;
 
         /// <summary>
         /// 매개변수로 받은 날씨 상태에 맞는 날씨 아이콘을 반환합니다.
         /// </summary>
         /// <param name="sky">날씨 상태입니다.</param>
         /// <returns>날씨 아이콘</returns>
-        public static char GetWeatherIcon(WeatherUtil.SkyCode sky)
+        public static char GetWeatherIcon(WeatherUtil.SkyCode sky, int hour)
         {
             char icon = ' ';
 
             switch (sky)
             {
                 case WeatherUtil.SkyCode.Sunny:
-                    icon = !isNight() ? iconTable["s-01"] : iconTable["n-01"];
+                    icon = !isNight(hour) ? iconTable["s-01"] : iconTable["n-01"];
                     break;
 
                 case WeatherUtil.SkyCode.PartlyCloudy:
-                    icon = !isNight() ? iconTable["s-02"] : iconTable["n-02"];
+                    icon = !isNight(hour) ? iconTable["s-02"] : iconTable["n-02"];
                     break;
 
                 case WeatherUtil.SkyCode.MostlyCloudy:
-                    icon = !isNight() ? iconTable["s-03"] : iconTable["n-03"];
+                    icon = !isNight(hour) ? iconTable["s-03"] : iconTable["n-03"];
                     break;
 
                 case WeatherUtil.SkyCode.MostlyCloudyAndRain:
-                    icon = !isNight() ? iconTable["s-04"] : iconTable["n-04"];
+                    icon = !isNight(hour) ? iconTable["s-04"] : iconTable["n-04"];
                     break;
 
                 case WeatherUtil.SkyCode.MostlyCloudyAndSnow:
-                    icon = !isNight() ? iconTable["s-05"] : iconTable["n-05"];
+                    icon = !isNight(hour) ? iconTable["s-05"] : iconTable["n-05"];
                     break;
 
                 case WeatherUtil.SkyCode.MostlyCloudyAndRainAndSnow:
-                    icon = !isNight() ? iconTable["s-06"] : iconTable["n-06"];
+                    icon = !isNight(hour) ? iconTable["s-06"] : iconTable["n-06"];
                     break;
 
                 case WeatherUtil.SkyCode.Fog:
-                    icon = !isNight() ? iconTable["s-07"] : iconTable["n-07"];
+                    icon = !isNight(hour) ? iconTable["s-07"] : iconTable["n-07"];
                     break;
 
                 case WeatherUtil.SkyCode.FogAndRain:
-                    icon = !isNight() ? iconTable["s-08"] : iconTable["n-08"];
+                    icon = !isNight(hour) ? iconTable["s-08"] : iconTable["n-08"];
                     break;
 
                 case WeatherUtil.SkyCode.FogAndSnow:
-                    icon = !isNight() ? iconTable["s-09"] : iconTable["n-09"];
+                    icon = !isNight(hour) ? iconTable["s-09"] : iconTable["n-09"];
                     break;
 
                 case WeatherUtil.SkyCode.FogAndRainAndSnow:
-                    icon = !isNight() ? iconTable["s-10"] : iconTable["n-10"];
+                    icon = !isNight(hour) ? iconTable["s-10"] : iconTable["n-10"];
                     break;
 
                 case WeatherUtil.SkyCode.FogAndThunderstroke:
-                    icon = !isNight() ? iconTable["s-11"] : iconTable["n-11"];
+                    icon = !isNight(hour) ? iconTable["s-11"] : iconTable["n-11"];
                     break;
 
                 case WeatherUtil.SkyCode.ThunderstormAndRain:
-                    icon = !isNight() ? iconTable["s-12"] : iconTable["n-12"];
+                    icon = !isNight(hour) ? iconTable["s-12"] : iconTable["n-12"];
                     break;
 
                 case WeatherUtil.SkyCode.ThunderstormAndSnow:
-                    icon = !isNight() ? iconTable["s-13"] : iconTable["n-13"];
+                    icon = !isNight(hour) ? iconTable["s-13"] : iconTable["n-13"];
                     break;
 
                 case WeatherUtil.SkyCode.ThunderstormAndRainAndSnow:
-                    icon = !isNight() ? iconTable["s-14"] : iconTable["n-14"];
+                    icon = !isNight(hour) ? iconTable["s-14"] : iconTable["n-14"];
                     break;
             }
 

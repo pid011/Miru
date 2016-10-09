@@ -55,6 +55,9 @@ namespace Miru.Factory
             get
             {
                 var list = new List<WeatherViewModel.WeatherItem>();
+
+                var icons = WeatherUtil.ConvertIcon(skyStates);
+
                 for (int i = 0; i < temperatures.Count; i++)
                 {
                     list.Add(new WeatherViewModel.WeatherItem()
@@ -62,12 +65,17 @@ namespace Miru.Factory
                         Temperatures = 
                             $"{CommonUtil.ConvertString(WeatherUtil.ConvertInt32(temperatures[i]))}{ResourcesString.GetString("temp")}",
                         Humiditys = $"{CommonUtil.ConvertString(WeatherUtil.ConvertInt32(humiditys[i]))}%",
-                        SkyIcons = WeatherUtil.ConvertIcon(skyStates)[i].ToString()
+                        SkyIcons = icons[i].ToString()
                     });
                 }
+
+                list[0].FromHour = ResourcesString.GetString("current");
+
                 int hour = DateTime.Now.Hour;
                 int day = 0;
-                foreach (var item in list)
+
+                // Danger code :(
+                for (int i = 1; i < list.Count; i++)
                 {
                     hour += 3;
                     if (hour > 24)
@@ -75,23 +83,24 @@ namespace Miru.Factory
                         hour -= 24;
                         day++;
                     }
-                    item.FromHour = $"{hour}{ResourcesString.GetString("hour")}";
+                    list[i].FromHour = $"{hour}{ResourcesString.GetString("hour")}";
                     #region 날짜표현
                     switch (day)
                     {
                         case 0:
-                            item.FromHour = $"{ResourcesString.GetString("today")} {item.FromHour}";
+                            list[i].FromHour = $"{ResourcesString.GetString("today")} {list[i].FromHour}";
                             break;
                         case 1:
-                            item.FromHour = $"{ResourcesString.GetString("tomorrow")} {item.FromHour}";
+                            list[i].FromHour = $"{ResourcesString.GetString("tomorrow")} {list[i].FromHour}";
                             break;
                         case 2:
-                            item.FromHour = $"{ResourcesString.GetString("the_day_after_tomorrow")} {item.FromHour}";
+                            list[i].FromHour = $"{ResourcesString.GetString("the_day_after_tomorrow")} {list[i].FromHour}";
                             break;
                         default:
                             break;
                     }
                     #endregion
+
                 }
                 return list;
             }

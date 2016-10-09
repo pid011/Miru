@@ -12,9 +12,16 @@ namespace Miru.Util
         public static List<char> ConvertIcon(List<SkyCode> skyState)
         {
             List<char> icons = new List<char>();
+            int hour = DateTime.Now.Hour;
             foreach (var item in skyState)
             {
-                icons.Add(WeatherIcon.GetWeatherIcon(item));
+                icons.Add(WeatherIcon.GetWeatherIcon(item, hour));
+
+                hour += 3;
+                if (hour > 24)
+                {
+                    hour -= 24;
+                }
             }
             return icons;
         }

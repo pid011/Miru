@@ -10,7 +10,7 @@ namespace Miru.ViewModel
 {
     public class SupporterViewModel : BindableBase, IDisposable
     {
-        private Supporter supporter;
+        // private Supporter supporter;
 
         private string answer;
 
@@ -28,9 +28,9 @@ namespace Miru.ViewModel
 
         public SupporterViewModel(Dictionary<string, string> timeDic, List<WeatherItem> weathersList)
         {
-            this.supporter = new Supporter(timeDic, weathersList);
+            //this.supporter = new Supporter(timeDic, weathersList);
 
-            this.Answer = this.supporter.GetAnswer();
+            //this.Answer = this.supporter.GetAnswer();
         }
 
 

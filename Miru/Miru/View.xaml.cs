@@ -28,11 +28,9 @@ namespace Miru
             this.ViewModel = new MainViewModel();
 
             timer = new DispatcherTimer();
-            /*
             timer.Interval = TimeSpan.FromSeconds(30);
             timer.Tick += Timer_End;
             timer.Start();
-            */
         }
 
         private void Timer_End(object sender, object e)
