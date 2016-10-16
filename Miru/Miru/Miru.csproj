@@ -20,6 +20,7 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>2F738A07DDA819EB8572EF84FD4F04402D7F307C</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -96,8 +97,11 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <PRIResource Include="Resources.resw" />
     <Content Include="Assets\Fonts\artill_clean_icons.otf" />
-    <Content Include="Assets\Fonts\RixVideoGame_3D.ttf" />
-    <Content Include="Assets\Fonts\Immortal_Memory.ttf" />
+    <Content Include="Assets\Fonts\서울남산_장체B.ttf" />
+    <Content Include="Assets\Fonts\서울남산_장체BL.ttf" />
+    <Content Include="Assets\Fonts\서울남산_장체EB.ttf" />
+    <Content Include="Assets\Fonts\서울남산_장체L.ttf" />
+    <Content Include="Assets\Fonts\서울남산_장체M.ttf" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
