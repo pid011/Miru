@@ -11,36 +11,36 @@ namespace Miru.Factory
     {
         #region icon table
 
-        private static Dictionary<string, char> iconTable = new Dictionary<string, char>
+        private static Dictionary<string, string> iconTable = new Dictionary<string, string>
         {
-            ["s-01"] = '1',
-            ["n-01"] = '6',
-            ["s-02"] = 'A',
-            ["n-02"] = 'a',
-            ["s-03"] = '3',
-            ["n-03"] = '3',
-            ["s-04"] = 'J',
-            ["n-04"] = 'k',
-            ["s-05"] = 'H',
-            ["n-05"] = 'i',
-            ["s-06"] = 'V',
-            ["n-06"] = 'w',
-            ["s-07"] = 'Z',
-            ["n-07"] = '!',
-            ["s-08"] = 'K',
-            ["n-08"] = 'K',
-            ["s-09"] = 'I',
-            ["n-09"] = 'I',
-            ["s-10"] = 'W',
-            ["n-10"] = 'W',
-            ["s-11"] = 'X',
-            ["n-11"] = 'y',
-            ["s-12"] = 'P',
-            ["n-12"] = 'q',
-            ["s-13"] = 'H',
-            ["n-13"] = 'i',
-            ["s-14"] = 'R',
-            ["n-14"] = 'r',
+            ["s-01"] = "\ue999",
+            ["n-01"] = "\ue95c",
+            ["s-02"] = "\ue972",
+            ["n-02"] = "\ue976",
+            ["s-03"] = "\ue970",
+            ["n-03"] = "\ue970",
+            ["s-04"] = "\ue97c",
+            ["n-04"] = "\ue980",
+            ["s-05"] = "\ue984",
+            ["n-05"] = "\ue991",
+            ["s-06"] = "\ue97a",
+            ["n-06"] = "\ue97a",
+            ["s-07"] = "\ue92b",
+            ["n-07"] = "\ue92d",
+            ["s-08"] = "\ue978",
+            ["n-08"] = "\ue978",
+            ["s-09"] = "\ue996",
+            ["n-09"] = "\ue996",
+            ["s-10"] = "\ue97a",
+            ["n-10"] = "\ue97a",
+            ["s-11"] = "\ue982",
+            ["n-11"] = "\ue982",
+            ["s-12"] = "\ue9b5",
+            ["n-12"] = "\ue9be",
+            ["s-13"] = "\ue996",
+            ["n-13"] = "\ue996",
+            ["s-14"] = "\ue97a",
+            ["n-14"] = "\ue97a",
         };
 
         #endregion icon table
@@ -52,9 +52,9 @@ namespace Miru.Factory
         /// </summary>
         /// <param name="sky">날씨 상태입니다.</param>
         /// <returns>날씨 아이콘</returns>
-        public static char GetWeatherIcon(WeatherUtil.SkyCode sky, int hour)
+        public static string GetWeatherIcon(WeatherUtil.SkyCode sky, int hour)
         {
-            char icon = ' ';
+            string icon = "";
 
             switch (sky)
             {

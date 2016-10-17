@@ -48,10 +48,16 @@
                     <DataTemplate>
                         <StackPanel Margin="0" Width="331" Height="76" Orientation="Horizontal">
                             <TextBlock Text="{Binding FromHour}" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체M.ttf#서울남산 장체M" Width="106" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" TextAlignment="Right" Foreground="White" FontStyle="Italic" />
-                            <TextBlock Text="a" Width="42" FontSize="53.333" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="13,0,7,10" Height="70" TextAlignment="Center" Foreground="White" />
-                            <StackPanel VerticalAlignment="Center" Height="65" d:LayoutOverrides="TopPosition, BottomPosition" HorizontalAlignment="Right" Width="126">
-                                <TextBlock Text="{Binding Temperatures}" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체M.ttf#서울남산 장체M" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="21.333" Margin="0,10,0,0" Height="40" Foreground="White" />
-                                <TextBlock Text="{Binding Humiditys}" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체L.ttf#서울남산 장체L" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="18.667" Height="30" Margin="0,-10,0,0" />
+                            <TextBlock Text="{Binding SkyIcons}" FontFamily="ms-appx:///Assets/Fonts/pe-icon-set-weather.ttf#pe-icon-set-weather" Width="48" FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="13,15,7,0" Height="70" TextAlignment="Center" Foreground="White" />
+                            <StackPanel VerticalAlignment="Center" Height="56" HorizontalAlignment="Right" Width="126" Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal" Width="126" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5,0,0">
+                                    <TextBlock Text="&#xe9a9;" FontFamily="ms-appx:///Assets/Fonts/pe-icon-set-weather.ttf#pe-icon-set-weather" HorizontalAlignment="Center" VerticalAlignment="Center" Width="13" TextAlignment="Center" FontSize="18.667"/>
+                                    <TextBlock Text="{Binding Temperatures}" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체M.ttf#서울남산 장체M" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="21.333" Margin="3,0,0,0" Height="25" Foreground="White" Width="107" />
+                                </StackPanel>
+                                <StackPanel Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal" Width="126" Margin="0">
+                                    <TextBlock Text="&#xe91b;" FontFamily="ms-appx:///Assets/Fonts/pe-icon-set-weather.ttf#pe-icon-set-weather" HorizontalAlignment="Center" VerticalAlignment="Center" Width="13" TextAlignment="Center"/>
+                                    <TextBlock Text="{Binding Humiditys}" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체L.ttf#서울남산 장체L" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="18.667" Margin="3,0,0,0" />
+                                </StackPanel>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

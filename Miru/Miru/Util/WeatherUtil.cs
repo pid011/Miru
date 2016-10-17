@@ -9,9 +9,9 @@ namespace Miru.Util
     /// </summary>
     public class WeatherUtil
     {
-        public static List<char> ConvertIcon(List<SkyCode> skyState)
+        public static List<string> ConvertIcon(List<SkyCode> skyState)
         {
-            List<char> icons = new List<char>();
+            List<string> icons = new List<string>();
             int hour = DateTime.Now.Hour;
             foreach (var item in skyState)
             {
