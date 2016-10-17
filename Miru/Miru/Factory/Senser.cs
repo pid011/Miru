@@ -71,9 +71,9 @@ namespace Miru
             stopwatch.Stop();
 
             TimeSpan timeBetween = stopwatch.Elapsed;
-            Debug.WriteLine(timeBetween.ToString());
 
             double distance = timeBetween.TotalSeconds * 17000;
+            Debug.WriteLine($"{DateTime.Now.ToString()}  Distance: {distance}");
 
             return Math.Round(distance);
         }

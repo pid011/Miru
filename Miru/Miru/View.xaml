@@ -20,7 +20,7 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Grid Height="412" Margin="80,760,80,260" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock x:Name="text_supporter" Text="{Binding SupporterViewModel.Answer}" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="White" FontSize="48" Width="800" TextAlignment="Center" d:LayoutOverrides="TopPosition, BottomPosition" FontFamily="Assets/Fonts/서울남산_장체M#서울남산 장체M" />
+            <TextBlock x:Name="text_supporter" Text="{Binding SupporterViewModel.Answer}" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="White" FontSize="48" Width="800" TextAlignment="Center" d:LayoutOverrides="TopPosition, BottomPosition" FontFamily="Assets/Fonts/서울남산_장체M.ttf#서울남산 장체M" />
         </Grid>
         <TextBlock x:Name="status" HorizontalAlignment="Center" Margin="0,0,0,50" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="40" Width="800" FontSize="30" TextAlignment="Center" FontStyle="Italic" Text="" />
         <Grid HorizontalAlignment="Right" Height="140" Margin="0,50,50,0" VerticalAlignment="Top" Width="262">
@@ -30,11 +30,11 @@
                 </TransitionCollection>
             </Grid.ChildrenTransitions>
             <Grid HorizontalAlignment="Left" Width="253" Margin="0,0,0,60" d:LayoutOverrides="TopPosition, BottomPosition">
-                <TextBlock x:Name="ampm" TextWrapping="Wrap" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체L#서울남산 장체L" Text="{Binding ClockViewModel.AMPMS}" Foreground="White" FontSize="24" RenderTransformOrigin="0.5,0.5" Opacity="0.8" Margin="209,42,0,9" TextAlignment="Center" HorizontalAlignment="Left" Width="44" d:LayoutOverrides="TopMargin, BottomMargin, TopPosition, BottomPosition" />
-                <TextBlock x:Name="clockTime" HorizontalAlignment="Right" Margin="0,-10,46,0" TextWrapping="Wrap" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체B#서울남산 장체B" Text="{Binding ClockViewModel.Time}" VerticalAlignment="Top" Height="80" Width="176" Foreground="White" FontSize="69.333" RenderTransformOrigin="0.5,0.5" TextAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin" />
+                <TextBlock x:Name="clockTime" HorizontalAlignment="Right" Margin="0,-10,46,0" TextWrapping="Wrap" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체B.ttf#서울남산 장체B" Text="{Binding ClockViewModel.Time}" VerticalAlignment="Bottom" Height="70" Width="176" Foreground="White" FontSize="69.333" RenderTransformOrigin="0.5,0.5" TextAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin" />
+                <TextBlock x:Name="ampm" TextWrapping="Wrap" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체L.ttf#서울남산 장체L" Text="{Binding ClockViewModel.AMPMS}" Foreground="White" FontSize="24" RenderTransformOrigin="0.5,0.5" Opacity="0.8" Margin="209,42,0,10" TextAlignment="Center" HorizontalAlignment="Left" Width="44" d:LayoutOverrides="TopPosition, BottomPosition" VerticalAlignment="Bottom" />
             </Grid>
             <Grid HorizontalAlignment="Left" Height="31" VerticalAlignment="Bottom" Width="253" Margin="0,0,0,29">
-                <TextBlock x:Name="clockDate" TextWrapping="Wrap" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체M#서울남산 장체M" Text="{Binding ClockViewModel.Date}" Foreground="White" FontSize="24" RenderTransformOrigin="1,0" Opacity="0.8" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin, TopPosition, BottomPosition" TextAlignment="Right" HorizontalAlignment="Right" Width="243" />
+                <TextBlock x:Name="clockDate" TextWrapping="Wrap" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체M.ttf#서울남산 장체M" Text="{Binding ClockViewModel.Date}" Foreground="White" FontSize="24" RenderTransformOrigin="1,0" Opacity="0.8" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin, TopPosition, BottomPosition" TextAlignment="Right" HorizontalAlignment="Right" Width="243" />
             </Grid>
         </Grid>
         <Grid Height="639" Margin="50,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="341">
@@ -47,11 +47,17 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="0" Width="331" Height="76" Orientation="Horizontal">
-                            <TextBlock Text="{Binding FromHour}" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체M#서울남산 장체M" Width="106" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" />
-                            <TextBlock Text="{Binding SkyIcons}" FontFamily="ms-appx:///Assets/Fonts/artill_clean_icons.otf#artill clean weather icons" Width="42" FontSize="53.333" VerticalAlignment="Center" HorizontalAlignment="Right" Height="90" Margin="13,0,7,18" />
-                            <StackPanel VerticalAlignment="Bottom" Height="76" d:LayoutOverrides="TopPosition, BottomPosition" HorizontalAlignment="Right" Width="126">
-                                <TextBlock Text="{Binding Temperatures}" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체B#서울남산 장체B" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Margin="0,10,0,0" />
-                                <TextBlock Text="{Binding Humiditys}" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체L#서울남산 장체L" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="18.667" Height="25" Margin="0,14,0,0" />
+                            <TextBlock Text="{Binding FromHour}" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체M.ttf#서울남산 장체M" Width="106" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" TextAlignment="Right" Foreground="White" FontStyle="Italic" />
+                            <TextBlock Text="{Binding SkyIcons}" FontFamily="ms-appx:///Assets/Fonts/pe-icon-set-weather.ttf#pe-icon-set-weather" Width="48" FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="13,15,7,0" Height="70" TextAlignment="Center" Foreground="White" />
+                            <StackPanel VerticalAlignment="Center" Height="56" HorizontalAlignment="Right" Width="126" Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal" Width="126" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,5,0,0">
+                                    <TextBlock Text="&#xe9a9;" FontFamily="ms-appx:///Assets/Fonts/pe-icon-set-weather.ttf#pe-icon-set-weather" HorizontalAlignment="Center" VerticalAlignment="Center" Width="13" TextAlignment="Center" FontSize="18.667"/>
+                                    <TextBlock Text="{Binding Temperatures}" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체M.ttf#서울남산 장체M" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="21.333" Margin="3,0,0,0" Height="25" Foreground="White" Width="107" />
+                                </StackPanel>
+                                <StackPanel Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal" Width="126" Margin="0">
+                                    <TextBlock Text="&#xe91b;" FontFamily="ms-appx:///Assets/Fonts/pe-icon-set-weather.ttf#pe-icon-set-weather" HorizontalAlignment="Center" VerticalAlignment="Center" Width="13" TextAlignment="Center"/>
+                                    <TextBlock Text="{Binding Humiditys}" FontFamily="ms-appx:///Assets/Fonts/서울남산_장체L.ttf#서울남산 장체L" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="18.667" Margin="3,0,0,0" />
+                                </StackPanel>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

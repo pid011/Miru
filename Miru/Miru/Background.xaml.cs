@@ -38,7 +38,7 @@ namespace Miru
         private void Timer_Tick(object sender, object e)
         {
             var currentDistance = Senser.Distance.GetDistance();
-            if (currentDistance < 90)
+            if (currentDistance < 60)
             {
                 timer.Stop();
                 this.Frame.Navigate(typeof(View));

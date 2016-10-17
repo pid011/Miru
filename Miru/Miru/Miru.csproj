@@ -96,12 +96,12 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <PRIResource Include="Resources.resw" />
-    <Content Include="Assets\Fonts\artill_clean_icons.otf" />
     <Content Include="Assets\Fonts\서울남산_장체B.ttf" />
     <Content Include="Assets\Fonts\서울남산_장체BL.ttf" />
     <Content Include="Assets\Fonts\서울남산_장체EB.ttf" />
     <Content Include="Assets\Fonts\서울남산_장체L.ttf" />
     <Content Include="Assets\Fonts\서울남산_장체M.ttf" />
+    <Content Include="Assets\Fonts\pe-icon-set-weather.ttf" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
