@@ -62,7 +62,7 @@ namespace Miru.Factory
                 {
                     list.Add(new WeatherViewModel.WeatherItem()
                     {
-                        Temperatures = 
+                        Temperatures =
                             $"{CommonUtil.ConvertString(WeatherUtil.ConvertInt32(temperatures[i]))}{ResourcesString.GetString("temp")}",
                         Humiditys = $"{CommonUtil.ConvertString(WeatherUtil.ConvertInt32(humiditys[i]))}%",
                         SkyIcons = icons[i]
@@ -89,17 +89,20 @@ namespace Miru.Factory
                         case 0:
                             list[i].FromHour = $"{ResourcesString.GetString("today")} {list[i].FromHour}";
                             break;
+
                         case 1:
                             list[i].FromHour = $"{ResourcesString.GetString("tomorrow")} {list[i].FromHour}";
                             break;
+
                         case 2:
                             list[i].FromHour = $"{ResourcesString.GetString("the_day_after_tomorrow")} {list[i].FromHour}";
                             break;
+
                         default:
                             break;
                     }
-                    #endregion
 
+                    #endregion 날짜표현
                 }
                 return list;
             }
@@ -108,6 +111,7 @@ namespace Miru.Factory
         private List<double> temperatures;
         private List<double> humiditys;
         private List<WeatherUtil.SkyCode> skyStates;
+        private bool isLoadSuccessed = true;
 
         /// <summary>
         /// 날씨정보를 가져오기 위한 몇가지 정보를 지정하고
@@ -160,7 +164,15 @@ namespace Miru.Factory
             }
             catch (ArgumentNullException)
             {
-                throw;
+                cwJson = null;
+                fwJson = null;
+                isLoadSuccessed = false;
+            }
+            catch (HttpRequestException)
+            {
+                cwJson = null;
+                fwJson = null;
+                isLoadSuccessed = false;
             }
 
             return new Dictionary<int, string>()
@@ -176,27 +188,39 @@ namespace Miru.Factory
             humiditys = new List<double>();
             skyStates = new List<WeatherUtil.SkyCode>();
 
-            try
+            if (isLoadSuccessed)
             {
-                JObject cwObj = JObject.Parse(currentWeatherJson);
-                cwObj = (JObject) cwObj["weather"]["minutely"][0];
-                temperatures.Add(Convert.ToDouble((string) cwObj["temperature"]["tc"]));
-                humiditys.Add(Convert.ToDouble((string) cwObj["humidity"]));
-                string skycode = (string) cwObj["sky"]["code"];
-                skyStates.Add(WeatherUtil.ConvertSky(skycode));
-
-                JObject fwObj = JObject.Parse(forecastWeatherJson);
-                fwObj = (JObject) fwObj["weather"]["forecast3days"][0]["fcst3hour"];
-                for (int i = 4; i < 25; i += 3)
+                try
                 {
-                    temperatures.Add(Convert.ToDouble((string) fwObj["temperature"][$"temp{i}hour"]));
-                    humiditys.Add(Convert.ToDouble((string) fwObj["humidity"][$"rh{i}hour"]));
-                    skyStates.Add(WeatherUtil.ConvertSky((string) fwObj["sky"][$"code{i}hour"]));
+                    JObject cwObj = JObject.Parse(currentWeatherJson);
+                    cwObj = (JObject) cwObj["weather"]["minutely"][0];
+                    temperatures.Add(Convert.ToDouble((string) cwObj["temperature"]["tc"]));
+                    humiditys.Add(Convert.ToDouble((string) cwObj["humidity"]));
+                    string skycode = (string) cwObj["sky"]["code"];
+                    skyStates.Add(WeatherUtil.ConvertSky(skycode));
+
+                    JObject fwObj = JObject.Parse(forecastWeatherJson);
+                    fwObj = (JObject) fwObj["weather"]["forecast3days"][0]["fcst3hour"];
+                    for (int i = 4; i < 25; i += 3)
+                    {
+                        temperatures.Add(Convert.ToDouble((string) fwObj["temperature"][$"temp{i}hour"]));
+                        humiditys.Add(Convert.ToDouble((string) fwObj["humidity"][$"rh{i}hour"]));
+                        skyStates.Add(WeatherUtil.ConvertSky((string) fwObj["sky"][$"code{i}hour"]));
+                    }
+                }
+                catch (FormatException)
+                {
+                    throw new FormatException(ResourcesString.GetString("format_exception"));
                 }
             }
-            catch (FormatException)
+            else
             {
-                throw new FormatException(ResourcesString.GetString("format_exception"));
+                for (int i = 0; i < 15; i++)
+                {
+                    temperatures.Add(0);
+                    humiditys.Add(0);
+                    skyStates.Add(WeatherUtil.SkyCode.NoReported);
+                }
             }
         }
     }

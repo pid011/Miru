@@ -41,6 +41,7 @@ namespace Miru.Factory
             ["n-13"] = "\ue996",
             ["s-14"] = "\ue97a",
             ["n-14"] = "\ue97a",
+            ["NR"] = "X"
         };
 
         #endregion icon table
@@ -112,6 +113,10 @@ namespace Miru.Factory
 
                 case WeatherUtil.SkyCode.ThunderstormAndRainAndSnow:
                     icon = !isNight(hour) ? iconTable["s-14"] : iconTable["n-14"];
+                    break;
+
+                case WeatherUtil.SkyCode.NoReported:
+                    icon = iconTable["NS"];
                     break;
             }
 
