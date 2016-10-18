@@ -124,7 +124,7 @@
     <value>"오늘은 무엇을 하실 건가요?"</value>
   </data>
   <data name="helloMiru_default" xml:space="preserve">
-    <value>"안녕하세요!"</value>
+    <value>"안녕하세요! :D"</value>
   </data>
   <data name="helloMiru_evening" xml:space="preserve">
     <value>"오늘도 하루가 다 갔네요."</value>

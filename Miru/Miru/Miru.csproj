@@ -113,6 +113,7 @@
     </Compile>
     <Compile Include="Factory\Supporter.cs" />
     <Compile Include="Util\CommonUtil.cs" />
+    <Compile Include="Util\SupporterUtil.cs" />
     <Compile Include="Util\WeatherConfig.cs" />
     <Compile Include="ViewModel\BindableBase.cs" />
     <Compile Include="Util\ResourcesString.cs" />

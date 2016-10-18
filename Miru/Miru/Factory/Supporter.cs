@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Miru.Util;
 using static Miru.ViewModel.WeatherViewModel;
 
 namespace Miru.Factory
@@ -21,7 +22,7 @@ namespace Miru.Factory
         public string GetAnswer()
         {
             // TODO: 시간, 날씨 분석해서 대답 리턴하기
-            string answer = "안녕하세요!  :)";
+            string answer = ResourcesString.GetString("helloMiru_default");
 
 
 
