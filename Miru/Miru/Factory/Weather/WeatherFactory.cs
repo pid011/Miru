@@ -65,7 +65,8 @@ namespace Miru.Factory
                         Temperatures =
                             $"{CommonUtil.ConvertString(WeatherUtil.ConvertInt32(temperatures[i]))}{ResourcesString.GetString("temp")}",
                         Humiditys = $"{CommonUtil.ConvertString(WeatherUtil.ConvertInt32(humiditys[i]))}%",
-                        SkyIcons = icons[i]
+                        SkyIcons = icons[i],
+                        SkyCode = skyStates[i]
                     });
                 }
 

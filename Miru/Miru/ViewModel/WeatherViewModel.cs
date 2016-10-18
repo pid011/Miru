@@ -19,12 +19,6 @@ namespace Miru.ViewModel
         private ObservableCollection<WeatherItem> weathers = new ObservableCollection<WeatherItem>();
         public ObservableCollection<WeatherItem> Weathers => this.weathers;
 
-        public List<WeatherItem> WeathersList => new List<WeatherItem>(weathers);
-
-        private const string configFilename = "weather_config.json";
-        private static StorageFolder folder = ApplicationData.Current.LocalFolder;
-
-
         private int version;
         private double lat;
         private double lon;
@@ -66,10 +60,26 @@ namespace Miru.ViewModel
 
         public class WeatherItem
         {
+            /// <summary>
+            /// 온도
+            /// </summary>
             public string Temperatures { get; set; }
+            /// <summary>
+            /// 습도
+            /// </summary>
             public string Humiditys { get; set; }
+            /// <summary>
+            /// 하늘상태 아이콘
+            /// </summary>
             public string SkyIcons { get; set; }
+            /// <summary>
+            /// 날씨정보 제공 시간
+            /// </summary>
             public string FromHour { get; set; }
+            /// <summary>
+            /// 하늘상태
+            /// </summary>
+            public WeatherUtil.SkyCode SkyCode { get; set; }
         }
     }
 }

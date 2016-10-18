@@ -10,22 +10,30 @@ namespace Miru.Factory
 {
     public class Supporter
     {
-        private Dictionary<string, string> timeDic;
-        private List<WeatherItem> weathersList;
-
-        public Supporter(Dictionary<string, string> timeDic, List<WeatherItem> weathersList)
-        {
-            this.timeDic = timeDic;
-            this.weathersList = weathersList;
-        }
-
         public string GetAnswer()
         {
-            // TODO: 시간, 날씨 분석해서 대답 리턴하기
-            string answer = ResourcesString.GetString("helloMiru_default");
+            string answer = string.Empty;
 
+            int hour = DateTime.Now.Hour;
 
+            if (hour > 5 && hour < 11)
+            {
+                answer = ResourcesString.GetString("helloMiru_moring");
+            }
+            else if (hour > 10 && hour < 19)
+            {
+                answer = ResourcesString.GetString("helloMiru_afternoon");
+            }
+            else if (hour > 18 && hour < 24)
+            {
+                answer = ResourcesString.GetString("helloMiru_evening");
+            }
+            else if (hour < 6)
+            {
+                answer = ResourcesString.GetString("helloMiru_night");
+            }
 
+            answer = $"「{answer}」";
             return answer;
         }
     }

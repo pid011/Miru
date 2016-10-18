@@ -18,7 +18,7 @@ namespace Miru.ViewModel
         {
             ClockViewModel = new ClockViewModel();
             WeatherViewModel = new WeatherViewModel();
-            SupporterViewModel = new SupporterViewModel(ClockViewModel.TimeDic, WeatherViewModel.WeathersList);
+            SupporterViewModel = new SupporterViewModel();
         }
 
         public void Dispose()

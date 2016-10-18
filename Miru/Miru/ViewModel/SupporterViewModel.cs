@@ -26,9 +26,9 @@ namespace Miru.ViewModel
             }
         }
 
-        public SupporterViewModel(Dictionary<string, string> timeDic, List<WeatherItem> weathersList)
+        public SupporterViewModel()
         {
-            this.supporter = new Supporter(timeDic, weathersList);
+            this.supporter = new Supporter();
 
             this.Answer = this.supporter.GetAnswer();
         }
