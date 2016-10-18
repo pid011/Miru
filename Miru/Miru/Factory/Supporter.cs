@@ -21,7 +21,8 @@ namespace Miru.Factory
         public string GetAnswer()
         {
             // TODO: 시간, 날씨 분석해서 대답 리턴하기
-            string answer = string.Empty;
+            string answer = "안녕하세요!  :)";
+
 
 
             return answer;
