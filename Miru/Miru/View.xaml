@@ -20,15 +20,13 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Grid Height="412" Margin="80,760,80,260" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock x:Name="text_supporter" Text="{Binding SupporterViewModel.Answer}" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="White" FontSize="48" Width="800" TextAlignment="Center" d:LayoutOverrides="TopPosition, BottomPosition" FontFamily="Assets/Fonts/서울남산_장체M.ttf#서울남산 장체M" />
-        </Grid>
-        <TextBlock x:Name="supporter" HorizontalAlignment="Center" Margin="0,0,0,50" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="40" Width="800" FontSize="30" TextAlignment="Center" FontStyle="Italic" Text="">
-            <TextBlock.Transitions>
+            <Grid.ChildrenTransitions>
                 <TransitionCollection>
                     <EntranceThemeTransition/>
                 </TransitionCollection>
-            </TextBlock.Transitions>
-        </TextBlock>
+            </Grid.ChildrenTransitions>
+            <TextBlock x:Name="text_supporter" Text="{Binding SupporterViewModel.Answer}" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="White" FontSize="48" Width="800" TextAlignment="Center" d:LayoutOverrides="TopPosition, BottomPosition" FontFamily="Assets/Fonts/서울남산_장체M.ttf#서울남산 장체M" />
+        </Grid>
         <Grid HorizontalAlignment="Right" Height="140" Margin="0,50,50,0" VerticalAlignment="Top" Width="262">
             <Grid.ChildrenTransitions>
                 <TransitionCollection>
