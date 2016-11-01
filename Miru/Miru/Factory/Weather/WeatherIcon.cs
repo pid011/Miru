@@ -41,7 +41,7 @@ namespace Miru.Factory
             ["n-13"] = "\ue996",
             ["s-14"] = "\ue97a",
             ["n-14"] = "\ue97a",
-            ["NR"] = "X"
+            ["NS"] = "X"
         };
 
         #endregion icon table

@@ -10,41 +10,6 @@ namespace Miru.Factory
 {
     public class WeatherFactory
     {
-        /*
-        public class WeatherItem
-        {
-            /// <summary>
-            /// 온도를 3시간 단위로 제공합니다.
-            /// 첫번째 요소는 현재 온도입니다.
-            /// </summary>
-            public List<string> Temperatures { get; }
-
-            /// <summary>
-            /// 습도를 3시간 단위로 제공합니다.
-            /// 첫번째 요소는 현재 습도입니다.
-            /// </summary>
-            public List<string> Humiditys { get; }
-
-            /// <summary>
-            /// 하늘상태에 맞는 날씨 아이콘을 3시간 단위로 제공합니다.
-            /// 첫번째 요소는 현재 하늘상태 아이콘입니다.
-            /// </summary>
-            public List<string> SkyIcons { get; }
-            public int Count => Temperatures.Count;
-
-            public WeatherItem(List<double> temp, List<double> hum, List<WeatherUtil.SkyCode> skyStates)
-            {
-                this.Temperatures = new List<string>();
-                temp.ForEach(x => Temperatures.Add(CommonUtil.ConvertString(WeatherUtil.ConvertInt32(x))));
-
-                this.Humiditys = new List<string>();
-                hum.ForEach(x => Humiditys.Add(CommonUtil.ConvertString(WeatherUtil.ConvertInt32(x))));
-
-                this.SkyIcons = new List<string>();
-                WeatherUtil.ConvertIcon(skyStates).ForEach(x => SkyIcons.Add(x.ToString()));
-            }
-        }
-        */
         private int version;
         private double lat;
         private double lon;
