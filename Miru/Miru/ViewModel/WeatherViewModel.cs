@@ -47,10 +47,10 @@ namespace Miru.ViewModel
 
         private void GetSettingItem()
         {
-            this.version = WeatherConfig.version;
-            this.lat = WeatherConfig.lat;
-            this.lon = WeatherConfig.lon;
-            this.appKey = WeatherConfig.appKey;
+            this.version = Config.Weather.version;
+            this.lat = Config.Weather.lat;
+            this.lon = Config.Weather.lon;
+            this.appKey = Config.Weather.appKey;
         }
 
         public void Dispose()

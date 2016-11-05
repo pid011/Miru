@@ -1,4 +1,5 @@
 ﻿using System;
+using Miru.Util;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -38,7 +39,7 @@ namespace Miru
         private void Timer_Tick(object sender, object e)
         {
             var currentDistance = Senser.Distance.GetDistance();
-            if (currentDistance < 60)
+            if (currentDistance < Config.Senser.distance)
             {
                 timer.Stop();
                 this.Frame.Navigate(typeof(View));
