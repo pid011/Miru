@@ -50,32 +50,38 @@ namespace Miru
         /// 현재 거리를 측정하여 소수점을 자른 정수형으로 반환합니다.
         /// </summary>
         /// <returns>현재 거리</returns>
-        public double GetDistance()
+        public async Task<double> GetDistance()
         {
-            ManualResetEvent mre = new ManualResetEvent(false);
-
-            Stopwatch stopwatch = new Stopwatch();
-
-            this.triggerPin.Write(GpioPinValue.High);
-            mre.WaitOne(TimeSpan.FromMilliseconds(0.01));
-            this.triggerPin.Write(GpioPinValue.Low);
-
-            while (this.echoPin.Read() == GpioPinValue.Low)
+            var workerTask = Task<double>.Run(() =>
             {
-            }
-            stopwatch.Start();
+                ManualResetEvent mre = new ManualResetEvent(false);
 
-            while (this.echoPin.Read() == GpioPinValue.High)
-            {
-            }
-            stopwatch.Stop();
+                Stopwatch stopwatch = new Stopwatch();
 
-            TimeSpan timeBetween = stopwatch.Elapsed;
+                this.triggerPin.Write(GpioPinValue.High);
+                mre.WaitOne(TimeSpan.FromMilliseconds(0.01));
+                this.triggerPin.Write(GpioPinValue.Low);
 
-            double distance = timeBetween.TotalSeconds * 17000;
-            Debug.WriteLine($"{DateTime.Now.ToString()}  Distance: {distance}");
+                while (this.echoPin.Read() == GpioPinValue.Low)
+                {
+                }
+                stopwatch.Start();
 
-            return Math.Round(distance);
+                while (this.echoPin.Read() == GpioPinValue.High)
+                {
+                }
+                stopwatch.Stop();
+
+                TimeSpan timeBetween = stopwatch.Elapsed;
+
+                double distance = timeBetween.TotalSeconds * 17000;
+
+                return Math.Round(distance);
+            });
+            var result = await workerTask;
+
+            Debug.WriteLine($"[{DateTime.Now.ToString()}]  Distance: {result}");
+            return result;
         }
 
     }

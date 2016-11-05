@@ -36,9 +36,9 @@ namespace Miru
             }
         }
 
-        private void Timer_Tick(object sender, object e)
+        private async void Timer_Tick(object sender, object e)
         {
-            var currentDistance = Senser.Distance.GetDistance();
+            var currentDistance = await Senser.Distance.GetDistance();
             if (currentDistance < Config.Senser.distance)
             {
                 timer.Stop();
