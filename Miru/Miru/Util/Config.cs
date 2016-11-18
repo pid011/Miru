@@ -15,7 +15,7 @@ namespace Miru.Util
         public class Weather
         {
             // weather api data
-
+            
             public static readonly int version = 1;
 
             //대한민국 경기도 여주시 홍문동
@@ -25,7 +25,10 @@ namespace Miru.Util
             /// <summary>
             /// Miru의 appKey
             /// </summary>
+            ///////////////////////////////////////////////////////////////////////////////////////
+            // DO NOT USE THIS APPKEY. THIS KEY IS PERSONAL KEY.
             public static readonly string appKey = "5424eae1-8e98-3d89-82e5-e9a1c589a7ba";
+            ///////////////////////////////////////////////////////////////////////////////////////
         }
 
         /// <summary>
