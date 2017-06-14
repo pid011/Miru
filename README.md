@@ -1,8 +1,6 @@
 # Miru
-미루 - 거울속 스크린.
+미루 - 거울속 스크린.  
 
-
-## Detail
-사용 디바이스: Raspberry pi 3  
-사용 OS: Windows 10 iot core  
-사용 폰트: 서울 남산체(장체)
+현재 v2.0 개발중.  
+v1.0 ☞ [Link](https://github.com/pid011/Miru/releases/tag/v1.0)
+v1.0 작동 영상 ☞ 준비중...
