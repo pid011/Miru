@@ -36,6 +36,7 @@ namespace Miru.ViewModel
         public TimeViewModel()
         {
             factory = new TimeViewFactory();
+            SetTime();
 
             timer = new DispatcherTimer();
             timer.Tick += Timer_Tick;
@@ -44,6 +45,11 @@ namespace Miru.ViewModel
         }
 
         private void Timer_Tick(object sender, object e)
+        {
+            SetTime();
+        }
+
+        private void SetTime()
         {
             var dateTime = factory.GetCurrentTime();
 
