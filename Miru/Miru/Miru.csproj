@@ -96,7 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Factory\TimeViewFactory.cs" />
+    <Compile Include="Factory\Time\TimeViewFactory.cs" />
     <Compile Include="Pages\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
     </Compile>
@@ -161,6 +161,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Factory\Weather\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

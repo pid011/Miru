@@ -3,7 +3,7 @@ using Miru.Utils;
 using Windows.Globalization.DateTimeFormatting;
 using Windows.ApplicationModel.Resources;
 
-namespace Miru.Factory
+namespace Miru.Factory.Time
 {
     public class TimeViewFactory
     {

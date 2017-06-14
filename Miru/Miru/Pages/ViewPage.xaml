@@ -10,18 +10,19 @@
         <viewmodel:ViewPageModel/>
     </Page.DataContext>
     <Grid x:Name="MainGrid" Background="Black">
-        <Grid x:Name="TimeViewGrid" Margin="0,65,45,0" Height="113" VerticalAlignment="Top" HorizontalAlignment="Right" Width="292" d:LayoutOverrides="HorizontalAlignment">
+        <Grid x:Name="TimeViewGrid" Margin="0,65,45,0" Height="110" VerticalAlignment="Top" HorizontalAlignment="Right" Width="281" d:LayoutOverrides="HorizontalAlignment">
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Stroke="Black" Width="5" d:LayoutOverrides="TopPosition, BottomPosition"/>
             <Grid x:Name="TimeGrid"  RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" HorizontalAlignment="Right" Width="269" Margin="-15,0,0,0">
                 <Grid.ChildrenTransitions>
                     <TransitionCollection>
                         <EdgeUIThemeTransition Edge="Right"/>
                     </TransitionCollection>
                 </Grid.ChildrenTransitions>
-                <TextBlock x:Name="Time" TextWrapping="Wrap" Text="{Binding TimeViewModel.Time}" FontSize="60" FontFamily="ms-appx:///Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" VerticalAlignment="Top" Margin="0,0,124,0" HorizontalAlignment="Right"/>
-                <TextBlock x:Name="AMPM" TextWrapping="Wrap" Text="{Binding TimeViewModel.AMPM}" FontSize="60" Margin="0" VerticalAlignment="Top" FontFamily="ms-appx:///Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="Time" TextWrapping="Wrap" Text="{Binding TimeViewModel.Time}" FontSize="60" FontFamily="ms-appx:///Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" VerticalAlignment="Top" Margin="0,0,124,0" HorizontalAlignment="Right" Width="145" d:LayoutOverrides="LeftMargin, RightMargin"/>
+                <TextBlock x:Name="AMPM" TextWrapping="Wrap" Text="{Binding TimeViewModel.AMPM}" FontSize="60" Margin="0" VerticalAlignment="Top" FontFamily="ms-appx:///Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" HorizontalAlignment="Right" TextAlignment="Right"/>
             </Grid>
-            <Grid x:Name="DateGrid" Margin="0,75,0,0" d:LayoutOverrides="LeftMargin, RightMargin" HorizontalAlignment="Right" Width="254" Height="33" VerticalAlignment="Top">
-                <TextBlock x:Name="Date" Margin="0" TextWrapping="Wrap" Text="{Binding TimeViewModel.Date}" d:LayoutOverrides="LeftPosition, RightPosition" FontSize="28" VerticalAlignment="Top" HorizontalAlignment="Right" FontFamily="ms-appx:/Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin"/>
+            <Grid x:Name="DateGrid" Margin="0,75,0,0" d:LayoutOverrides="LeftMargin, RightMargin" HorizontalAlignment="Right" Width="269" Height="33" VerticalAlignment="Top">
+                <TextBlock x:Name="Date" Margin="0,-1,125,0" TextWrapping="Wrap" Text="{Binding TimeViewModel.Date}" FontSize="28" HorizontalAlignment="Right" FontFamily="ms-appx:/Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" Width="144" d:LayoutOverrides="Height, LeftMargin, RightMargin, TopPosition, BottomPosition"/>
             </Grid>
         </Grid>
 

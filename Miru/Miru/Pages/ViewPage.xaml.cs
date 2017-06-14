@@ -24,7 +24,7 @@ namespace Miru.Pages
     {
         public ViewPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }
