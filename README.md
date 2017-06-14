@@ -5,5 +5,5 @@
 
 
 v1.0 ☞ [Link](https://github.com/pid011/Miru/releases/tag/v1.0)  
-v1.0 source code ☞ [Link](https://github.com/pid011/Miru/releases/tag/v1.0)  
+v1.0 source code ☞ [Link](https://github.com/pid011/Miru/tree/v1.0)  
 v1.0 작동 영상 ☞ 준비중...
