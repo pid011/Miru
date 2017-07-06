@@ -1,7 +1,6 @@
 ﻿using System;
-using Miru.Utils;
-using Windows.Globalization.DateTimeFormatting;
 using Windows.ApplicationModel.Resources;
+using Windows.Globalization.DateTimeFormatting;
 
 namespace Miru.Factory.Time
 {
@@ -16,7 +15,7 @@ namespace Miru.Factory.Time
         }
 
         public enum AMPMS
-        { 
+        {
             AM,
             PM
         }

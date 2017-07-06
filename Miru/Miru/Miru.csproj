@@ -97,6 +97,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Factory\Time\TimeViewFactory.cs" />
+    <Compile Include="Factory\Weather\Sky.cs" />
+    <Compile Include="Factory\Weather\WeatherIcon.cs" />
     <Compile Include="Pages\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
     </Compile>
@@ -111,6 +113,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="Assets\Fonts\NotoSansCJKkr-Thin.otf" />
+    <Content Include="Assets\Fonts\pe-icon-set-weather.ttf" />
     <None Include="Miru_TemporaryKey.pfx" />
     <PRIResource Include="Strings\Resources.resw" />
   </ItemGroup>
@@ -162,9 +165,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Factory\Weather\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
