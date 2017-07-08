@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Factory\Time\TimeViewFactory.cs" />
     <Compile Include="Factory\Weather\Sky.cs" />
+    <Compile Include="Factory\Weather\WeatherConverter.cs" />
     <Compile Include="Factory\Weather\WeatherIcon.cs" />
     <Compile Include="Pages\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
