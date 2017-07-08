@@ -11,84 +11,139 @@ namespace Miru.Factory.Weather
         /// <summary>
         /// 문자열을 <see cref="SkyCode"/>형태로 변환합니다.
         /// </summary>
-        /// <param name="position"></param>
+        /// <param name="code"></param>
         /// <returns></returns>
-        public static SkyCode ConvertSky(string position)
+        public static SkyCode ConvertSky(int skyCode, int pTypeCode)
         {
-            SkyCode result = SkyCode.NoReported;
-            switch (position)
+            SkyCode resultCode = SkyCode.NoReported;
+
+            switch (skyCode)
             {
-                case "SKY_A01":
-                case "SKY_S01":
-                    result = SkyCode.Sunny;
+                // 맑음
+                case 1:
+                    {
+                        resultCode = SkyCode.Sunny;
+                    }
                     break;
 
-                case "SKY_A02":
-                case "SKY_S02":
-                    result = SkyCode.PartlyCloudy;
+               // 구름 조금
+                case 2:
+                    {
+                        resultCode = SkyCode.PartlyCloudy;
+                    }
                     break;
 
-                case "SKY_A03":
-                case "SKY_S03":
-                    result = SkyCode.MostlyCloudy;
+                // 구름 많음
+                case 3:
+                    {
+                        switch (pTypeCode)
+                        {
+                            // 비 / 눈 X
+                            case 0:
+                                resultCode = SkyCode.MostlyCloudy;
+                                break;
+                            
+                            // 비
+                            case 1:
+                                resultCode = SkyCode.MostlyCloudyAndRain;
+                                break;
+
+                            // 비/눈 (진눈깨비)
+                            case 2:
+                                resultCode = SkyCode.MostlyCloudyAndRainAndSnow;
+                                break;
+
+                            // 눈
+                            case 3:
+                                resultCode = SkyCode.MostlyCloudyAndSnow;
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
                     break;
 
-                case "SKY_A04":
-                case "SKY_S04":
-                    result = SkyCode.MostlyCloudyAndRain;
+                // 흐림
+                case 4:
+                    {
+                        switch (pTypeCode)
+                        {
+                            case 0:
+                                resultCode = SkyCode.Fog;
+                                break;
+
+                            case 1:
+                                resultCode = SkyCode.FogAndRain;
+                                break;
+
+                            case 2:
+                                resultCode = SkyCode.FogAndRainAndSnow;
+                                break;
+
+                            case 3:
+                                resultCode = SkyCode.FogAndSnow;
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
                     break;
 
-                case "SKY_A05":
-                case "SKY_S05":
-                    result = SkyCode.MostlyCloudyAndSnow;
-                    break;
-
-                case "SKY_A06":
-                case "SKY_S06":
-                    result = SkyCode.MostlyCloudyAndRainAndSnow;
-                    break;
-
-                case "SKY_A07":
-                case "SKY_S07":
-                    result = SkyCode.Fog;
-                    break;
-
-                case "SKY_A08":
-                case "SKY_S08":
-                    result = SkyCode.FogAndRain;
-                    break;
-
-                case "SKY_A09":
-                case "SKY_S09":
-                    result = SkyCode.FogAndSnow;
-                    break;
-
-                case "SKY_A10":
-                case "SKY_S10":
-                    result = SkyCode.FogAndRainAndSnow;
-                    break;
-
-                case "SKY_A11":
-                case "SKY_S11":
-                    result = SkyCode.FogAndThunderstroke;
-                    break;
-
-                case "SKY_A12":
-                case "SKY_S12":
-                    result = SkyCode.ThunderstormAndRain;
-                    break;
-
-                case "SKY_A13":
-                case "SKY_S13":
-                    result = SkyCode.ThunderstormAndSnow;
-                    break;
-
-                case "SKY_A14":
-                case "SKY_S14":
-                    result = SkyCode.ThunderstormAndRainAndSnow;
+                default:
                     break;
             }
-            return result;
+
+            return resultCode;
+        }
+        
+        /// <summary>
+        /// <see cref="SkyCode"/>를 <see cref="string"/>형태로 변환합니다.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static string ConvertSkyCodeToString(SkyCode target)
+        {
+            string converted = "idk";
+
+            switch (target)
+            {
+                case SkyCode.Sunny:
+                    converted = "맑음";
+                    break;
+                case SkyCode.PartlyCloudy:
+                    converted = "구름 조금";
+                    break;
+                case SkyCode.MostlyCloudy:
+                    converted = "구름 많음";
+                    break;
+                case SkyCode.MostlyCloudyAndRain:
+                    converted = "구름 많고 비";
+                    break;
+                case SkyCode.MostlyCloudyAndSnow:
+                    converted = "구름 많고 눈";
+                    break;
+                case SkyCode.MostlyCloudyAndRainAndSnow:
+                    converted = "구름 많고 비와 눈";
+                    break;
+                case SkyCode.Fog:
+                    converted = "흐림";
+                    break;
+                case SkyCode.FogAndRain:
+                    converted = "흐리고 비";
+                    break;
+                case SkyCode.FogAndSnow:
+                    converted = "흐리고 눈";
+                    break;
+                case SkyCode.FogAndRainAndSnow:
+                    converted = "흐리고 비와 눈";
+                    break;
+                default:
+                    break;
+            }
+
+            return converted;
         }
 
         /// <summary>
@@ -145,26 +200,6 @@ namespace Miru.Factory.Weather
             /// 흐리고 비 또는 눈
             /// </summary>
             FogAndRainAndSnow,
-
-            /// <summary>
-            /// 흐리고 낙뢰
-            /// </summary>
-            FogAndThunderstroke,
-
-            /// <summary>
-            /// 뇌우, 비
-            /// </summary>
-            ThunderstormAndRain,
-
-            /// <summary>
-            /// 뇌우, 눈
-            /// </summary>
-            ThunderstormAndSnow,
-
-            /// <summary>
-            /// 뇌우, 비 또는 눈
-            /// </summary>
-            ThunderstormAndRainAndSnow,
 
             /// <summary>
             /// 알 수 없음
