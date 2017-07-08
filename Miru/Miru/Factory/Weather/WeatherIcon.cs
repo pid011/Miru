@@ -100,22 +100,5 @@ namespace Miru.Factory.Weather
 
             return icon;
         }
-
-        public static List<string> ConvertIcon(List<Sky.SkyCode> skyState)
-        {
-            List<string> icons = new List<string>();
-            int hour = DateTime.Now.Hour;
-            foreach (var item in skyState)
-            {
-                icons.Add(WeatherIcon.GetWeatherIcon(item, hour));
-
-                hour += 3;
-                if (hour > 24)
-                {
-                    hour -= 24;
-                }
-            }
-            return icons;
-        }
     }
 }
