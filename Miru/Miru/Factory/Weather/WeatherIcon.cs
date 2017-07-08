@@ -32,14 +32,6 @@ namespace Miru.Factory.Weather
             ["n-09"] = "\ue996",
             ["s-10"] = "\ue97a",
             ["n-10"] = "\ue97a",
-            ["s-11"] = "\ue982",
-            ["n-11"] = "\ue982",
-            ["s-12"] = "\ue9b5",
-            ["n-12"] = "\ue9be",
-            ["s-13"] = "\ue996",
-            ["n-13"] = "\ue996",
-            ["s-14"] = "\ue97a",
-            ["n-14"] = "\ue97a",
             ["NS"] = "X"
         };
 
@@ -99,22 +91,6 @@ namespace Miru.Factory.Weather
 
                 case Sky.SkyCode.FogAndRainAndSnow:
                     icon = !IsNight(hour) ? iconTable["s-10"] : iconTable["n-10"];
-                    break;
-
-                case Sky.SkyCode.FogAndThunderstroke:
-                    icon = !IsNight(hour) ? iconTable["s-11"] : iconTable["n-11"];
-                    break;
-
-                case Sky.SkyCode.ThunderstormAndRain:
-                    icon = !IsNight(hour) ? iconTable["s-12"] : iconTable["n-12"];
-                    break;
-
-                case Sky.SkyCode.ThunderstormAndSnow:
-                    icon = !IsNight(hour) ? iconTable["s-13"] : iconTable["n-13"];
-                    break;
-
-                case Sky.SkyCode.ThunderstormAndRainAndSnow:
-                    icon = !IsNight(hour) ? iconTable["s-14"] : iconTable["n-14"];
                     break;
 
                 case Sky.SkyCode.NoReported:
