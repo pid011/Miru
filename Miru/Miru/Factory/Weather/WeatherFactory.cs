@@ -39,7 +39,7 @@ namespace Miru.Factory.Weather
             return new WeatherItem();
         }
 
-        public string RequestData(string baseDate, string baseTime)
+        private string RequestData(string baseDate, string baseTime)
         {
             string uri = @"http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData";
 
