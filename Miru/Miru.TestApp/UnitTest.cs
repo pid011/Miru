@@ -1,7 +1,8 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Miru.Test
+namespace Miru.TestApp
 {
     [TestClass]
     public class UnitTest1
