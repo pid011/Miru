@@ -35,18 +35,20 @@ namespace Miru.Factory.Weather
             var baseTime = WeatherConverter.ConvertBaseTime(DateTime.Now);
 
             var jsonData = RequestData(baseDate, baseTime);
+
+            return new WeatherItem();
         }
 
-        private string RequestData(string baseDate, string baseTime)
+        public string RequestData(string baseDate, string baseTime)
         {
             string uri = @"http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData";
 
             var dataParams = new StringBuilder();
-            dataParams.Append($@"?ServiceKey={UserValue.ApiKey}");
+            dataParams.Append($@"?ServiceKey={apiKey}");
             dataParams.Append($@"&base_date={baseDate}");
             dataParams.Append($@"&base_time={baseTime}");
-            dataParams.Append($@"&nx={UserValue.Nx}");
-            dataParams.Append($@"&ny={UserValue.Ny}");
+            dataParams.Append($@"&nx={Nx}");
+            dataParams.Append($@"&ny={Ny}");
             dataParams.Append($@"&_type=json");
             dataParams.Append($@"&numOfRows=62");
 
