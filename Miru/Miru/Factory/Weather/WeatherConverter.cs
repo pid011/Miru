@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Miru.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -148,5 +149,54 @@ namespace Miru.Factory.Weather
             return converted;
         }
 
+        public static string ConvertBaseTime(DateTime time)
+        {
+            int hour = time.Hour;
+            int min = time.Minute;
+            var baseList = new List<int>() { 2, 5, 8, 11, 14, 17, 20, 23 };
+            int baseResult = 0;
+
+            if (hour >= baseList[7] && hour < baseList[0])
+            {
+                baseResult = baseList[7];
+                if (hour == baseList[7])
+                {
+                    if (min < 11)
+                    {
+                        baseResult = baseList[6];
+                    }
+                }
+            }
+            else if (hour >= baseList[0] && hour < baseList[1])
+            {
+                baseResult = baseList[0];
+                if (hour == baseList[0])
+                {
+                    if (min < 11)
+                    {
+                        baseResult = baseList[7];
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 1; i < baseList.Count; i++)
+                {
+                    if (hour >= baseList[i] && hour < baseList[i + 1])
+                    {
+                        baseResult = baseList[i];
+                        if (hour == baseList[i])
+                        {
+                            if (min < 11)
+                            {
+                                baseResult = baseList[i - 1];
+                            }
+                        }
+                    }
+                }
+            }
+
+            return MiruConverter.ConvertNumber(baseResult) + "00";
+        }
     }
 }

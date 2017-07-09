@@ -37,7 +37,7 @@ namespace Miru.Factory.Time
 
                 var sdatefmt = new DateTimeFormatter("shortdate");
                 Date = sdatefmt.Format(time);
-                Time = $"{MiruUtil.ConvertString(TimeConverter.ConvertHour(time.Hour))}:{MiruUtil.ConvertString(time.Minute)}";
+                Time = $"{MiruConverter.ConvertNumber(MiruConverter.ConvertHour(time.Hour))}:{MiruConverter.ConvertNumber(time.Minute)}";
                 AMPM = TimeConverter.ConvertString(ampm);
             }
         }

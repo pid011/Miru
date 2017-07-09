@@ -63,10 +63,5 @@ namespace Miru.Factory.Time
             }
             return result;
         }
-
-        public static int ConvertHour(int hour)
-        {
-            return hour > 12 ? hour - 12 : hour == 0 ? 12 : hour;
-        }
     }
 }
