@@ -1,6 +1,7 @@
 ﻿
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Miru.Factory.Weather;
 
 namespace Miru.TestApp
 {
@@ -10,6 +11,7 @@ namespace Miru.TestApp
         [TestMethod]
         public void TestMethod1()
         {
+            var weather = new WeatherFactory()
         }
     }
 }
