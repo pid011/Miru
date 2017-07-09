@@ -4,7 +4,7 @@ using Windows.Globalization.DateTimeFormatting;
 
 namespace Miru.Factory.Time
 {
-    public class TimeViewFactory
+    public class TimeFactory
     {
         private ResourceLoader loader = new ResourceLoader();
 
@@ -90,7 +90,7 @@ namespace Miru.Factory.Time
 
             public TimeViewItem(DateTime time, AMPMS ampm)
             {
-                var factory = new TimeViewFactory();
+                var factory = new TimeFactory();
 
                 var sdatefmt = new DateTimeFormatter("shortdate");
                 Date = sdatefmt.Format(time);

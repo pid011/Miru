@@ -10,7 +10,7 @@ namespace Miru.ViewModel
 {
     public class TimeViewModel : BindableBase
     {
-        TimeViewFactory factory;
+        TimeFactory factory;
         private DispatcherTimer timer;
 
         private string date;
@@ -35,7 +35,7 @@ namespace Miru.ViewModel
 
         public TimeViewModel()
         {
-            factory = new TimeViewFactory();
+            factory = new TimeFactory();
             SetTime();
 
             timer = new DispatcherTimer();
