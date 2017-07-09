@@ -18,11 +18,11 @@ namespace Miru.Factory.Weather
 
         public WeatherFactory(double nx, double ny, string apiKey)
         {
-            SetNyNx(nx, ny);
+            SetNxNy(nx, ny);
             this.apiKey = apiKey;
         }
 
-        public void SetNyNx(double nx, double ny)
+        public void SetNxNy(double nx, double ny)
         {
             Ny = ny;
             Nx = nx;
