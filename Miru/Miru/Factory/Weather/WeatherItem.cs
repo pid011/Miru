@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Miru.Factory.Weather
 {
@@ -11,84 +7,83 @@ namespace Miru.Factory.Weather
     /// </summary>
     public class WeatherItem
     {
+        public DateTime BaseDateTime { get; set; }
+        public bool Success { get; set; }
+
         /// <summary>
         /// 강수확률
         /// </summary>
-        public class POP
-        {
-            public int Value { get; set; }
-            public const string Unit = "%";
-        }
+        public POP POPValue { get; set; } = new POP();
 
         /// <summary>
         /// 하늘 상태
         /// </summary>
+        public SkyStat SkyStatValue { get; set; } = new SkyStat();
+
+        /// <summary>
+        /// 6시간 강수량
+        /// </summary>
+        public R06 R06Value { get; set; } = new R06();
+
+        /// <summary>
+        /// 습도
+        /// </summary>
+        public REH REHValue { get; set; } = new REH();
+
+        /// <summary>
+        /// 6시간 신적설
+        /// </summary>
+        public S06 S06Value { get; set; } = new S06();
+
+        /// <summary>
+        /// 3시간 기온
+        /// </summary>
+        public T3H T3HValue { get; set; } = new T3H();
+
+        /// <summary>
+        /// 풍속
+        /// </summary>
+        public WSD WSDValue { get; set; } = new WSD();
+
+        public class POP
+        {
+            public int Value { get; set; }
+            public readonly string Unit = "%";
+        }
+
         public class SkyStat
         {
             public Sky.SkyCode Value { get; set; }
         }
 
-        /// <summary>
-        /// 6시간 강수량
-        /// </summary>
         public class R06
         {
             public double Value { get; set; }
-            public const string Unit = "mm";
+            public readonly string Unit = "mm";
         }
 
-        /// <summary>
-        /// 습도
-        /// </summary>
         public class REH
         {
             public int Value { get; set; }
-            public const string Unit = "%";
+            public readonly string Unit = "%";
         }
 
-        /// <summary>
-        /// 6시간 신적설
-        /// </summary>
         public class S06
         {
             public int Value { get; set; }
-            public const string Unit = "cm";
+            public readonly string Unit = "cm";
         }
 
-        /// <summary>
-        /// 3시간 기온
-        /// </summary>
         public class T3H
         {
             public double Value { get; set; }
-            public const string Unit = "℃";
+            public readonly string Unit = "℃";
         }
 
-        /// <summary>
-        /// 아침 최저기온
-        /// </summary>
-        public class TMN
-        {
-            public double Value { get; set; }
-            public const string Unit = "℃";
-        }
-
-        /// <summary>
-        /// 낮 최고기온
-        /// </summary>
-        public class TMX
-        {
-            public double Value { get; set; }
-            public const string Unit = "℃";
-        }
-
-        /// <summary>
-        /// 풍속
-        /// </summary>
         public class WSD
         {
             public double Value { get; set; }
-            public const string Unit = "㎧";
+            public readonly string Unit = "㎧";
         }
     }
 }

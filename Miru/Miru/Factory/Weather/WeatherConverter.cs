@@ -149,14 +149,14 @@ namespace Miru.Factory.Weather
             return converted;
         }
 
-        public static string ConvertBaseTime(DateTime time)
+        public static Dictionary<string, string> ConvertBaseDateTime(DateTime time)
         {
             int hour = time.Hour;
             int min = time.Minute;
             var baseList = new List<int>() { 2, 5, 8, 11, 14, 17, 20, 23 };
             int baseResult = 0;
 
-            if (hour >= baseList[7] && hour < baseList[0])
+            if (hour == baseList[7] || hour < baseList[0])
             {
                 baseResult = baseList[7];
                 if (hour == baseList[7])
@@ -195,8 +195,35 @@ namespace Miru.Factory.Weather
                     }
                 }
             }
+            // BUG: 하루를 빼야 하는데 안빼짐
+            if (hour < baseList[0])
+            {
+                time.Date.Subtract(new DateTime(0, 0, 1));
+            }
+            var baseDate = $"{time.Year}{MiruConverter.ConvertNumber(time.Month)}{MiruConverter.ConvertNumber(time.Day)}";
+            var baseTime = MiruConverter.ConvertNumber(baseResult) + "00";
 
-            return MiruConverter.ConvertNumber(baseResult) + "00";
+            return new Dictionary<string, string>
+            {
+                ["baseDate"] = baseDate,
+                ["baseTime"] = baseTime
+            };
+        }
+
+        public static DateTime ConvertDateTime(string date, string time)
+        {
+            var year = date[0].ToString() + date[1].ToString() + date[2].ToString() + date[3].ToString();
+            var month = date[4].ToString() + date[5].ToString();
+            var day = date[6].ToString() + date[7].ToString();
+            var hour = time[0].ToString() + time[1].ToString();
+            var result = new DateTime(
+                Convert.ToInt32(year),
+                Convert.ToInt32(month),
+                Convert.ToInt32(day),
+                Convert.ToInt32(hour),
+                0, 0);
+
+            return result;
         }
     }
 }

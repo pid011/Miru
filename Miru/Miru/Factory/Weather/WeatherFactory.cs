@@ -1,11 +1,9 @@
-﻿using Miru.Utils;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net;
 using System.Net.Http;
+using System.Text;
 
 namespace Miru.Factory.Weather
 {
@@ -28,15 +26,12 @@ namespace Miru.Factory.Weather
             Nx = nx;
         }
 
-        public WeatherItem GetCurrentWeatherItem()
+        public List<WeatherItem> GetCurrentWeatherItem()
         {
-            var now = DateTime.Now.Date;
-            var baseDate = $"{now.Year}{MiruConverter.ConvertNumber(now.Month)}{MiruConverter.ConvertNumber(now.Day)}";
-            var baseTime = WeatherConverter.ConvertBaseTime(DateTime.Now);
+            var baseDateTime = WeatherConverter.ConvertBaseDateTime(DateTime.Now);
 
-            var jsonData = RequestData(baseDate, baseTime);
-
-            return new WeatherItem();
+            var jsonData = RequestData(baseDateTime["baseDate"], baseDateTime["baseTime"]);
+            return JsonParser(jsonData);
         }
 
         private string RequestData(string baseDate, string baseTime)
@@ -62,6 +57,118 @@ namespace Miru.Factory.Weather
             }
 
             return result;
+        }
+
+        private List<WeatherItem> JsonParser(string json)
+        {
+            var items = new List<WeatherItem>();
+
+            var obj = JObject.Parse(json);
+            obj = (JObject)obj["response"];
+            if ((string)obj["header"]["resultCode"] != "0000")
+            {
+                items.Add(new WeatherItem() { Success = false });
+                return items;
+            }
+
+            var dataArray = (JArray)obj["body"]["items"]["item"];
+
+            var dataSet = new List<WeatherData>();
+            foreach (var data in dataArray)
+            {
+                dataSet.Add(new WeatherData()
+                {
+                    Category = (string)data["category"],
+                    FcstDate = (string)data["fcstDate"],
+                    FcstTime = (string)data["fcstTime"],
+                    FcstValue = (string)data["fcstValue"]
+                });
+            }
+
+            var sortedData = new List<List<WeatherData>>();
+            while (dataSet.Count != 0)
+            {
+                var dataSetA = dataSet.Where(x => x.FcstTime == dataSet.First().FcstTime).ToList();
+                dataSetA.RemoveAll(x => x.FcstDate != dataSetA.First().FcstDate);
+
+                for (int i = 0; i < dataSetA.Count; i++)
+                {
+                    dataSet.Remove(dataSetA[i]);
+                }
+
+                sortedData.Add(dataSetA);
+            }
+
+            if (sortedData.Count > 6)
+            {
+                sortedData.RemoveRange(6, sortedData.Count - 6);
+            }
+
+            foreach (var data in sortedData)
+            {
+                var result = new WeatherItem()
+                {
+                    Success = true,
+                    BaseDateTime = WeatherConverter.ConvertDateTime(data.First().FcstDate, data.First().FcstTime)
+                };
+
+                int pty = 0;
+                int sky = 0;
+                foreach (var item in data)
+                {
+                    switch (item.Category)
+                    {
+                        case "POP":
+                            result.POPValue.Value = Convert.ToInt32(item.FcstValue);
+                            break;
+
+                        case "R06":
+                            result.R06Value.Value = Convert.ToDouble(item.FcstValue);
+                            break;
+
+                        case "REH":
+                            result.REHValue.Value = Convert.ToInt32(item.FcstValue);
+                            break;
+
+                        case "S06":
+                            result.S06Value.Value = Convert.ToInt32(item.FcstValue);
+                            break;
+
+                        case "T3H":
+                            result.T3HValue.Value = Convert.ToDouble(item.FcstValue);
+                            break;
+
+                        case "WSD":
+                            result.WSDValue.Value = Convert.ToDouble(item.FcstValue);
+                            break;
+
+                        case "PTY":
+                            pty = Convert.ToInt32(item.FcstValue);
+                            break;
+
+                        case "SKY":
+                            sky = Convert.ToInt32(item.FcstValue);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+
+                result.SkyStatValue.Value = WeatherConverter.ConvertSky(sky, pty);
+
+                items.Add(result);
+            }
+
+            return items;
+        }
+
+        internal class WeatherData
+        {
+            public string Category { get; set; }
+            public string FcstDate { get; set; }
+            public string FcstTime { get; set; }
+            public string FcstValue { get; set; }
         }
     }
 }
