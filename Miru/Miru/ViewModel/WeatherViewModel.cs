@@ -30,15 +30,11 @@ namespace Miru.ViewModel
         {
             var items = weatherFactory.GetCurrentWeatherItem();
             itemSources = items;
-
-            foreach (var item in items)
-            {
-                weatherItems.Add(item);
-            }
         }
 
         public void SetWeatherItems()
         {
+            weatherItems.Clear();
             foreach (var item in itemSources)
             {
                 weatherItems.Add(item);
