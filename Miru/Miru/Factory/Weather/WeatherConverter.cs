@@ -195,10 +195,9 @@ namespace Miru.Factory.Weather
                     }
                 }
             }
-            // BUG: 하루를 빼야 하는데 안빼짐
             if (hour < baseList[0])
             {
-                time.Date.Subtract(new DateTime(0, 0, 1));
+                time = time.Subtract(TimeSpan.FromDays(1));
             }
             var baseDate = $"{time.Year}{MiruConverter.ConvertNumber(time.Month)}{MiruConverter.ConvertNumber(time.Day)}";
             var baseTime = MiruConverter.ConvertNumber(baseResult) + "00";
