@@ -11,7 +11,6 @@ namespace Miru.ViewModel
     public class TimeViewModel : BindableBase
     {
         TimeFactory factory;
-        private DispatcherTimer timer;
 
         private string date;
         private string time;
