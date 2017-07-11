@@ -13,5 +13,8 @@ namespace Miru.Utils
 
         public static readonly int Nx = 71;
         public static readonly int Ny = 121;
+
+        public static readonly string NAVER_ClientId = "s3I3RO_5WlxSetYBqLtA";
+        public static readonly string NAVER_ClientSecret = "WaKu4369Bv";
     }
 }
