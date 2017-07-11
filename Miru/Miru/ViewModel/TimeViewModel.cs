@@ -37,19 +37,9 @@ namespace Miru.ViewModel
         {
             factory = new TimeFactory();
             SetTime();
-
-            timer = new DispatcherTimer();
-            timer.Tick += Timer_Tick;
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Start();
         }
 
-        private void Timer_Tick(object sender, object e)
-        {
-            SetTime();
-        }
-
-        private void SetTime()
+        public void SetTime()
         {
             var dateTime = factory.GetCurrentTime();
 

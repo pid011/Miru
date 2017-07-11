@@ -9,10 +9,12 @@ namespace Miru.ViewModel
     public class ViewPageModel
     {
         public TimeViewModel TimeViewModel { get; }
+        public WeatherViewModel WeatherViewModel { get; }
 
         public ViewPageModel()
         {
             TimeViewModel = new TimeViewModel();
+            WeatherViewModel = new WeatherViewModel();
         }
     }
 }

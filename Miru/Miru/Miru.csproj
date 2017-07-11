@@ -113,6 +113,7 @@
     <Compile Include="ViewModel\BindableBase.cs" />
     <Compile Include="ViewModel\TimeViewModel.cs" />
     <Compile Include="ViewModel\ViewPageModel.cs" />
+    <Compile Include="ViewModel\WeatherViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
