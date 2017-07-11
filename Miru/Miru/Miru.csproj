@@ -96,6 +96,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Factory\News\NewsFactory.cs" />
+    <Compile Include="Factory\News\NewsItem.cs" />
     <Compile Include="Factory\Time\TimeConverter.cs" />
     <Compile Include="Factory\Time\TimeFactory.cs" />
     <Compile Include="Factory\Weather\Sky.cs" />
