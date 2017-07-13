@@ -113,6 +113,7 @@
     <Compile Include="Utils\StringManager.cs" />
     <Compile Include="Utils\UserValue.cs" />
     <Compile Include="ViewModel\BindableBase.cs" />
+    <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\TimeViewModel.cs" />
     <Compile Include="ViewModel\ViewPageModel.cs" />
     <Compile Include="ViewModel\WeatherViewModel.cs" />

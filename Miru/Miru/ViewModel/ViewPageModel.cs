@@ -10,11 +10,13 @@ namespace Miru.ViewModel
     {
         public TimeViewModel TimeViewModel { get; }
         public WeatherViewModel WeatherViewModel { get; }
+        public NewsViewModel NewsViewModel { get; }
 
         public ViewPageModel()
         {
             TimeViewModel = new TimeViewModel();
             WeatherViewModel = new WeatherViewModel();
+            NewsViewModel = new NewsViewModel();
         }
     }
 }
