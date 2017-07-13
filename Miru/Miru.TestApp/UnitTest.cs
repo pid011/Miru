@@ -2,6 +2,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Miru.Factory.Weather;
+using Miru.Factory.News;
 using Miru.Utils;
 using System.Diagnostics;
 
