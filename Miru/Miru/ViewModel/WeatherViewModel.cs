@@ -23,7 +23,7 @@ namespace Miru.ViewModel
         {
             weatherFactory = new WeatherFactory(UserValue.Nx, UserValue.Ny, UserValue.ApiKey);
             GetWeatherItems();
-            SetWeatherItems();
+            RefreshWeaherItems();
         }
 
         public void GetWeatherItems()
@@ -32,7 +32,7 @@ namespace Miru.ViewModel
             itemSources = items;
         }
 
-        public void SetWeatherItems()
+        public void RefreshWeaherItems()
         {
             weatherItems.Clear();
             foreach (var item in itemSources)

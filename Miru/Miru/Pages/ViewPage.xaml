@@ -24,7 +24,7 @@
                 <TextBlock x:Name="AMPM" TextWrapping="Wrap" Text="{Binding TimeViewModel.AMPM}" FontSize="60" Margin="0" VerticalAlignment="Top" FontFamily="ms-appx:///Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" HorizontalAlignment="Right" TextAlignment="Right"/>
             </Grid>
             <Grid x:Name="DateGrid" Margin="0,75,0,0" d:LayoutOverrides="LeftMargin, RightMargin" HorizontalAlignment="Right" Width="269" Height="33" VerticalAlignment="Top">
-                <TextBlock x:Name="Date" Margin="0,-1,125,0" TextWrapping="Wrap" Text="{Binding TimeViewModel.Date}" FontSize="28" HorizontalAlignment="Right" FontFamily="ms-appx:/Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" Width="144" d:LayoutOverrides="Height, LeftMargin, RightMargin, TopPosition, BottomPosition"/>
+                <TextBlock x:Name="Date" Margin="0,-1,120,0" TextWrapping="Wrap" Text="{Binding TimeViewModel.Date}" FontSize="25" HorizontalAlignment="Right" FontFamily="ms-appx:/Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" Width="144" d:LayoutOverrides="Height, LeftMargin, RightMargin, TopPosition, BottomPosition"/>
             </Grid>
         </Grid>
 

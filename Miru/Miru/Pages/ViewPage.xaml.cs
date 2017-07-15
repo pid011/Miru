@@ -33,6 +33,9 @@ namespace Miru.Pages
         private DispatcherTimer timeChangeTimer;
         private ThreadPoolTimer weatherLoadTimer;
 
+        private int newsCounter = 0;
+        private int newsViewTick = 0;
+
         public ViewPage()
         {
             InitializeComponent();
@@ -40,7 +43,7 @@ namespace Miru.Pages
             ViewPageModel = new ViewPageModel();
 
             StartTimeChangeTimer();
-            StartWeatherLoadTimer();
+            StartRefreshTimer();
 
             Unloaded += ViewPage_Unloaded;
         }
@@ -57,13 +60,34 @@ namespace Miru.Pages
             timeChangeTimer.Tick += (sender, e) =>
             {
                 ViewPageModel.TimeViewModel.SetTime();
+
+                newsViewTick += 1;
+                if (newsViewTick == 15)
+                {
+                    var newsList = ViewPageModel.NewsViewModel.NewsList;
+
+                    ViewPageModel.NewsViewModel.SetNewsView(
+                            newsList[newsCounter].Title,
+                            newsList[newsCounter].Description,
+                            newsList[newsCounter].PubDate.ToString());
+                    if (newsCounter == newsList.Count - 1)
+                    {
+                        newsCounter = 0;
+                    }
+                    else
+                    {
+                        newsCounter++;
+                    }
+
+                    newsViewTick = 0;
+                }
             };
 
             timeChangeTimer.Interval = TimeSpan.FromSeconds(1);
             timeChangeTimer.Start();
         }
 
-        private void StartWeatherLoadTimer()
+        private void StartRefreshTimer()
         {
             TimeSpan delay = TimeSpan.FromHours(3);
             bool completed = false;
@@ -74,7 +98,8 @@ namespace Miru.Pages
 
                 Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
                 {
-                    ViewPageModel.WeatherViewModel.SetWeatherItems();
+                    ViewPageModel.WeatherViewModel.RefreshWeaherItems();
+                    ViewPageModel.NewsViewModel.RefreshNewsList();
                 });
 
                 completed = true;

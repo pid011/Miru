@@ -15,6 +15,28 @@ namespace Miru.ViewModel
         public List<NewsItem> NewsList => newsList;
         private List<NewsItem> newsList;
 
+        private string title;
+        private string description;
+        private string pubDate;
+
+        public string Title
+        {
+            get => title;
+            set => SetProperty(ref title, value);
+        }
+
+        public string Description
+        {
+            get => description;
+            set => SetProperty(ref description, value);
+        }
+
+        public string PubDate
+        {
+            get => pubDate;
+            set => SetProperty(ref pubDate, value);
+        }
+
         public NewsViewModel()
         {
             newsFactory = new NewsFactory(UserValue.NAVER_ClientId, UserValue.NAVER_ClientSecret);
@@ -25,6 +47,13 @@ namespace Miru.ViewModel
         public void RefreshNewsList()
         {
             newsList = newsFactory.GetCurrentNewsItem();
+        }
+
+        public void SetNewsView(string title, string description, string pubDate)
+        {
+            Title = title;
+            Description = description;
+            PubDate = pubDate;
         }
     }
 }
