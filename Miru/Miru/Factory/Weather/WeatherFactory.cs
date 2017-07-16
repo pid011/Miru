@@ -119,27 +119,27 @@ namespace Miru.Factory.Weather
                     switch (item.Category)
                     {
                         case "POP":
-                            result.POPValue.Value = Convert.ToInt32(item.FcstValue);
+                            result.POP.Value = Convert.ToInt32(item.FcstValue);
                             break;
 
                         case "R06":
-                            result.R06Value.Value = Convert.ToDouble(item.FcstValue);
+                            result.R06.Value = Convert.ToDouble(item.FcstValue);
                             break;
 
                         case "REH":
-                            result.REHValue.Value = Convert.ToInt32(item.FcstValue);
+                            result.REH.Value = Convert.ToInt32(item.FcstValue);
                             break;
 
                         case "S06":
-                            result.S06Value.Value = Convert.ToInt32(item.FcstValue);
+                            result.S06.Value = Convert.ToInt32(item.FcstValue);
                             break;
 
                         case "T3H":
-                            result.T3HValue.Value = Convert.ToDouble(item.FcstValue);
+                            result.T3H.Value = Convert.ToDouble(item.FcstValue);
                             break;
 
                         case "WSD":
-                            result.WSDValue.Value = Convert.ToDouble(item.FcstValue);
+                            result.WSD.Value = Convert.ToDouble(item.FcstValue);
                             break;
 
                         case "PTY":
@@ -155,7 +155,8 @@ namespace Miru.Factory.Weather
                     }
                 }
 
-                result.SkyStatValue.Value = WeatherConverter.ConvertSky(sky, pty);
+                result.SkyStat.Value = WeatherConverter.ConvertSky(sky, pty);
+                result.SkyStat.Icon = WeatherIcon.GetWeatherIcon(result.SkyStat.Value, result.BaseDateTime.Hour);
 
                 items.Add(result);
             }

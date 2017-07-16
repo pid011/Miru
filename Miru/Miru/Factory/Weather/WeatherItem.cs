@@ -13,74 +13,75 @@ namespace Miru.Factory.Weather
         /// <summary>
         /// 강수확률
         /// </summary>
-        public POP POPValue { get; set; } = new POP();
+        public POPSet POP { get; set; } = new POPSet();
 
         /// <summary>
         /// 하늘 상태
         /// </summary>
-        public SkyStat SkyStatValue { get; set; } = new SkyStat();
+        public SkyStatSet SkyStat { get; set; } = new SkyStatSet();
 
         /// <summary>
         /// 6시간 강수량
         /// </summary>
-        public R06 R06Value { get; set; } = new R06();
+        public R06Set R06 { get; set; } = new R06Set();
 
         /// <summary>
         /// 습도
         /// </summary>
-        public REH REHValue { get; set; } = new REH();
+        public REHSet REH { get; set; } = new REHSet();
 
         /// <summary>
         /// 6시간 신적설
         /// </summary>
-        public S06 S06Value { get; set; } = new S06();
+        public S06Set S06 { get; set; } = new S06Set();
 
         /// <summary>
         /// 3시간 기온
         /// </summary>
-        public T3H T3HValue { get; set; } = new T3H();
+        public T3HSet T3H { get; set; } = new T3HSet();
 
         /// <summary>
         /// 풍속
         /// </summary>
-        public WSD WSDValue { get; set; } = new WSD();
+        public WSDSet WSD { get; set; } = new WSDSet();
 
-        public class POP
+        public class POPSet
         {
             public int Value { get; set; }
             public readonly string Unit = "%";
         }
 
-        public class SkyStat
+        public class SkyStatSet
         {
             public Sky.SkyCode Value { get; set; }
+            public string Icon { get; set; }
         }
 
-        public class R06
+        public class R06Set
         {
             public double Value { get; set; }
             public readonly string Unit = "mm";
         }
 
-        public class REH
+        public class REHSet
         {
             public int Value { get; set; }
             public readonly string Unit = "%";
         }
 
-        public class S06
+        public class S06Set
         {
             public int Value { get; set; }
             public readonly string Unit = "cm";
         }
 
-        public class T3H
+        public class T3HSet
         {
             public double Value { get; set; }
             public readonly string Unit = "℃";
         }
 
-        public class WSD
+        public class WSDSet
         {
             public double Value { get; set; }
             public readonly string Unit = "㎧";

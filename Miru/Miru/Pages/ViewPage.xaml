@@ -27,6 +27,17 @@
                 <TextBlock x:Name="Date" Margin="0,-1,120,0" TextWrapping="Wrap" Text="{Binding TimeViewModel.Date}" FontSize="25" HorizontalAlignment="Right" FontFamily="ms-appx:/Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" Width="144" d:LayoutOverrides="Height, LeftMargin, RightMargin, TopPosition, BottomPosition"/>
             </Grid>
         </Grid>
+        <Grid x:Name="WeatherViewGrid" HorizontalAlignment="Left" Margin="45,65,0,0" VerticalAlignment="Top" Width="319">
+            <ListView x:Name="listView" ItemsSource="{Binding WeatherViewModel.WeatherItems}" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Margin="0" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0" Width="331" Height="76" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
 
     </Grid>
 </Page>
