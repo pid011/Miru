@@ -124,6 +124,7 @@
     </AppxManifest>
     <Content Include="Assets\Fonts\NotoSansCJKkr-Thin.otf" />
     <Content Include="Assets\Fonts\Pe-icon-7-weather.ttf" />
+    <Content Include="Assets\Fonts\fontawesome-webfont.ttf" />
     <None Include="Miru_TemporaryKey.pfx" />
     <PRIResource Include="Strings\Resources.resw" />
   </ItemGroup>

@@ -27,16 +27,42 @@
                 <TextBlock x:Name="Date" Margin="0,-1,120,0" TextWrapping="Wrap" Text="{Binding TimeViewModel.Date}" FontSize="25" HorizontalAlignment="Right" FontFamily="ms-appx:/Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" Width="144" d:LayoutOverrides="Height, LeftMargin, RightMargin, TopPosition, BottomPosition"/>
             </Grid>
         </Grid>
-        <Grid x:Name="WeatherViewGrid" HorizontalAlignment="Left" Margin="45,65,0,0" VerticalAlignment="Top" Width="319">
-            <ListView x:Name="listView" ItemsSource="{Binding WeatherViewModel.WeatherItems}" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Margin="0" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center">
+        <Grid x:Name="WeatherViewGrid" HorizontalAlignment="Left" Margin="45,65,0,0" Width="355" VerticalAlignment="Top" Height="387">
+            <Grid.Transitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition FromHorizontalOffset="28" FromVerticalOffset="0"/>
+                </TransitionCollection>
+            </Grid.Transitions>
+            <StackPanel Orientation="Horizontal" d:LayoutOverrides="TopMargin, BottomMargin, LeftPosition, RightPosition, TopPosition, BottomPosition" Margin="10,0,0,332">
+                <TextBlock Text="&#xf017;" FontFamily="ms-appx:/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" TextAlignment="Center" Height="24" Width="40" Margin="0,10"/>
+                <TextBlock Text="&#xf185;" FontFamily="ms-appx:/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" FontSize="24" Margin="20,10,0,10" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" Width="40" TextAlignment="Center" Opacity="0.7"/>
+                <TextBlock Text="&#xf2cb;" FontFamily="ms-appx:/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,10,0,10" FontSize="24" Width="70" TextAlignment="Center"/>
+                <TextBlock Text="&#xf043;" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,10,0,10" FontSize="24" TextAlignment="Center" FontFamily="ms-appx:/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Height="21" Width="70" Opacity="0.7"/>
+                <TextBlock Text="&#xe604;" Width="70" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,10" FontFamily="ms-appx:/Assets/Fonts/Pe-icon-7-weather.ttf#Pe-icon-7-weather" FontSize="24" TextAlignment="Center" FontWeight="Bold"/>
+            </StackPanel>
+            <ListView x:Name="WeatherList" ItemsSource="{Binding WeatherViewModel.WeatherItems}" d:LayoutOverrides="LeftMargin, RightMargin, LeftPosition, RightPosition" HorizontalContentAlignment="Right" VerticalAlignment="Bottom">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="0" Width="331" Height="76" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-
+                        <StackPanel Height="55" Orientation="Horizontal" HorizontalAlignment="Left" Width="339">
+                            <TextBlock Text="{Binding BaseHour}" FontFamily="ms-appx:///Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" TextAlignment="Center" Height="33" Width="40" Margin="0,10"/>
+                            <TextBlock Text="{Binding SkyStat.Icon}" FontFamily="ms-appx:/Assets/Fonts/Pe-icon-7-weather.ttf#Pe-icon-7-weather" FontSize="35" Margin="20,10,0,10" Height="37" VerticalAlignment="Center" HorizontalAlignment="Center" Width="40" TextAlignment="Center" Opacity="0.7"/>
+                            <TextBlock Text="{Binding T3H.ValueWithUnit}" FontFamily="ms-appx:/Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" Height="26" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,10,0,10" FontSize="24" Width="70" TextAlignment="Center"/>
+                            <TextBlock Text="{Binding REH.ValueWithUnit}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,10,0,10" FontSize="24" TextAlignment="Center" FontFamily="ms-appx:/Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" Height="26" Width="70" Opacity="0.7"/>
+                            <TextBlock Text="{Binding POP.ValueWithUnit}" Width="70" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,0,10" FontFamily="ms-appx:/Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin" FontSize="24" TextAlignment="Center"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Rectangle Fill="#FFF4F4F5" Stroke="Black" Margin="175.667,-118.5,175.333,154.5" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" HorizontalAlignment="Center" Width="2" Height="351" StrokeThickness="0">
+                <Rectangle.RenderTransform>
+                    <CompositeTransform Rotation="90"/>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle Fill="#FFF4F4F5" Stroke="Black" Margin="59,57,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="2" d:LayoutOverrides="TopMargin, BottomMargin, TopPosition, BottomPosition" StrokeThickness="0">
+                <Rectangle.RenderTransform>
+                    <CompositeTransform Rotation="180"/>
+                </Rectangle.RenderTransform>
+            </Rectangle>
         </Grid>
 
     </Grid>
