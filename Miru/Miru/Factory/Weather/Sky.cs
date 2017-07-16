@@ -3,6 +3,64 @@
     public class Sky
     {
         /// <summary>
+        /// 문자열을 <see cref="SkyCode"/>형태로 변환합니다.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public static SkyCode GetSkyCode(int skyCode, int pTypeCode)
+        {
+            SkyCode resultCode = SkyCode.NoReported;
+
+            switch (pTypeCode)
+            {
+                // 비 / 눈 X
+                case 0:
+                    {
+                        switch (skyCode)
+                        {
+                            // 맑음
+                            case 1:
+                                resultCode = SkyCode.Sunny;
+                                break;
+
+                            // 구름 조금
+                            case 2:
+                                resultCode = SkyCode.PartlyCloudy;
+                                break;
+
+                            // 구름 많음
+                            case 3:
+                                resultCode = SkyCode.MostlyCloudy;
+                                break;
+
+                            // 흐림
+                            case 4:
+                                resultCode = SkyCode.Fog;
+                                break;
+                        }
+                    }
+                    break;
+
+                // 비
+                case 1:
+                    resultCode = SkyCode.Rain;
+                    break;
+
+                // 비/눈 (진눈깨비)
+                case 2:
+                    resultCode = SkyCode.Drizzle;
+                    break;
+
+                // 눈
+                case 3:
+                    resultCode = SkyCode.Snow;
+                    break;
+            }
+
+            return resultCode;
+        }
+
+        /// <summary>
         /// 여러가지 하늘상태를 열거합니다.
         /// </summary>
         public enum SkyCode
@@ -23,39 +81,24 @@
             MostlyCloudy,
 
             /// <summary>
-            /// 구름많고 비
-            /// </summary>
-            MostlyCloudyAndRain,
-
-            /// <summary>
-            /// 구름많고 눈
-            /// </summary>
-            MostlyCloudyAndSnow,
-
-            /// <summary>
-            /// 구름많고 비 또는 눈
-            /// </summary>
-            MostlyCloudyAndRainAndSnow,
-
-            /// <summary>
             /// 흐림
             /// </summary>
             Fog,
 
             /// <summary>
-            /// 흐리고 비
+            /// 비
             /// </summary>
-            FogAndRain,
+            Rain,
 
             /// <summary>
-            /// 흐리고 눈
+            /// 눈
             /// </summary>
-            FogAndSnow,
+            Snow,
 
             /// <summary>
-            /// 흐리고 비 또는 눈
+            /// 이슬비, 진눈깨비 등등...
             /// </summary>
-            FogAndRainAndSnow,
+            Drizzle,
 
             /// <summary>
             /// 알 수 없음

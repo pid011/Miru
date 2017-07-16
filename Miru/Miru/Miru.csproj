@@ -123,7 +123,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="Assets\Fonts\NotoSansCJKkr-Thin.otf" />
-    <Content Include="Assets\Fonts\pe-icon-set-weather.ttf" />
+    <Content Include="Assets\Fonts\Pe-icon-7-weather.ttf" />
     <None Include="Miru_TemporaryKey.pfx" />
     <PRIResource Include="Strings\Resources.resw" />
   </ItemGroup>

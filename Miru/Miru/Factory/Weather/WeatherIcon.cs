@@ -12,27 +12,21 @@ namespace Miru.Factory.Weather
 
         private static Dictionary<string, string> iconTable = new Dictionary<string, string>
         {
-            ["s-01"] = "\ue999",
-            ["n-01"] = "\ue95c",
-            ["s-02"] = "\ue972",
-            ["n-02"] = "\ue976",
-            ["s-03"] = "\ue970",
-            ["n-03"] = "\ue970",
-            ["s-04"] = "\ue97c",
-            ["n-04"] = "\ue980",
-            ["s-05"] = "\ue984",
-            ["n-05"] = "\ue991",
-            ["s-06"] = "\ue97a",
-            ["n-06"] = "\ue97a",
-            ["s-07"] = "\ue92b",
-            ["n-07"] = "\ue92d",
-            ["s-08"] = "\ue978",
-            ["n-08"] = "\ue978",
-            ["s-09"] = "\ue996",
-            ["n-09"] = "\ue996",
-            ["s-10"] = "\ue97a",
-            ["n-10"] = "\ue97a",
-            ["NS"] = "X"
+            ["1_d"] = "\ue60c",
+            ["1_n"] = "\ue619",
+            ["2_d"] = "\ue63a",
+            ["2_n"] = "\ue63b",
+            ["3_d"] = "\ue636",
+            ["3_n"] = "\ue636",
+            ["4_d"] = "\ue626",
+            ["4_n"] = "\ue627",
+            ["5_d"] = "\ue613",
+            ["5_n"] = "\ue613",
+            ["6_d"] = "\ue60d",
+            ["6_n"] = "\ue60d",
+            ["7_d"] = "\ue62c",
+            ["7_n"] = "\ue62d",
+            ["NS"] = "\uee62e"
         };
 
         #endregion icon table
@@ -54,43 +48,31 @@ namespace Miru.Factory.Weather
             switch (sky)
             {
                 case Sky.SkyCode.Sunny:
-                    icon = !IsNight(hour) ? iconTable["s-01"] : iconTable["n-01"];
+                    icon = !IsNight(hour) ? iconTable["1_d"] : iconTable["1_n"];
                     break;
 
                 case Sky.SkyCode.PartlyCloudy:
-                    icon = !IsNight(hour) ? iconTable["s-02"] : iconTable["n-02"];
+                    icon = !IsNight(hour) ? iconTable["2_d"] : iconTable["2_n"];
                     break;
 
                 case Sky.SkyCode.MostlyCloudy:
-                    icon = !IsNight(hour) ? iconTable["s-03"] : iconTable["n-03"];
-                    break;
-
-                case Sky.SkyCode.MostlyCloudyAndRain:
-                    icon = !IsNight(hour) ? iconTable["s-04"] : iconTable["n-04"];
-                    break;
-
-                case Sky.SkyCode.MostlyCloudyAndSnow:
-                    icon = !IsNight(hour) ? iconTable["s-05"] : iconTable["n-05"];
-                    break;
-
-                case Sky.SkyCode.MostlyCloudyAndRainAndSnow:
-                    icon = !IsNight(hour) ? iconTable["s-06"] : iconTable["n-06"];
+                    icon = !IsNight(hour) ? iconTable["3_d"] : iconTable["3_n"];
                     break;
 
                 case Sky.SkyCode.Fog:
-                    icon = !IsNight(hour) ? iconTable["s-07"] : iconTable["n-07"];
+                    icon = !IsNight(hour) ? iconTable["4_d"] : iconTable["4_n"];
                     break;
 
-                case Sky.SkyCode.FogAndRain:
-                    icon = !IsNight(hour) ? iconTable["s-08"] : iconTable["n-08"];
+                case Sky.SkyCode.Rain:
+                    icon = !IsNight(hour) ? iconTable["5_d"] : iconTable["5_n"];
                     break;
 
-                case Sky.SkyCode.FogAndSnow:
-                    icon = !IsNight(hour) ? iconTable["s-09"] : iconTable["n-09"];
+                case Sky.SkyCode.Snow:
+                    icon = !IsNight(hour) ? iconTable["6_d"] : iconTable["6_n"];
                     break;
 
-                case Sky.SkyCode.FogAndRainAndSnow:
-                    icon = !IsNight(hour) ? iconTable["s-10"] : iconTable["n-10"];
+                case Sky.SkyCode.Drizzle:
+                    icon = !IsNight(hour) ? iconTable["7_d"] : iconTable["7_n"];
                     break;
 
                 case Sky.SkyCode.NoReported:

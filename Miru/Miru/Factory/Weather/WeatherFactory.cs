@@ -155,7 +155,7 @@ namespace Miru.Factory.Weather
                     }
                 }
 
-                result.SkyStat.Value = WeatherConverter.ConvertSky(sky, pty);
+                result.SkyStat.Value = Sky.GetSkyCode(sky, pty);
                 result.SkyStat.Icon = WeatherIcon.GetWeatherIcon(result.SkyStat.Value, result.BaseDateTime.Hour);
 
                 items.Add(result);
