@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Miru.Utils;
+using System;
 
 namespace Miru.Factory.Weather
 {
@@ -8,6 +9,7 @@ namespace Miru.Factory.Weather
     public class WeatherItem
     {
         public DateTime BaseDateTime { get; set; }
+        public string BaseHour => MiruConverter.ConvertNumber(BaseDateTime.Hour);
         public bool Success { get; set; }
 
         /// <summary>
@@ -45,46 +47,82 @@ namespace Miru.Factory.Weather
         /// </summary>
         public WSDSet WSD { get; set; } = new WSDSet();
 
-        public class POPSet
+        public class POPSet : BaseSet<int>
         {
-            public int Value { get; set; }
-            public readonly string Unit = "%";
+            public POPSet() : base("%")
+            {
+            }
         }
 
         public class SkyStatSet
         {
+            /// <summary>
+            /// 값
+            /// </summary>
             public Sky.SkyCode Value { get; set; }
+
+            /// <summary>
+            /// 아이콘
+            /// </summary>
             public string Icon { get; set; }
         }
 
-        public class R06Set
+        public class R06Set : BaseSet<double>
         {
-            public double Value { get; set; }
-            public readonly string Unit = "mm";
+            public R06Set() : base("mm")
+            {
+            }
         }
 
-        public class REHSet
+        public class REHSet : BaseSet<double>
         {
-            public int Value { get; set; }
-            public readonly string Unit = "%";
+            public REHSet() : base("%")
+            {
+            }
         }
 
-        public class S06Set
+        public class S06Set : BaseSet<int>
         {
-            public int Value { get; set; }
-            public readonly string Unit = "cm";
+            public S06Set() : base("cm")
+            {
+            }
         }
 
-        public class T3HSet
+        public class T3HSet : BaseSet<double>
         {
-            public double Value { get; set; }
-            public readonly string Unit = "℃";
+            public T3HSet() : base("℃")
+            {
+            }
         }
 
-        public class WSDSet
+        public class WSDSet : BaseSet<double>
         {
-            public double Value { get; set; }
-            public readonly string Unit = "㎧";
+            public WSDSet() : base("㎧")
+            {
+            }
+        }
+
+        public class BaseSet<T>
+        {
+            public BaseSet(string unit)
+            {
+                Unit = unit;
+            }
+
+            /// <summary>
+            /// 값
+            /// </summary>
+            public T Value { get; set; }
+
+            /// <summary>
+            /// 단위
+            /// </summary>
+            public string Unit { get; }
+
+            /// <summary>
+            /// 값을 단위와 합쳐 문자열로 반환합니다.
+            /// </summary>
+            public string ValueWithUnit => Value.ToString() + Unit;
         }
     }
 }
