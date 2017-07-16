@@ -31,10 +31,10 @@ namespace Miru.Pages
         public ViewPageModel ViewPageModel { get; }
 
         private DispatcherTimer timeChangeTimer;
+        private ThreadPoolTimer newsChangeTimer;
         private ThreadPoolTimer weatherLoadTimer;
 
         private int newsCounter = 0;
-        private int newsViewTick = 0;
 
         public ViewPage()
         {
@@ -60,9 +60,19 @@ namespace Miru.Pages
             timeChangeTimer.Tick += (sender, e) =>
             {
                 ViewPageModel.TimeViewModel.SetTime();
+            };
 
-                newsViewTick += 1;
-                if (newsViewTick == 15)
+            timeChangeTimer.Interval = TimeSpan.FromSeconds(1);
+            timeChangeTimer.Start();
+        }
+
+        private void StartNewsChangeTimer()
+        {
+            TimeSpan delay = TimeSpan.FromSeconds(15);
+
+            newsChangeTimer = ThreadPoolTimer.CreateTimer((s) =>
+            {
+                Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
                 {
                     var newsList = ViewPageModel.NewsViewModel.NewsList;
 
@@ -78,13 +88,8 @@ namespace Miru.Pages
                     {
                         newsCounter++;
                     }
-
-                    newsViewTick = 0;
-                }
-            };
-
-            timeChangeTimer.Interval = TimeSpan.FromSeconds(1);
-            timeChangeTimer.Start();
+                });
+            }, delay);
         }
 
         private void StartRefreshTimer()
