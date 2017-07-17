@@ -42,7 +42,7 @@ namespace Miru.Pages
 
             ViewPageModel = new ViewPageModel();
 
-            StartTimeChangeTimer();
+            //StartTimeChangeTimer();
             StartRefreshTimer();
 
             Unloaded += ViewPage_Unloaded;
@@ -52,18 +52,6 @@ namespace Miru.Pages
         {
             timeChangeTimer.Stop();
             weatherLoadTimer.Cancel();
-        }
-
-        private void StartTimeChangeTimer()
-        {
-            timeChangeTimer = new DispatcherTimer();
-            timeChangeTimer.Tick += (sender, e) =>
-            {
-                ViewPageModel.TimeViewModel.SetTime();
-            };
-
-            timeChangeTimer.Interval = TimeSpan.FromSeconds(1);
-            timeChangeTimer.Start();
         }
 
         private void StartNewsChangeTimer()

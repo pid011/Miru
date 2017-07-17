@@ -12,6 +12,8 @@ namespace Miru.ViewModel
     {
         TimeFactory factory;
 
+        DispatcherTimer timer;
+
         private string date;
         private string time;
         private string ampm;
@@ -36,6 +38,14 @@ namespace Miru.ViewModel
         {
             factory = new TimeFactory();
             SetTime();
+
+            timer = new DispatcherTimer();
+            timer.Tick += (sender, e) =>
+            {
+                SetTime();
+            };
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Start();
         }
 
         public void SetTime()
