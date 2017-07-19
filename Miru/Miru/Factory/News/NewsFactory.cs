@@ -32,9 +32,9 @@ namespace Miru.Factory.News
             string uri = @"https://openapi.naver.com/v1/search/news.json";
 
             var dataParams = new StringBuilder();
-            dataParams.Append($@"?query=주요뉴스");
+            dataParams.Append($@"?query='주요 뉴스'");
             dataParams.Append($@"&display=20");
-            dataParams.Append($@"&sort=sim");
+            dataParams.Append($@"&sort=date"); // sim, date
 
             string result = string.Empty;
             using (var client = new HttpClient())
@@ -62,14 +62,36 @@ namespace Miru.Factory.News
             {
                 items.Add(new NewsItem()
                 {
-                    Title = (string)data["title"],
+                    Title = RemoveGarbageOfString((string)data["title"]),
                     OriginalLink = (string)data["originallink"],
                     Link = (string)data["link"],
-                    Description = (string)data["description"],
+                    Description = RemoveGarbageOfString((string)data["description"]),
                     PubDate = DateTime.Parse((string)data["pubDate"])
                 });
             }
             return items;
+        }
+
+        private string RemoveGarbageOfString(string str)
+        {
+            List<string> removeList = new List<string>()
+            {
+                @"<b>",
+                @"</b>"
+            };
+
+            foreach (var item in removeList)
+            {
+                str = str.Replace(item, string.Empty);
+            }
+
+            str = str.Replace(@"&quot;", "\"");
+            str = str.Replace(@"&lt;", "<");
+            str = str.Replace(@"&gt;", ">");
+            str = str.Replace(@"&amp;", "&");
+            str = str.Replace(@"&nbsp;", " ");
+
+            return str;
         }
     }
 }

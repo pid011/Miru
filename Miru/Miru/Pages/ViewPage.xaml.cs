@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Globalization.DateTimeFormatting;
 using Windows.System.Threading;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -30,54 +31,19 @@ namespace Miru.Pages
     {
         public ViewPageModel ViewPageModel { get; }
 
-        private DispatcherTimer timeChangeTimer;
-        private ThreadPoolTimer newsChangeTimer;
         private ThreadPoolTimer weatherLoadTimer;
 
-        private int newsCounter = 0;
 
         public ViewPage()
         {
             InitializeComponent();
 
             ViewPageModel = new ViewPageModel();
-
-            //StartTimeChangeTimer();
-            StartRefreshTimer();
-
             Unloaded += ViewPage_Unloaded;
         }
 
         private void ViewPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            timeChangeTimer.Stop();
-            weatherLoadTimer.Cancel();
-        }
-
-        private void StartNewsChangeTimer()
-        {
-            TimeSpan delay = TimeSpan.FromSeconds(15);
-
-            newsChangeTimer = ThreadPoolTimer.CreateTimer((s) =>
-            {
-                Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
-                {
-                    var newsList = ViewPageModel.NewsViewModel.NewsList;
-
-                    ViewPageModel.NewsViewModel.SetNewsView(
-                            newsList[newsCounter].Title,
-                            newsList[newsCounter].Description,
-                            newsList[newsCounter].PubDate.ToString());
-                    if (newsCounter == newsList.Count - 1)
-                    {
-                        newsCounter = 0;
-                    }
-                    else
-                    {
-                        newsCounter++;
-                    }
-                });
-            }, delay);
         }
 
         private void StartRefreshTimer()
@@ -92,7 +58,6 @@ namespace Miru.Pages
                 Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
                 {
                     ViewPageModel.WeatherViewModel.RefreshWeaherItems();
-                    ViewPageModel.NewsViewModel.RefreshNewsList();
                 });
 
                 completed = true;
