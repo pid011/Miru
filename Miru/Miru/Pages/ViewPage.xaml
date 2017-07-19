@@ -64,10 +64,10 @@
                 </Rectangle.RenderTransform>
             </Rectangle>
         </Grid>
-        <Grid HorizontalAlignment="Center" Height="173" VerticalAlignment="Bottom" Width="743" Margin="109,0,108,80">
-            <TextBlock Margin="5,0" Style="{StaticResource HeaderTextBlockStyle}" TextWrapping="Wrap" Text="{Binding NewsViewModel.Title}" d:LayoutOverrides="LeftMargin, RightMargin, LeftPosition, RightPosition" FontSize="36" Height="57" VerticalAlignment="Top"/>
-            <TextBlock HorizontalAlignment="Left" Margin="0,0,0,85" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="{Binding NewsViewModel.PubDate}" FontSize="24" Foreground="White" Opacity="0.7" VerticalAlignment="Bottom"/>
-            <TextBlock Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="{Binding NewsViewModel.Description}" FontSize="18" d:LayoutOverrides="LeftMargin, RightMargin, LeftPosition, RightPosition" Height="82" VerticalAlignment="Bottom"/>
+        <Grid x:Name="NewsViewGrid" Margin="109,0,108,80" VerticalAlignment="Bottom" d:LayoutOverrides="LeftPosition, RightPosition">
+            <TextBlock x:Name="NewsTitleBox" Margin="0,0,3,117" Style="{StaticResource HeaderTextBlockStyle}" TextWrapping="Wrap" Text="{Binding NewsViewModel.Title}" d:LayoutOverrides="TopMargin, BottomMargin, LeftPosition, RightPosition" FontSize="36" VerticalAlignment="Bottom" FontFamily="ms-appx:/Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin"/>
+            <TextBlock x:Name="NewsDateBox" HorizontalAlignment="Left" Margin="0,0,0,85" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" Text="{Binding NewsViewModel.PubDate}" FontSize="24" Foreground="White" Opacity="0.7" VerticalAlignment="Bottom" FontFamily="ms-appx:/Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin"/>
+            <TextBlock x:Name="NewsDescriptionBox" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="{Binding NewsViewModel.Description}" FontSize="18" d:LayoutOverrides="LeftMargin, RightMargin, LeftPosition, RightPosition" Height="82" VerticalAlignment="Bottom" FontFamily="ms-appx:/Assets/Fonts/NotoSansCJKkr-Thin.otf#Noto Sans CJK KR Thin"/>
         </Grid>
 
     </Grid>

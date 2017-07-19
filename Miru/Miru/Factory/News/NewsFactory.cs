@@ -32,9 +32,9 @@ namespace Miru.Factory.News
             string uri = @"https://openapi.naver.com/v1/search/news.json";
 
             var dataParams = new StringBuilder();
-            dataParams.Append($@"?query='주요 뉴스'");
+            dataParams.Append($@"?query='IT'");
             dataParams.Append($@"&display=20");
-            dataParams.Append($@"&sort=date"); // sim, date
+            dataParams.Append($@"&sort=sim"); // sim, date
 
             string result = string.Empty;
             using (var client = new HttpClient())
